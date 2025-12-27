@@ -1,0 +1,7 @@
+{
+	"editor.codeActionsOnSave": {
+		"source.action.useSortedKeys.biome": "explicit",
+		"source.fixAll.biome": "explicit"
+	},
+	"editor.tabSize": 2
+}
