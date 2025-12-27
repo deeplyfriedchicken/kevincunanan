@@ -1,4 +1,6 @@
 import { useLottie } from "lottie-react";
+import { Link } from "react-router";
+import { Navbar } from "~/components/Navbar";
 import catJson from "../data/cat.json";
 
 export function Welcome() {
@@ -21,41 +23,14 @@ export function Welcome() {
 					</p>
 				</div>
 				<div>2</div>
-				<div>
-					<nav>
-						<div
-							className="hidden w-full md:block md:w-auto"
-							id="navbar-default"
-						>
-							<ul className="font-medium flex p-4 md:p-0 mt-4 flex-row">
-								<li>
-									<a
-										href="#"
-										className="block py-2 mx-3 text-dark-blue-900 border-b-4"
-										aria-current="page"
-									>
-										home
-									</a>
-								</li>
-								<li>
-									<a href="#" className="block py-2 mx-3 text-dark-blue-900">
-										about
-									</a>
-								</li>
-								<li>
-									<a href="#" className="block py-2 mx-3 text-dark-blue-900">
-										projects
-									</a>
-								</li>
-								<li>
-									<a href="#" className="block py-2 mx-3 text-dark-blue-900">
-										contact
-									</a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-				</div>
+				<Navbar
+					navItems={[
+						{ to: "/", children: "home" },
+						{ to: "/about", children: "about" },
+						{ to: "/projects", children: "projects" },
+						{ to: "/resume", children: "resume" },
+					]}
+				/>
 				<div className="row-start-2 col-span-3 flex items-center justify-center">
 					{Cat}
 				</div>
@@ -69,12 +44,12 @@ export function Welcome() {
 						Bay Area
 					</p>
 					<div className="basis-2/3">
-						<button
-							type="button"
-							className="bg-dark-blue-900 px-16 py-4 text-white rounded-full"
+						<Link
+							to="/projects"
+							className="bg-dark-blue-900 hover:bg-dark-blue-950 px-16 py-4 text-white rounded-full"
 						>
 							check out my work
-						</button>
+						</Link>
 					</div>
 				</div>
 				<div className="row-start-3">9</div>
