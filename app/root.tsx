@@ -8,6 +8,8 @@ import {
 } from "react-router";
 
 import type { Route } from "./+types/root";
+import { ThemeSwitcher } from "~/components/ThemeSwitcher";
+import { ThemeProvider } from "~/context/ThemeContext";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -25,15 +27,18 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en">
+		<html lang="en" data-theme="blue">
 			<head>
 				<meta charSet="utf-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
 				<Links />
-			</head>
-			<body className="h-screen w-screen pl-16 pr-16 pb-16 pt-16">
-				{children}
+				</head>
+			<body className="min-h-screen w-full">
+				<ThemeProvider>
+					{children}
+					<ThemeSwitcher />
+				</ThemeProvider>
 				<ScrollRestoration />
 				<Scripts />
 			</body>
