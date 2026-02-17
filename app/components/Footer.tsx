@@ -1,0 +1,24 @@
+import LeftBlob from "~/assets/leftBlob.svg?react";
+import RightBlob from "~/assets/rightBlob.svg?react";
+
+export function Footer() {
+	return (
+		<footer className="relative bg-[#2e3445] overflow-hidden py-[6rem] px-[2rem] md:px-[4rem]">
+			<div className="absolute left-[-175px] bottom-0 text-white opacity-[0.04] pointer-events-none">
+				<LeftBlob className="w-full h-full" style={{ overflow: "visible" }} />
+			</div>
+			<div className="absolute right-[-500px] bottom-0 text-white opacity-[0.04] pointer-events-none">
+				<RightBlob className="w-full h-full" style={{ overflow: "visible" }} />
+			</div>
+
+			<div className="relative z-10 flex items-center justify-center">
+				<a
+					href="mailto:kevincunanan@gmail.com"
+					className="bg-white text-theme-text px-[3rem] py-[1rem] rounded-full hover:opacity-90 transition-opacity font-merriweather-sans text-[1rem]"
+				>
+					send me an email
+				</a>
+			</div>
+		</footer>
+	);
+}
