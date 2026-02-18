@@ -11,13 +11,13 @@ export function ThemeSwitcher() {
 	const { theme, setTheme } = useTheme();
 
 	return (
-		<div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 flex flex-col items-center gap-2 md:gap-3 z-50">
+		<div className="fixed bottom-4 left-4 flex-row gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50">
 			{themes.map(({ name, color }) => (
 				<button
 					key={name}
 					type="button"
 					onClick={() => setTheme(name)}
-					className={`w-8 h-8 md:w-10 md:h-10 rounded-full hover:scale-110 ${
+					className={`w-[25px] h-[25px] md:w-10 md:h-10 rounded-full hover:scale-110 ${
 						theme === name
 							? "ring-2 ring-offset-2 ring-gray-400 scale-110"
 							: ""
