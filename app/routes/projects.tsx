@@ -1,5 +1,5 @@
 import { ProjectCard } from "~/components/ProjectCard";
-import { projects } from "~/data/projects";
+import { getPortfolioItems } from "~/data/portfolio";
 
 export function meta() {
 	return [
@@ -9,6 +9,8 @@ export function meta() {
 }
 
 export default function Projects() {
+	const projects = getPortfolioItems();
+
 	return (
 		<main className="px-[2rem] md:px-[4rem] py-[3rem] md:py-[5rem]">
 			<h1 className="text-theme-text-light text-[3rem] md:text-[5rem] font-light mb-[1.5rem]">
