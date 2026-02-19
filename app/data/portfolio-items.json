@@ -1,0 +1,35 @@
+{
+	"items": [
+		{
+			"slug": "floatcms",
+			"title": "FloatCMS",
+			"description": "Headless GraphQL / API Service for flexibly managing data for any number of web applications, static sites, or native applications.",
+			"content": "## FloatCMS\n\nA headless CMS built with a GraphQL API layer on top of Django, designed to flexibly manage content for web applications, static sites, and native apps.\n\n### Key Features\n\n- GraphQL API for flexible content queries\n- Django backend for robust data management\n- React-based admin interface\n- Deployed on AWS EC2",
+			"tags": ["GraphQL", "Django", "React", "AWS", "EC2"],
+			"color": "#006d77",
+			"date": "2021-01-01",
+			"published": true
+		},
+		{
+			"slug": "wspir",
+			"title": "Waiver Application Portal (WSPIR)",
+			"description": "Integrating project waivers into a single system / simple UI. Built while working fully remotely.",
+			"content": "## Waiver Application Portal (WSPIR)\n\nA unified portal for managing project waivers, consolidating multiple systems into a single, intuitive interface.\n\n### Key Features\n\n- Centralized waiver management system\n- Streamlined approval workflows\n- Built with Django and React\n- Deployed on Kubernetes with CI/CD via Drone",
+			"tags": ["Django", "React", "Kubernetes", "Drone", "Sentry"],
+			"color": "#2e3445",
+			"date": "2022-01-01",
+			"published": true
+		},
+		{
+			"slug": "iads",
+			"title": "ITAR Ticket Dashboard (IADS)",
+			"description": "Unifying 4 JPL applications into a single metrics application to streamline ITAR verification of JPL documents and shipments.",
+			"content": "## ITAR Ticket Dashboard (IADS)\n\nA metrics dashboard that unifies four separate JPL applications into a single interface for ITAR verification tracking.\n\n### Key Features\n\n- Consolidated metrics from 4 JPL applications\n- Streamlined ITAR document and shipment verification\n- Django and React stack\n- Kubernetes deployment with Drone CI and Sentry monitoring",
+			"tags": ["Django", "React", "Kubernetes", "Drone", "Sentry"],
+			"color": "#6ab4b1",
+			"date": "2023-01-01",
+			"published": true
+		}
+	],
+	"lastUpdated": "2026-02-17T00:00:00.000Z"
+}
