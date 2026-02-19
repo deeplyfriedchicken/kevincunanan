@@ -36,6 +36,7 @@ export default function About() {
 					Work is not everything though. I love sports 🏐, climbing 🧗🏽‍♂️, snow 🎿, and many games🕹️.
 				</p>
 				<p>If you couldn't tell, I like cats.</p>
+				<p>Please reach out if you'd like to chat!</p>
 			</div>
 		</main>
 	);

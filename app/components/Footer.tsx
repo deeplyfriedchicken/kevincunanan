@@ -13,7 +13,7 @@ export function Footer() {
 
 			<div className="relative z-10 flex items-center justify-center">
 				<a
-					href="mailto:kevincunanan@gmail.com"
+					href="mailto:kevin.a.cunanan@gmail.com"
 					className="bg-white text-theme-text px-[3rem] py-[1rem] rounded-full hover:opacity-90 transition-opacity font-merriweather-sans text-[1rem]"
 				>
 					send me an email
