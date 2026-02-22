@@ -7,16 +7,20 @@
 		"dev": "react-router dev",
 		"start": "react-router-serve ./build/server/index.js",
 		"typecheck": "react-router typegen && tsc",
-		"fetch-data": "tsx scripts/fetch-capacities.ts"
+		"fetch-data": "tsx scripts/fetch-capacities.ts",
+		"fetch-notion": "tsx --env-file=.env scripts/fetch-notion.ts"
 	},
 	"dependencies": {
+		"@notionhq/client": "^5.9.0",
 		"@react-router/node": "7.10.1",
 		"@react-router/serve": "7.10.1",
 		"isbot": "5.1.31",
 		"lottie-react": "2.4.1",
 		"lucide-react": "0.564.0",
+		"notion-to-md": "^3.1.9",
 		"react": "19.2.3",
 		"react-dom": "19.2.3",
+		"react-markdown": "^10.1.0",
 		"react-router": "7.10.1",
 		"vite-plugin-svgr": "^4.5.0"
 	},

@@ -17,21 +17,23 @@ export default function Projects() {
 				Projects
 			</h1>
 			<p className="text-theme-text font-light text-[1.125rem] leading-relaxed max-w-[48rem] mb-[4rem]">
-				My experience in software engineering has mainly focused on
-				internal tools that speed up daily activities.
+				My experience in software engineering has mainly focused on internal
+				tools that speed up daily activities.
 			</p>
 
 			<div className="space-y-[4rem]">
-				{projects.map((project) => (
-					<ProjectCard
-						key={project.slug}
-						title={project.title}
-						description={project.description}
-						tags={project.tags}
-						slug={project.slug}
-						color={project.color}
-					/>
-				))}
+				{projects.map((project) => {
+					return (
+						<ProjectCard
+							key={project.title}
+							title={project.title}
+							description={project.description}
+							tags={project.tags}
+							color={project.color}
+							iconPath={project.iconPath}
+						/>
+					);
+				})}
 			</div>
 		</main>
 	);

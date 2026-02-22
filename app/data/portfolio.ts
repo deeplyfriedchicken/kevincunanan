@@ -1,19 +1,14 @@
-import type { PortfolioData, PortfolioItem } from "./types";
-import rawData from "./portfolio-items.json";
+import type { TProject } from "./types";
+import rawData from "./notion-pages.json";
 
-const data = rawData as PortfolioData;
+const data = rawData as TProject[];
 
-export function getPortfolioItems(): PortfolioItem[] {
-	return data.items
-		.filter((item) => item.published)
-		.sort((a, b) => {
-			if (!a.date || !b.date) return 0;
-			return new Date(b.date).getTime() - new Date(a.date).getTime();
-		});
+export function getPortfolioItems() {
+	return data;
 }
 
-export function getPortfolioItem(slug: string): PortfolioItem | undefined {
-	return data.items.find((item) => item.slug === slug && item.published);
+export function getPortfolioItem(encodedName: string): TProject| undefined {
+	return data.find((item) => item.title === decodeURI(encodedName));
 }
 
 export function getAllTags(): string[] {

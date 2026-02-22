@@ -1,17 +1,8 @@
-export interface PortfolioItem {
-	slug: string;
+export type TProject = {
 	title: string;
+	iconPath: string;
 	description: string;
 	content: string;
 	tags: string[];
 	color: string;
-	imageUrl?: string;
-	externalUrl?: string;
-	date?: string;
-	published: boolean;
-}
-
-export interface PortfolioData {
-	items: PortfolioItem[];
-	lastUpdated: string;
 }

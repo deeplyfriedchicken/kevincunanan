@@ -1,0 +1,16 @@
+[
+  {
+    "title": "FloatCMS",
+    "description": "FloatCMS",
+    "tags": [
+      "GraphQL",
+      "Django",
+      "React",
+      "AWS",
+      "EC2"
+    ],
+    "color": "#006d77",
+    "iconPath": "/images/projects/floatcms.png",
+    "content": "\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+  }
+]
