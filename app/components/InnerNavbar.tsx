@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Github, Menu, X } from "lucide-react";
 
 const navLinks = [
 	{ to: "/", label: "home" },
@@ -8,6 +8,8 @@ const navLinks = [
 	{ to: "/projects", label: "projects" },
 	{ to: "/resume", label: "resume" },
 ];
+
+const githubUrl = "https://github.com/deeplyfriedchicken/kevincunanan";
 
 export function InnerNavbar({
 	variant = "light",
@@ -40,7 +42,7 @@ export function InnerNavbar({
 					)}
 				</button>
 
-				<ul className="hidden md:flex gap-[0.25rem]">
+				<ul className="hidden md:flex gap-[0.25rem] items-center">
 					{navLinks.map(({ to, label }) => (
 						<li key={to}>
 							<NavLink
@@ -53,6 +55,17 @@ export function InnerNavbar({
 							</NavLink>
 						</li>
 					))}
+					<li>
+						<a
+							href={githubUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label="GitHub repository"
+							className={`block py-[0.5rem] mx-[0.75rem] ${textClass} hover:opacity-70 transition-opacity`}
+						>
+							<Github className="w-[1.25rem] h-[1.25rem]" />
+						</a>
+					</li>
 				</ul>
 			</div>
 
@@ -74,6 +87,18 @@ export function InnerNavbar({
 								</NavLink>
 							</li>
 						))}
+						<li>
+							<a
+								href={githubUrl}
+								target="_blank"
+								rel="noopener noreferrer"
+								onClick={() => setIsOpen(false)}
+								className={`flex items-center gap-[0.5rem] py-[0.75rem] text-[1rem] ${textClass} hover:opacity-70 transition-opacity`}
+							>
+								<Github className="w-[1.25rem] h-[1.25rem]" />
+								github
+							</a>
+						</li>
 					</ul>
 				</div>
 			)}

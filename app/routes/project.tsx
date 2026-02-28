@@ -77,7 +77,7 @@ export default function Project() {
 					{/* LEFT COLUMN: app icon + TOC */}
 					<div>
 						{/* App icon — negative margin pulls it up over the hero boundary */}
-						<div className="-mt-[6rem] mb-[2rem] w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center">
+						<div className="relative z-10 -mt-[6rem] mb-[2rem] w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center">
 							{project.iconPath && (
 								<img
 									src={project.iconPath}
