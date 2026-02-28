@@ -13,6 +13,24 @@ npm run test         # Run unit tests (Vitest)
 npm run test:e2e     # Run E2E tests (Playwright)
 ```
 
+## Verification
+
+After making changes, always run the following checks:
+
+```bash
+npm run lint         # Biome linting (must pass with zero errors)
+npm run typecheck    # TypeScript type checking
+npm run test         # Unit tests (Vitest)
+```
+
+If the changes touch **more than one file**, also run:
+
+```bash
+npm run test:e2e     # Playwright E2E tests
+```
+
+All checks must pass before considering work complete.
+
 ## Testing Paradigms
 
 When writing or modifying tests, follow these principles:
