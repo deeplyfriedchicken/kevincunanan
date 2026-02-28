@@ -28,7 +28,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add app/data/notion-pages.json public/images/projects/
+          git add data/notion-pages.json public/images/projects/
           if ! git diff --staged --quiet; then
             git commit -m "chore: update Document Hub data from Notion"
             git push
