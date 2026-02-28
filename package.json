@@ -8,7 +8,10 @@
 		"start": "react-router-serve ./build/server/index.js",
 		"typecheck": "react-router typegen && tsc",
 		"fetch-data": "tsx scripts/fetch-capacities.ts",
-		"fetch-notion": "tsx --env-file=.env scripts/fetch-notion.ts"
+		"fetch-notion": "tsx --env-file=.env scripts/fetch-notion.ts",
+		"changeset": "changeset",
+		"version": "changeset version",
+		"release": "changeset publish"
 	},
 	"dependencies": {
 		"@notionhq/client": "^5.9.0",
@@ -26,6 +29,7 @@
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.4",
+		"@changesets/cli": "^2.29.8",
 		"@react-router/dev": "7.10.1",
 		"@tailwindcss/vite": "4.1.13",
 		"@types/node": "22",
