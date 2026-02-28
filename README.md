@@ -1,5 +1,7 @@
 https://www.figma.com/design/426yCocZmlHHH97BfTNU6u/Kevin-s-Portfolio?node-id=327-515&t=IEf6EI3eDWX4YHFT-4
 
+[GitHub Stats](github-stats-sureapp.md)
+
 # Welcome to React Router!
 
 A modern, production-ready template for building full-stack React applications using React Router.
