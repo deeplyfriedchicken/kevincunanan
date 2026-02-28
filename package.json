@@ -8,6 +8,10 @@
 		"dev": "react-router dev",
 		"start": "react-router-serve ./build/server/index.js",
 		"typecheck": "react-router typegen && tsc",
+		"test": "vitest run",
+		"test:watch": "vitest",
+		"test:e2e": "playwright test",
+		"test:e2e:ui": "playwright test --ui",
 		"fetch-notion": "tsx --env-file=.env scripts/fetch-notion.ts"
 	},
 	"dependencies": {
@@ -22,19 +26,30 @@
 		"react-dom": "19.2.3",
 		"react-markdown": "^10.1.0",
 		"react-router": "7.10.1",
+		"react-slugify": "^5.0.0",
 		"vite-plugin-svgr": "^4.5.0"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "2.4.4",
+		"@faker-js/faker": "^10.3.0",
+		"@playwright/test": "^1.58.2",
 		"@react-router/dev": "7.10.1",
 		"@tailwindcss/vite": "4.1.13",
+		"@testing-library/jest-dom": "^6.9.1",
+		"@testing-library/react": "^16.3.2",
+		"@testing-library/user-event": "^14.6.1",
 		"@types/node": "22",
 		"@types/react": "19.2.7",
 		"@types/react-dom": "19.2.3",
+		"@types/rosie": "^0.0.45",
+		"@vitejs/plugin-react": "^5.1.4",
+		"jsdom": "^28.1.0",
+		"rosie": "^2.1.1",
 		"tailwindcss": "4.1.13",
 		"tsx": "4.21.0",
 		"typescript": "5.9.2",
 		"vite": "7.1.7",
-		"vite-tsconfig-paths": "5.1.4"
+		"vite-tsconfig-paths": "5.1.4",
+		"vitest": "^4.0.18"
 	}
 }
