@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
+import { projectWithoutIcon, sampleProject } from "@tests/fixtures/projects";
+import { renderWithTheme } from "@tests/helpers/render";
 import { ProjectCard } from "~/components/ProjectCard";
-import { projectWithoutIcon, sampleProject } from "../fixtures/projects";
-import { renderWithTheme } from "../helpers/render";
 
 describe("ProjectCard", () => {
 	it("renders title, description, and tags", () => {

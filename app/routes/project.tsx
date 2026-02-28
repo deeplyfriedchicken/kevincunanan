@@ -1,5 +1,5 @@
-import { useParams } from "react-router";
 import ReactMarkdown from "react-markdown";
+import { useParams } from "react-router";
 import { Footer } from "~/components/Footer";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { getPortfolioItem } from "~/data/portfolio";

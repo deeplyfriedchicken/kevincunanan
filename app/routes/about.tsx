@@ -1,4 +1,4 @@
-import { MapPin, Briefcase } from "lucide-react";
+import { Briefcase, MapPin } from "lucide-react";
 
 export function meta() {
 	return [

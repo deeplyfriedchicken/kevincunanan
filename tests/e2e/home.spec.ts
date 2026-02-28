@@ -17,9 +17,7 @@ test.describe("Home page", () => {
 		const pinkButton = page.getByLabel("Switch to pink theme");
 		await pinkButton.click();
 
-		const theme = await page
-			.locator("html")
-			.getAttribute("data-theme");
+		const theme = await page.locator("html").getAttribute("data-theme");
 		expect(theme).toBe("pink");
 	});
 });

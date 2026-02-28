@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { renderWithTheme } from "@tests/helpers/render";
 import { InnerNavbar } from "~/components/InnerNavbar";
-import { renderWithTheme } from "../helpers/render";
 
 describe("InnerNavbar", () => {
 	it("renders desktop nav links", () => {
@@ -9,12 +9,8 @@ describe("InnerNavbar", () => {
 
 		expect(screen.getByRole("link", { name: "home" })).toBeInTheDocument();
 		expect(screen.getByRole("link", { name: "about" })).toBeInTheDocument();
-		expect(
-			screen.getByRole("link", { name: "projects" }),
-		).toBeInTheDocument();
-		expect(
-			screen.getByRole("link", { name: "resume" }),
-		).toBeInTheDocument();
+		expect(screen.getByRole("link", { name: "projects" })).toBeInTheDocument();
+		expect(screen.getByRole("link", { name: "resume" })).toBeInTheDocument();
 	});
 
 	it("hamburger opens mobile dropdown", async () => {

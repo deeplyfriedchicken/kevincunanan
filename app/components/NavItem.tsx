@@ -4,13 +4,9 @@ type TNavItem = {
 	to: string;
 	children: React.ReactNode;
 	className?: string;
-}
+};
 
-export function NavItem({
-	to,
-	children,
-	className = "",
-}: TNavItem) {
+export function NavItem({ to, children, className = "" }: TNavItem) {
 	return (
 		<li>
 			<NavLink

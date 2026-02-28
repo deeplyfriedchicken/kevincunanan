@@ -26,9 +26,7 @@ test.describe("Navigation", () => {
 		const hamburger = page.getByLabel("Toggle menu");
 		await hamburger.click();
 
-		const projectsLink = page
-			.getByRole("link", { name: "projects" })
-			.last();
+		const projectsLink = page.getByRole("link", { name: "projects" }).last();
 		await projectsLink.click();
 		await expect(page).toHaveURL(/\/projects/);
 	});

@@ -1,5 +1,5 @@
+import type { TProject } from "@shared/notion";
 import { Factory } from "rosie";
-import type { TProject } from "../../types/notion";
 
 export const ProjectFactory = new Factory<TProject>()
 	.sequence("title", (i) => `Project ${i}`)

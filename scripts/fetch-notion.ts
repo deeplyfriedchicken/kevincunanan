@@ -1,15 +1,12 @@
-import { Client } from "@notionhq/client";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
+import { Client } from "@notionhq/client";
+import { getNotionProperty } from "@scripts/notion-utils";
+import type { TProject } from "@shared/notion";
 import { NotionToMarkdown } from "notion-to-md";
 import slugify from "react-slugify";
-import type { TProject } from "../types/notion";
-import { getNotionProperty } from "./notion-utils";
 
-const OUTPUT_PATH = resolve(
-	import.meta.dirname,
-	"../data/notion-pages.json",
-);
+const OUTPUT_PATH = resolve(import.meta.dirname, "../data/notion-pages.json");
 
 const ICONS_DIR = resolve(import.meta.dirname, "../public/images/projects");
 

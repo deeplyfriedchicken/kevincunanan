@@ -1,6 +1,6 @@
+import { Github, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router";
-import { Github, Menu, X } from "lucide-react";
 
 const navLinks = [
 	{ to: "/", label: "home" },

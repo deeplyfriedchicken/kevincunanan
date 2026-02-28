@@ -3,9 +3,7 @@ import { expect, test } from "@playwright/test";
 test.describe("Projects page", () => {
 	test("projects heading is visible", async ({ page }) => {
 		await page.goto("/projects");
-		await expect(
-			page.getByRole("heading", { name: "Projects" }),
-		).toBeVisible();
+		await expect(page.getByRole("heading", { name: "Projects" })).toBeVisible();
 	});
 
 	test("at least one project card is rendered", async ({ page }) => {

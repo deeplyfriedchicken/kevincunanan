@@ -1,1 +1,1 @@
-export type { TProject } from "../../types/notion";
+export type { TProject } from "@shared/notion";
