@@ -1,5 +1,5 @@
 import type { TProject } from "./types";
-import rawData from "./notion-pages.json";
+import rawData from "../../data/notion-pages.json";
 
 const data = rawData as TProject[];
 
