@@ -1,15 +1,7 @@
 import { Github, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router";
-
-const navLinks = [
-	{ to: "/", label: "home" },
-	{ to: "/about", label: "about" },
-	{ to: "/projects", label: "projects" },
-	{ to: "/resume", label: "resume" },
-];
-
-const githubUrl = "https://github.com/deeplyfriedchicken/kevincunanan";
+import { githubUrl, navLinks } from "~/components/nav-links";
 
 export function InnerNavbar({
 	variant = "light",

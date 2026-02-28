@@ -1,11 +1,14 @@
-import { getNotionProperty } from "../../../scripts/notion-utils";
+import type { PageObjectResponse } from "@notionhq/client";
+import { getNotionProperty } from "@scripts/notion-utils";
+
+type NotionProperty = PageObjectResponse["properties"][string];
 
 describe("getNotionProperty", () => {
 	it("extracts plain text from a title property", () => {
 		const property = {
 			type: "title",
 			title: [{ plain_text: "My Project" }],
-		} as any;
+		} as unknown as NotionProperty;
 
 		expect(getNotionProperty(property)).toBe("My Project");
 	});
@@ -14,7 +17,7 @@ describe("getNotionProperty", () => {
 		const property = {
 			type: "multi_select",
 			multi_select: [{ name: "React" }, { name: "TypeScript" }],
-		} as any;
+		} as unknown as NotionProperty;
 
 		expect(getNotionProperty(property)).toEqual(["React", "TypeScript"]);
 	});
@@ -23,7 +26,7 @@ describe("getNotionProperty", () => {
 		const property = {
 			type: "title",
 			title: [],
-		} as any;
+		} as unknown as NotionProperty;
 
 		expect(getNotionProperty(property)).toBeUndefined();
 	});
@@ -32,7 +35,7 @@ describe("getNotionProperty", () => {
 		const property = {
 			type: "rich_text",
 			rich_text: [{ plain_text: "A description" }],
-		} as any;
+		} as unknown as NotionProperty;
 
 		expect(getNotionProperty(property)).toBe("A description");
 	});

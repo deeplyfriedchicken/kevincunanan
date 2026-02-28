@@ -1,9 +1,11 @@
+import { Github } from "lucide-react";
 import Lottie from "lottie-react";
 import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
 import { Navbar } from "~/components/Navbar";
+import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
 import catBlue from "~/data/cat.json";
 import catGreen from "~/data/cat-green.json";
@@ -17,12 +19,7 @@ const catAnimations = {
 	yellow: catYellow,
 } as const;
 
-const navItems = [
-	{ to: "/", children: "home" },
-	{ to: "/about", children: "about" },
-	{ to: "/projects", children: "projects" },
-	{ to: "/resume", children: "resume" },
-];
+const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
 export function Welcome() {
 	const { theme } = useTheme();
@@ -128,6 +125,18 @@ export function Welcome() {
 											</NavLink>
 										</li>
 									))}
+									<li>
+										<a
+											href={githubUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											onClick={() => setNavOpen(false)}
+											className="font-merriweather-sans font-bold text-[0.875rem] text-theme-text opacity-50 flex items-center gap-[0.375rem] hover:opacity-100 transition-opacity"
+										>
+											<Github className="w-[0.875rem] h-[0.875rem]" />
+											github
+										</a>
+									</li>
 								</ul>
 							</nav>
 						</div>

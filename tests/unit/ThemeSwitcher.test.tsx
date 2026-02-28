@@ -1,24 +1,16 @@
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { renderWithTheme } from "@tests/helpers/render";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
-import { renderWithTheme } from "../helpers/render";
 
 describe("ThemeSwitcher", () => {
 	it("renders 4 theme buttons with aria-labels", () => {
 		renderWithTheme(<ThemeSwitcher />);
 
-		expect(
-			screen.getByLabelText("Switch to blue theme"),
-		).toBeInTheDocument();
-		expect(
-			screen.getByLabelText("Switch to pink theme"),
-		).toBeInTheDocument();
-		expect(
-			screen.getByLabelText("Switch to green theme"),
-		).toBeInTheDocument();
-		expect(
-			screen.getByLabelText("Switch to yellow theme"),
-		).toBeInTheDocument();
+		expect(screen.getByLabelText("Switch to blue theme")).toBeInTheDocument();
+		expect(screen.getByLabelText("Switch to pink theme")).toBeInTheDocument();
+		expect(screen.getByLabelText("Switch to green theme")).toBeInTheDocument();
+		expect(screen.getByLabelText("Switch to yellow theme")).toBeInTheDocument();
 	});
 
 	it("active button has ring class", () => {
