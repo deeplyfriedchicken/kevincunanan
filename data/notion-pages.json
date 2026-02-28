@@ -1,65 +1,50 @@
 [
-  {
-    "title": "FloatCMS",
-    "description": "FloatCMS",
-    "tags": [
-      "GraphQL",
-      "Django",
-      "React",
-      "AWS",
-      "EC2"
-    ],
-    "color": "#006d77",
-    "iconPath": "/images/projects/floatcms.png",
-    "content": "\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  },
-  {
-    "title": "Toggle",
-    "description": "Whitelabel insurance product for Farmers Insurance subsidiary to sell auto, renters, and homeowners insurance nationwide.",
-    "tags": [
-      "React",
-      "Django",
-      "AWS",
-      "EC2",
-      "Component Library"
-    ],
-    "color": "#4A0861",
-    "iconPath": "/images/projects/toggle.jpeg",
-    "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  },
-  {
-    "title": "JPL",
-    "description": "",
-    "tags": [],
-    "color": "",
-    "iconPath": "",
-    "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  },
-  {
-    "title": "Retrace",
-    "description": "",
-    "tags": [],
-    "color": "",
-    "iconPath": "/images/projects/retrace.svg",
-    "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  },
-  {
-    "title": "Admin Portal",
-    "description": "",
-    "tags": [
-      "React",
-      "Material UI"
-    ],
-    "color": "#0C2874",
-    "iconPath": "/images/projects/admin-portal.jpg",
-    "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  },
-  {
-    "title": "Document / Email Engineer",
-    "description": "",
-    "tags": [],
-    "color": "",
-    "iconPath": "/images/projects/document-email-engineer.png",
-    "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
-  }
+	{
+		"title": "FloatCMS",
+		"description": "FloatCMS",
+		"tags": ["GraphQL", "Django", "React", "AWS", "EC2"],
+		"color": "#006d77",
+		"iconPath": "/images/projects/floatcms.png",
+		"content": "\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	},
+	{
+		"title": "Toggle",
+		"description": "Whitelabel insurance product for Farmers Insurance subsidiary to sell auto, renters, and homeowners insurance nationwide.",
+		"tags": ["React", "Django", "AWS", "EC2", "Component Library"],
+		"color": "#4A0861",
+		"iconPath": "/images/projects/toggle.jpeg",
+		"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	},
+	{
+		"title": "JPL",
+		"description": "",
+		"tags": ["Django", "GraphQL", "React", "AWS", "EC2", "SQS"],
+		"color": "",
+		"iconPath": "",
+		"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	},
+	{
+		"title": "Retrace",
+		"description": "",
+		"tags": ["Preact"],
+		"color": "",
+		"iconPath": "/images/projects/retrace.svg",
+		"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	},
+	{
+		"title": "Admin Portal",
+		"description": "",
+		"tags": ["React", "Material UI"],
+		"color": "#0C2874",
+		"iconPath": "/images/projects/admin-portal.jpg",
+		"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	},
+	{
+		"title": "Document / Email Engineer",
+		"description": "",
+		"tags": ["Deno"],
+		"color": "",
+		"iconPath": "/images/projects/document-email-engineer.png",
+		"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
+	}
 ]
