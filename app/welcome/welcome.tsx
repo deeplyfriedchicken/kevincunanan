@@ -1,13 +1,15 @@
-import { useCallback, useState } from "react";
+import { Github } from "lucide-react";
 import Lottie from "lottie-react";
+import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router";
-import { Navbar } from "~/components/Navbar";
-import { useTheme } from "~/context/ThemeContext";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
+import { Navbar } from "~/components/Navbar";
+import { githubUrl, navLinks } from "~/components/nav-links";
+import { useTheme } from "~/context/ThemeContext";
 import catBlue from "~/data/cat.json";
-import catPink from "~/data/cat-pink.json";
 import catGreen from "~/data/cat-green.json";
+import catPink from "~/data/cat-pink.json";
 import catYellow from "~/data/cat-yellow.json";
 
 const catAnimations = {
@@ -17,12 +19,7 @@ const catAnimations = {
 	yellow: catYellow,
 } as const;
 
-const navItems = [
-	{ to: "/", children: "home" },
-	{ to: "/about", children: "about" },
-	{ to: "/projects", children: "projects" },
-	{ to: "/resume", children: "resume" },
-];
+const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
 export function Welcome() {
 	const { theme } = useTheme();
@@ -93,23 +90,18 @@ export function Welcome() {
 
 				{/* Bottom-right: cat */}
 				<div className="col-start-1 col-span-2 row-start-2 self-end justify-self-end w-[30rem] mr-[-85px] mb-[-60px]">
-					<Lottie
-						key={theme}
-						animationData={catAnimations[theme]}
-						loop
-					/>
+					<Lottie key={theme} animationData={catAnimations[theme]} loop />
 				</div>
 
 				{/* Nav overlay */}
 				{navOpen && (
 					<>
 						{/* Dark overlay */}
-						<div
-							className="fixed inset-0 bg-theme-primary/85 z-20 animate-nav-overlay"
+						<button
+							type="button"
+							className="fixed inset-0 bg-theme-primary/85 z-20 animate-nav-overlay appearance-none border-none p-0 cursor-default"
 							onClick={() => setNavOpen(false)}
-							onKeyDown={(e) => {
-								if (e.key === "Escape") setNavOpen(false);
-							}}
+							aria-label="Close navigation"
 						/>
 						{/* White nav header */}
 						<div className="fixed top-0 left-0 right-0 h-[11.4375rem] bg-white/95 backdrop-blur-[10px] z-30 flex items-end px-[2.25rem] pb-[1.5rem] animate-nav-slide">
@@ -133,6 +125,18 @@ export function Welcome() {
 											</NavLink>
 										</li>
 									))}
+									<li>
+										<a
+											href={githubUrl}
+											target="_blank"
+											rel="noopener noreferrer"
+											onClick={() => setNavOpen(false)}
+											className="font-merriweather-sans font-bold text-[0.875rem] text-theme-text opacity-50 flex items-center gap-[0.375rem] hover:opacity-100 transition-opacity"
+										>
+											<Github className="w-[0.875rem] h-[0.875rem]" />
+											github
+										</a>
+									</li>
 								</ul>
 							</nav>
 						</div>
@@ -160,13 +164,19 @@ export function Welcome() {
 						className="absolute left-[-175px] bottom-0 text-theme-primary"
 						style={{ opacity: "var(--theme-blob-opacity)" }}
 					>
-						<LeftBlob className="w-full h-full" style={{ overflow: "visible" }} />
+						<LeftBlob
+							className="w-full h-full"
+							style={{ overflow: "visible" }}
+						/>
 					</div>
 					<div
 						className="absolute right-[-500px] bottom-0 text-theme-primary"
 						style={{ opacity: "var(--theme-blob-opacity)" }}
 					>
-						<RightBlob className="w-full h-full" style={{ overflow: "visible" }} />
+						<RightBlob
+							className="w-full h-full"
+							style={{ overflow: "visible" }}
+						/>
 					</div>
 				</div>
 
@@ -195,11 +205,7 @@ export function Welcome() {
 					</div>
 
 					<div className="col-start-2 col-span-1 flex items-center justify-center">
-						<Lottie
-							key={theme}
-							animationData={catAnimations[theme]}
-							loop
-						/>
+						<Lottie key={theme} animationData={catAnimations[theme]} loop />
 					</div>
 
 					<div className="flex items-center justify-end">

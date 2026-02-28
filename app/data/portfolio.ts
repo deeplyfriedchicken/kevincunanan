@@ -1,5 +1,5 @@
+import rawData from "@data/notion-pages.json";
 import type { TProject } from "./types";
-import rawData from "./notion-pages.json";
 
 const data = rawData as TProject[];
 
@@ -7,7 +7,7 @@ export function getPortfolioItems() {
 	return data;
 }
 
-export function getPortfolioItem(encodedName: string): TProject| undefined {
+export function getPortfolioItem(encodedName: string): TProject | undefined {
 	return data.find((item) => item.title === decodeURI(encodedName));
 }
 

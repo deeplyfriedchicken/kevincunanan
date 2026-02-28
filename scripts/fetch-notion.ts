@@ -1,39 +1,12 @@
-import { Client, type PageObjectResponse } from "@notionhq/client";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
+import { Client } from "@notionhq/client";
+import { getNotionProperty } from "@scripts/notion-utils";
+import type { TProject } from "@shared/notion";
 import { NotionToMarkdown } from "notion-to-md";
+import slugify from "react-slugify";
 
-type TProject = {
-	title: string;
-	description: string;
-	content: string;
-	tags: string[];
-	color: string;
-	iconPath: string;
-};
-
-const OUTPUT_PATH = resolve(
-	import.meta.dirname,
-	"../app/data/notion-pages.json",
-);
-
-function getNotionProperty(
-	property: PageObjectResponse["properties"][string],
-): string | string[] | undefined {
-	const value = property[property.type as keyof typeof property];
-	if (!Array.isArray(value) || value.length === 0) return;
-
-	const notionValue = value[0];
-
-	if ("plain_text" in notionValue) return notionValue.plain_text as string;
-	if ("file" in notionValue) {
-		console.log({ notionValue });
-		const { file } = notionValue;
-		const isExternalUrl = file.type === "external" || file.type === "file";
-		return isExternalUrl ? file.external?.url : file.url;
-	}
-	if ("multi_select" in property) return value.map((v) => v.name);
-}
+const OUTPUT_PATH = resolve(import.meta.dirname, "../data/notion-pages.json");
 
 const ICONS_DIR = resolve(import.meta.dirname, "../public/images/projects");
 
@@ -65,10 +38,7 @@ for (const page of results) {
 	const props = page.properties;
 
 	const title = (getNotionProperty(props["Doc name"]) as string) || "";
-	const titleSlug = title
-		.toLowerCase()
-		.replace(/\s+/g, "-")
-		.replace(/[^\w-]/g, "");
+	const titleSlug = slugify(title);
 
 	console.log({ page, icon: page.icon });
 

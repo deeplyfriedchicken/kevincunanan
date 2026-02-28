@@ -2,6 +2,7 @@
 .env
 /node_modules/
 .claude/worktrees/
+/test-results
 
 # React Router
 /.react-router/

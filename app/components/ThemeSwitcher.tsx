@@ -18,9 +18,7 @@ export function ThemeSwitcher() {
 					type="button"
 					onClick={() => setTheme(name)}
 					className={`w-[25px] h-[25px] md:w-10 md:h-10 rounded-full hover:scale-110 ${
-						theme === name
-							? "ring-2 ring-offset-2 ring-gray-400 scale-110"
-							: ""
+						theme === name ? "ring-2 ring-offset-2 ring-gray-400 scale-110" : ""
 					}`}
 					style={{ backgroundColor: color }}
 					aria-label={`Switch to ${name} theme`}

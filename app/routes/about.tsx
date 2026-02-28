@@ -1,4 +1,4 @@
-import { MapPin, Briefcase } from "lucide-react";
+import { Briefcase, MapPin } from "lucide-react";
 
 export function meta() {
 	return [
@@ -31,9 +31,13 @@ export default function About() {
 
 			<div className="mt-[4rem] max-w-[48rem] space-y-[1.5rem] text-theme-text font-light leading-relaxed text-[1rem]">
 				<p>
-					While I am a full-stack developer at heart, I have 6+ years of focused experience working in frontend engineering; sprinkled in there is regular work with CI pipelines, API contracts, and UI/UX.</p>
+					While I am a full-stack developer at heart, I have 6+ years of focused
+					experience working in frontend engineering; sprinkled in there is
+					regular work with CI pipelines, API contracts, and UI/UX.
+				</p>
 				<p>
-					Work is not everything though. I love sports 🏐, climbing 🧗🏽‍♂️, snow 🎿, and many games🕹️.
+					Work is not everything though. I love sports 🏐, climbing 🧗🏽‍♂️, snow
+					🎿, and many games🕹️.
 				</p>
 				<p>If you couldn't tell, I like cats.</p>
 				<p>Please reach out if you'd like to chat!</p>

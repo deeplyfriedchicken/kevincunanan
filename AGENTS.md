@@ -2,39 +2,6 @@
 
 This file provides guidance for AI agents (and contributors) working in this repository.
 
-## Changesets
-
-This project uses [Changesets](https://github.com/changesets/changesets) to track version changes and generate changelogs.
-
-### Workflow
-
-**Always add a changeset before committing a feature or fix:**
-
-```bash
-npm run changeset
-```
-
-This prompts you to:
-1. Select a bump type:
-   - `patch` — bug fix or minor tweak (e.g. CSS adjustment, copy edit)
-   - `minor` — new feature or non-breaking addition
-   - `major` — breaking change
-2. Write a short summary of the change (this becomes the changelog entry)
-
-The command creates a `.changeset/*.md` file — commit this alongside your changes.
-
-### Release Automation
-
-When a changeset-containing branch merges to `main`, the `Release` GitHub Action automatically opens a **"Version Packages"** pull request that:
-- Bumps the version in `package.json`
-- Updates `CHANGELOG.md` with all accumulated changeset summaries
-
-Merging that PR completes the release.
-
-### PR Bot
-
-The [changeset-bot](https://github.com/apps/changeset-bot) is installed on this repo and will comment on PRs that are missing a changeset file, reminding contributors to add one.
-
 ## Commands
 
 ```bash
@@ -42,7 +9,53 @@ npm run dev          # Start dev server with HMR (localhost:5173)
 npm run build        # Production build
 npm run start        # Run production server (serves from build/)
 npm run typecheck    # TypeScript type checking + react-router typegen
-npm run changeset    # Add a changeset for the current change
-npm run version      # Apply pending changesets (bump versions + update CHANGELOG)
-npm run release      # Publish (not used for this site — reserved for future npm packages)
+npm run test         # Run unit tests (Vitest)
+npm run test:e2e     # Run E2E tests (Playwright)
 ```
+
+## Verification
+
+After making changes, always run the following checks:
+
+```bash
+npm run lint         # Biome linting (must pass with zero errors)
+npm run typecheck    # TypeScript type checking
+npm run test         # Unit tests (Vitest)
+```
+
+If the changes touch **more than one file**, also run:
+
+```bash
+npm run test:e2e     # Playwright E2E tests
+```
+
+All checks must pass before considering work complete.
+
+## Testing Paradigms
+
+When writing or modifying tests, follow these principles:
+
+### Test behavior, not implementation
+- Assert what the user **sees and experiences**, not internal state
+- Use Testing Library queries that reflect how users interact: `getByRole`, `getByText`, `getByLabelText`
+- Never assert on state variables (e.g. `isOpen`), CSS class names, or component internals
+- Ask: "Would this test break if I refactored the component without changing its behavior?" If yes, the test is too coupled
+
+### Keep tests independent and isolated
+- Each test should set up its own state — never depend on the order of other tests
+- Use factories (`tests/factories/`) to generate test data rather than hardcoding objects inline
+- Shared fixtures live in `tests/fixtures/` — import them, don't copy-paste
+
+### Prefer realistic rendering
+- Wrap components in `ThemeProvider` and router context as needed (use the shared `renderWithTheme` helper in `tests/setup.ts`)
+- Test components as close to how they're mounted in the real app as possible
+
+### E2E tests are happy-path only
+- Playwright tests cover critical user flows, not edge cases
+- Edge cases and conditional logic belong in unit tests
+- E2E tests should use fixture data from `tests/fixtures/`, not live Notion data
+
+### Shared types
+- The `TProject` type lives in `types/notion.ts` and is the single source of truth
+- Both `app/` and `scripts/` import from this shared location
+- Test factories must match this shape exactly

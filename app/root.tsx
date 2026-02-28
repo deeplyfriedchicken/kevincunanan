@@ -6,10 +6,9 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "react-router";
-
-import type { Route } from "./+types/root";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
 import { ThemeProvider } from "~/context/ThemeContext";
+import type { Route } from "./+types/root";
 import "./app.css";
 
 export const links: Route.LinksFunction = () => [
@@ -33,7 +32,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<Meta />
 				<Links />
-				</head>
+			</head>
 			<body className="min-h-screen w-full">
 				<ThemeProvider>
 					{children}
