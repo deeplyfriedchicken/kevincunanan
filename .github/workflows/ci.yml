@@ -22,6 +22,7 @@ jobs:
       - run: pnpm run typecheck
 
   build:
+    needs: typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -36,6 +37,7 @@ jobs:
       - run: pnpm run build
 
   unit-tests:
+    needs: [build, typecheck]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -50,6 +52,7 @@ jobs:
       - run: pnpm run test
 
   e2e-tests:
+    needs: [build, typecheck]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
