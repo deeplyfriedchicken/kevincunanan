@@ -16,8 +16,7 @@ export function InnerNavbar({
 }) {
 	const [isOpen, setIsOpen] = useState(false);
 	const textClass = variant === "dark" ? "text-white" : "text-theme-text";
-	const borderClass =
-		variant === "dark" ? "border-white" : "border-theme-text";
+	const borderClass = variant === "dark" ? "border-white" : "border-theme-text";
 	const menuBg = variant === "dark" ? "bg-[#32384c]" : "bg-white";
 
 	return (
@@ -26,9 +25,7 @@ export function InnerNavbar({
 				<NavLink
 					to="/"
 					className={`text-[2.25rem] font-light ${textClass}`}
-				>
-					kev.dev
-				</NavLink>
+				></NavLink>
 
 				<button
 					type="button"

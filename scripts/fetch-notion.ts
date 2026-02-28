@@ -17,15 +17,22 @@ const OUTPUT_PATH = resolve(
 	"../app/data/notion-pages.json",
 );
 
-function getNotionPlainTextProperty(
-	property: PageObjectResponse["properties"]["string"],
-) {
-	if (property.type === "title" && property[property.type].length > 0) {
-		return property[property.type][0].plain_text;
+function getNotionProperty(
+	property: PageObjectResponse["properties"][string],
+): string | string[] | undefined {
+	const value = property[property.type as keyof typeof property];
+	if (!Array.isArray(value) || value.length === 0) return;
+
+	const notionValue = value[0];
+
+	if ("plain_text" in notionValue) return notionValue.plain_text as string;
+	if ("file" in notionValue) {
+		console.log({ notionValue });
+		const { file } = notionValue;
+		const isExternalUrl = file.type === "external" || file.type === "file";
+		return isExternalUrl ? file.external?.url : file.url;
 	}
-	if (property.type === "rich_text" && property[property.type].length > 0) {
-		return property[property.type][0].plain_text;
-	}
+	if ("multi_select" in property) return value.map((v) => v.name);
 }
 
 const ICONS_DIR = resolve(import.meta.dirname, "../public/images/projects");
@@ -57,25 +64,30 @@ for (const page of results) {
 
 	const props = page.properties;
 
-	const title = getNotionPlainTextProperty(props["Doc name"]) || "";
+	const title = (getNotionProperty(props["Doc name"]) as string) || "";
 	const titleSlug = title
 		.toLowerCase()
 		.replace(/\s+/g, "-")
 		.replace(/[^\w-]/g, "");
 
+	console.log({ page, icon: page.icon });
+
 	// Download cover icon
 	let iconPath = "";
-	const coverProp = props["Cover icon"];
-	if (coverProp?.type === "files" && coverProp.files.length > 0) {
-		const file = coverProp.files[0];
-		const url = (
-			file.type === "external" ? file.external.url : file.file.url
-		) as string;
-		const urlPathname = new URL(url).pathname;
-		const ext = extname(urlPathname) || ".png";
+	let coverUrl = "";
+	if ("icon" in page && page.icon) {
+		if ("file" in page.icon) {
+			coverUrl = page.icon.file.url;
+		}
+		if ("custom_emoji" in page.icon) {
+			coverUrl = page.icon.custom_emoji.url;
+		}
+	}
+	if (coverUrl) {
+		const ext = extname(new URL(coverUrl).pathname) || ".png";
 		const filename = `${titleSlug}${ext}`;
 
-		const res = await fetch(url);
+		const res = await fetch(coverUrl);
 		const buffer = Buffer.from(await res.arrayBuffer());
 		writeFileSync(resolve(ICONS_DIR, filename), buffer);
 		iconPath = `/images/projects/${filename}`;
@@ -83,16 +95,13 @@ for (const page of results) {
 	}
 
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
-	let tags: string[] = [];
-	if (props.Tags.type === "multi_select") {
-		tags = props.Tags.multi_select.map((tag) => tag.name);
-	}
+	const tags = (getNotionProperty(props.Tags) as string[]) || [];
 
 	pages.push({
 		title,
-		description: getNotionPlainTextProperty(props.Description) || "",
+		description: (getNotionProperty(props.Description) as string) || "",
 		tags,
-		color: getNotionPlainTextProperty(props.Color) || "",
+		color: (getNotionProperty(props.Color) as string) || "",
 		iconPath,
 		content: n2m.toMarkdownString(mdBlocks).parent,
 	});
