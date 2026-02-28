@@ -30,7 +30,14 @@
   {
     "title": "JPL",
     "description": "",
-    "tags": [],
+    "tags": [
+      "Django",
+      "GraphQL",
+      "React",
+      "AWS",
+      "EC2",
+      "SQS"
+    ],
     "color": "",
     "iconPath": "",
     "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
@@ -38,7 +45,9 @@
   {
     "title": "Retrace",
     "description": "",
-    "tags": [],
+    "tags": [
+      "Preact"
+    ],
     "color": "",
     "iconPath": "/images/projects/retrace.svg",
     "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
@@ -57,7 +66,9 @@
   {
     "title": "Document / Email Engineer",
     "description": "",
-    "tags": [],
+    "tags": [
+      "Deno"
+    ],
     "color": "",
     "iconPath": "/images/projects/document-email-engineer.png",
     "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n"
