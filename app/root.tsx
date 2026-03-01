@@ -7,7 +7,9 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 } from "react-router";
+import { Sentry } from "~/sentry";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
 import { ThemeProvider, useTheme } from "~/context/ThemeContext";
 import type { Route } from "./+types/root";
@@ -89,7 +91,19 @@ function NotFoundPage() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+	const location = useLocation();
+
 	if (isRouteErrorResponse(error) && error.status === 404) {
+		Sentry.captureMessage("404 Not Found", {
+			level: "warning",
+			tags: { status: 404 },
+			contexts: {
+				route: {
+					pathname: location.pathname,
+					search: location.search,
+				},
+			},
+		});
 		return <NotFoundPage />;
 	}
 

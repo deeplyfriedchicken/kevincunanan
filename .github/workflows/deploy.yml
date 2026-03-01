@@ -28,6 +28,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
       - run: pnpm run build
+        env:
+          VITE_SENTRY_DSN: ${{ secrets.SENTRY_DSN }}
       - run: cp build/client/index.html build/client/404.html
       - run: touch build/client/.nojekyll
       - uses: actions/upload-pages-artifact@v3

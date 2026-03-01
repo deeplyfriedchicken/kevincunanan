@@ -21,6 +21,7 @@
 		"@anthropic-ai/sdk": "^0.78.0",
 		"@react-router/node": "7.10.1",
 		"@react-router/serve": "7.10.1",
+		"@sentry/react": "^10.40.0",
 		"isbot": "5",
 		"lottie-react": "2.4.1",
 		"lucide-react": "0.564.0",
