@@ -16,7 +16,7 @@ describe("normalizedToHex", () => {
 	it("converts normalized RGB to a hex string", () => {
 		expect(normalizedToHex(0, 0, 0)).toBe("#000000");
 		expect(normalizedToHex(1, 1, 1)).toBe("#ffffff");
-		expect(normalizedToHex(0.196, 0.216, 0.298)).toBe("#323737");
+		expect(normalizedToHex(0.196, 0.216, 0.298)).toBe("#32374c");
 	});
 
 	it("roundtrips through hexToNormalized within floating-point tolerance", () => {
@@ -64,7 +64,7 @@ describe("extractLottieColors", () => {
 
 		const colors = extractLottieColors(lottie);
 		expect(colors.size).toBe(2);
-		expect(colors.has("#333348")).toBe(true); // approx #32384c
+		expect(colors.has(normalizedToHex(0.2, 0.22, 0.298))).toBe(true); // #33384c
 		expect(colors.has("#ffffff")).toBe(true);
 	});
 
@@ -84,7 +84,11 @@ describe("extractLottieColors", () => {
 // ─── Lottie recoloring ────────────────────────────────────────────────────────
 
 describe("recolorLottie", () => {
-	const ORIGINAL = { v: "5.0", assets: [], layers: [{ it: [{ ty: "fl", c: { a: 0, k: [0.2, 0.22, 0.298, 1] } }] }] };
+	const ORIGINAL = {
+		v: "5.0",
+		assets: [],
+		layers: [{ it: [{ ty: "fl", c: { a: 0, k: [0.2, 0.22, 0.298, 1] } }] }],
+	};
 
 	it("replaces matched color values using the color map", () => {
 		const [r, g, b] = hexToNormalized(normalizedToHex(0.2, 0.22, 0.298));
@@ -138,7 +142,7 @@ describe("validateCss", () => {
 	it("throws when a required CSS variable is missing", () => {
 		const broken = VALID_CSS.replace("--theme-blob-opacity: 0.08;", "");
 		expect(() => validateCss(broken, "test")).toThrow(
-			'missing required variable: --theme-blob-opacity',
+			"missing required variable: --theme-blob-opacity",
 		);
 	});
 });
@@ -155,9 +159,9 @@ describe("validateColorMap", () => {
 
 	it("throws when a hex is missing from the map", () => {
 		const map = { "#aabbcc": "#112233" };
-		expect(() =>
-			validateColorMap(map, ["#aabbcc", "#ddeeff"], "test"),
-		).toThrow('missing entry for hex: #ddeeff');
+		expect(() => validateColorMap(map, ["#aabbcc", "#ddeeff"], "test")).toThrow(
+			"missing entry for hex: #ddeeff",
+		);
 	});
 });
 
@@ -171,9 +175,9 @@ describe("validateLottie", () => {
 	});
 
 	it("throws when v is missing", () => {
-		expect(() =>
-			validateLottie({ layers: [], assets: [] }, "test"),
-		).toThrow('missing "v"');
+		expect(() => validateLottie({ layers: [], assets: [] }, "test")).toThrow(
+			'missing "v"',
+		);
 	});
 
 	it("throws when layers is not an array", () => {
