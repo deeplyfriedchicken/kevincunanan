@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-01T01:29:00.096Z",
+  "last_updated": "2026-03-01T07:14:47.098Z",
   "projects": [
     {
       "title": "FloatCMS",
@@ -46,7 +46,7 @@
         "SQS"
       ],
       "color": "#020002",
-      "iconPath": "",
+      "iconPath": "/images/projects/jpl.png",
       "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n",
       "isFavorite": false
     },
