@@ -17,7 +17,7 @@ export function ThemeSwitcher() {
 	const { theme, setTheme } = useTheme();
 	const { pathname } = useLocation();
 	const isHomePage = pathname === "/";
-	const containerRef = useRef<HTMLDivElement>(null);
+	const containerRef = useRef<HTMLFieldSetElement>(null);
 
 	const [pickerState, setPickerState] = useState<PickerState>(
 		isHomePage ? "expanded" : "collapsed",
@@ -68,13 +68,14 @@ export function ThemeSwitcher() {
 	};
 
 	return (
-		<div
+		<fieldset
 			ref={containerRef}
 			data-picker-state={pickerState}
 			onMouseEnter={handleMouseEnter}
 			onMouseLeave={handleMouseLeave}
 			onClick={handleContainerClick}
-			className="fixed bottom-10 left-0 right-0 justify-center flex-row gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50"
+			onKeyDown={handleContainerClick}
+			className="fixed bottom-10 left-0 right-0 justify-center flex-row gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50 border-none p-0 m-0"
 			style={{ "--dot-count": themes.length } as React.CSSProperties}
 		>
 			{themes.map(({ slug, primaryColor }, index) => (
@@ -103,6 +104,6 @@ export function ThemeSwitcher() {
 					aria-label={`Switch to ${slug} theme`}
 				/>
 			))}
-		</div>
+		</fieldset>
 	);
 }

@@ -1,6 +1,5 @@
 import ReactMarkdown from "react-markdown";
 import { data } from "react-router";
-import { Footer } from "~/components/Footer";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { getPortfolioItem } from "~/data/portfolio";
 import { assetUrl } from "~/services/assetUrl";

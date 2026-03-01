@@ -55,11 +55,28 @@ test.describe("Generated theme switcher", () => {
 		await page.getByLabel(`Switch to ${slug} theme`).click();
 
 		await expect(page.locator("html")).toHaveAttribute("data-theme", slug);
-		const link = page.getByRole("link", { name: `check out ${slug}` });
-		await expect(link).toBeVisible();
 	});
 
-	test("active theme button has a visible ring style", async ({ page }) => {
+	test("clicking a generated theme updates the CTA link", async ({
+		page,
+	}) => {
+		test.skip(
+			generatedThemes.length === 0,
+			"No generated themes in themes.json",
+		);
+
+		await page.goto("/");
+
+		const { slug } = generatedThemes[0];
+		await page.getByLabel(`Switch to ${slug} theme`).click();
+
+		// CTA should link to the project page for this theme (mobile + desktop both render one)
+		const ctaLinks = page.locator(`a[href*="/projects/${slug}"]`);
+		await expect(ctaLinks).toHaveCount(2);
+		await expect(ctaLinks.last()).toBeVisible();
+	});
+
+	test("active theme button has a visible ring", async ({ page }) => {
 		test.skip(
 			generatedThemes.length === 0,
 			"No generated themes in themes.json",
@@ -71,9 +88,8 @@ test.describe("Generated theme switcher", () => {
 		const btn = page.getByLabel(`Switch to ${slug} theme`);
 		await btn.click();
 
-		// ring class is applied — check via computed class attribute
-		const className = await btn.getAttribute("class");
-		expect(className).toContain("ring-2");
+		// Check computed outline via box-shadow (Tailwind ring compiles to box-shadow)
+		await expect(btn).toHaveCSS("box-shadow", /rgb/);
 	});
 
 	test("switching themes updates CSS variables on the document root", async ({
@@ -89,7 +105,9 @@ test.describe("Generated theme switcher", () => {
 		const { slug, primaryColor } = generatedThemes[0];
 		await page.getByLabel(`Switch to ${slug} theme`).click();
 
-		// The CSS variable --theme-primary should match the theme's primaryColor
+		// Wait for data-theme to update before checking CSS variables
+		await expect(page.locator("html")).toHaveAttribute("data-theme", slug);
+
 		const computedPrimary = await page.evaluate(() =>
 			getComputedStyle(document.documentElement)
 				.getPropertyValue("--theme-primary")

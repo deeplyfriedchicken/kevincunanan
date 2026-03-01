@@ -219,19 +219,27 @@ body {
 
 /* Mobile (horizontal): all dots collapse to center, fan out symmetrically */
 [data-picker-state="collapsed"] .theme-dot {
-	transform: translateX(calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 40px));
+	transform: translateX(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 40px)
+	);
 }
 [data-picker-state="peeking"] .theme-dot {
-	transform: translateX(calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 34px));
+	transform: translateX(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 34px)
+	);
 }
 
 /* Desktop (vertical): all dots collapse to center, fan out symmetrically */
 @media (min-width: 768px) {
 	[data-picker-state="collapsed"] .theme-dot {
-		transform: translateY(calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.25rem));
+		transform: translateY(
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.25rem)
+		);
 	}
 	[data-picker-state="peeking"] .theme-dot {
-		transform: translateY(calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.75rem));
+		transform: translateY(
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.75rem)
+		);
 	}
 }
 

@@ -9,16 +9,15 @@ import {
 	ScrollRestoration,
 	useLocation,
 } from "react-router";
-import { Sentry } from "~/sentry";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
 import { ThemeProvider, useTheme } from "~/context/ThemeContext";
+import { Sentry } from "~/sentry";
 import type { Route } from "./+types/root";
 import "./app.css";
 
-const catModules = import.meta.glob<{ default: object }>(
-	"./data/cat-*.json",
-	{ eager: true },
-);
+const catModules = import.meta.glob<{ default: object }>("./data/cat-*.json", {
+	eager: true,
+});
 const catAnimations: Record<string, object> = {};
 for (const [path, mod] of Object.entries(catModules)) {
 	const slug = path.match(/cat-(.+)\.json$/)?.[1];
