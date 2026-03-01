@@ -8,6 +8,9 @@ on:
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
 
@@ -28,14 +31,29 @@ jobs:
           NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
         run: npx tsx scripts/fetch-notion.ts
 
-      - name: Commit if changed
+      - name: Open PR if changed
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/notion-pages.json public/images/projects/
           if ! git diff --staged --quiet; then
-            git commit -m "chore: update Document Hub data from Notion"
-            git push
+            DATE=$(date -u "+%Y-%m-%d")
+            TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
+            BRANCH="notion-data/${DATE}-$(date -u '+%H%M')"
+            ITEM_COUNT=$(jq length data/notion-pages.json)
+            git checkout -b "${BRANCH}"
+            git commit -m "chore: update Notion data (${DATE})"
+            git push origin "${BRANCH}"
+            gh pr create \
+              --title "chore: Notion data update (${DATE})" \
+              --body "## Notion Data Pull
+
+**Pulled at:** ${TIMESTAMP}
+**Total items:** ${ITEM_COUNT}" \
+              --base main \
+              --head "${BRANCH}"
           else
-            echo "No changes to commit."
+            echo "No changes, skipping PR."
           fi
