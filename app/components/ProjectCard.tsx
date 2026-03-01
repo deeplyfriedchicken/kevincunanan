@@ -36,7 +36,10 @@ export function ProjectCard({
 				<p className="text-theme-text font-light leading-relaxed text-[0.875rem]">
 					{description}
 				</p>
-				<p className="text-theme-text font-bold text-[0.75rem]">
+				<p
+					data-testid="tags"
+					className="text-theme-text font-bold text-[0.75rem]"
+				>
 					{tags.join(", ")} ...
 				</p>
 				<Link

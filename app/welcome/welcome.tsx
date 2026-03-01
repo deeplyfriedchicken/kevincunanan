@@ -74,7 +74,7 @@ export function Welcome() {
 	return (
 		<>
 			{/* Mobile layout */}
-			<div className="md:hidden bg-white min-h-screen grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-hidden">
+			<div className="md:hidden bg-white min-h-screen grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-x-hidden">
 				{/* Top-left: title, subtitles, CTA */}
 				<div className="col-start-1 row-start-1 px-[2.25rem] pt-[3rem]">
 					<h1 className="text-theme-text-light font-light text-[3.5rem] leading-tight">
@@ -107,12 +107,14 @@ export function Welcome() {
 					}`}
 				>
 					{/* String */}
-					<div className="w-[0.625rem] h-[11.4375rem] bg-theme-text-light rounded-full" />
+					<div
+						className={`w-[0.625rem] h-[32rem] -mt-[12rem] bg-theme-text-light rounded-b-full ${navOpen ? "" : "animate-ball-rattle"}`}
+					/>
 					{/* Ball (nav trigger) */}
 					<button
 						type="button"
 						onClick={handleMobileBallClick}
-						className="w-[3.9375rem] h-[3.9375rem] rounded-full bg-theme-text-light shrink-0 -mt-[0.5rem] cursor-pointer"
+						className={`w-[3.9375rem] h-[3.9375rem] rounded-full bg-theme-text-light shrink-0 -mt-[0.5rem] cursor-pointer ${navOpen ? "" : "animate-ball-rattle"}`}
 						aria-label="Toggle navigation"
 					/>
 				</div>
@@ -144,7 +146,7 @@ export function Welcome() {
 							aria-label="Close navigation"
 						/>
 						{/* White nav header */}
-						<div className="fixed top-0 left-0 right-0 h-[11.4375rem] bg-white/95 backdrop-blur-[10px] z-30 flex items-end px-[2.25rem] pb-[1.5rem] animate-nav-slide">
+						<div className="fixed top-0 left-0 right-0 h-[12.4375rem] bg-white/95 backdrop-blur-[10px] z-30 flex items-end px-[2.25rem] pb-[1.5rem] animate-nav-slide">
 							{/* Logo */}
 							<p className="text-theme-text font-light italic text-[1.5rem]">
 								kevin cunanan

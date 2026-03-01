@@ -11,9 +11,8 @@ describe("ProjectCard", () => {
 		expect(
 			screen.getByText("Personal portfolio built with React Router 7."),
 		).toBeInTheDocument();
-		expect(screen.getByText("React")).toBeInTheDocument();
-		expect(screen.getByText("TypeScript")).toBeInTheDocument();
-		expect(screen.getByText("Tailwind")).toBeInTheDocument();
+		const tags = screen.getByTestId("tags");
+		expect(tags).toHaveTextContent("React, TypeScript, Tailwind");
 	});
 
 	it("READ MORE link has correct href", () => {

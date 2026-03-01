@@ -88,4 +88,66 @@ describe("ThemeSwitcher", () => {
 			screen.getByLabelText("Switch to blue theme").className,
 		).not.toContain("ring-2");
 	});
+
+	describe("collapsible behavior on non-home pages", () => {
+		it('renders data-picker-state="collapsed" at /about', () => {
+			const { container } = renderWithTheme(<ThemeSwitcher />, {
+				initialEntries: ["/about"],
+			});
+
+			const picker = container.querySelector("[data-picker-state]");
+			expect(picker).toHaveAttribute("data-picker-state", "collapsed");
+		});
+
+		it('renders data-picker-state="expanded" at /', () => {
+			const { container } = renderWithTheme(<ThemeSwitcher />, {
+				initialEntries: ["/"],
+			});
+
+			const picker = container.querySelector("[data-picker-state]");
+			expect(picker).toHaveAttribute("data-picker-state", "expanded");
+		});
+
+		it("container click when collapsed transitions to expanded", async () => {
+			const user = userEvent.setup();
+			const { container } = renderWithTheme(<ThemeSwitcher />, {
+				initialEntries: ["/about"],
+			});
+
+			const picker = container.querySelector(
+				"[data-picker-state]",
+			) as HTMLElement;
+			expect(picker).toHaveAttribute("data-picker-state", "collapsed");
+
+			await user.click(picker);
+
+			expect(picker).toHaveAttribute("data-picker-state", "expanded");
+		});
+
+		it("dot click when expanded keeps it expanded and changes theme", async () => {
+			const user = userEvent.setup();
+			const { container } = renderWithTheme(<ThemeSwitcher />, {
+				initialEntries: ["/about"],
+			});
+
+			const picker = container.querySelector(
+				"[data-picker-state]",
+			) as HTMLElement;
+
+			// First expand
+			await user.click(picker);
+			expect(picker).toHaveAttribute("data-picker-state", "expanded");
+
+			// Click a theme dot
+			const { slug } = generatedThemes[0];
+			const btn = screen.getByLabelText(`Switch to ${slug} theme`);
+			await user.click(btn);
+
+			// Should stay expanded
+			expect(picker).toHaveAttribute("data-picker-state", "expanded");
+			await waitFor(() => {
+				expect(document.documentElement.dataset.theme).toBe(slug);
+			});
+		});
+	});
 });

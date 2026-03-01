@@ -56,7 +56,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 		<div className="min-h-screen flex flex-col">
 			{/* HERO */}
 			<section style={{ backgroundColor: project.color }} className="relative">
-				<InnerNavbar variant="dark" />
+				<InnerNavbar variant="dark" color={project.color} />
 				<div className="px-[2rem] md:px-[4rem] pb-[5rem]">
 					<h1 className="text-white text-[3rem] md:text-[4rem] font-light mb-[1rem]">
 						{project.title}
@@ -191,8 +191,6 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 					</article>
 				</div>
 			</div>
-
-			<Footer />
 		</div>
 	);
 }

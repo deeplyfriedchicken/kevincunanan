@@ -5,16 +5,21 @@ import { githubUrl, navLinks } from "~/components/nav-links";
 
 export function InnerNavbar({
 	variant = "light",
+	color,
 }: {
 	variant?: "light" | "dark";
+	color?: string;
 }) {
 	const [isOpen, setIsOpen] = useState(false);
-	const textClass = variant === "dark" ? "text-white" : "text-theme-text";
-	const borderClass = variant === "dark" ? "border-white" : "border-theme-text";
-	const menuBg = variant === "dark" ? "bg-theme-text" : "bg-white";
+	const textClass = variant === "dark" ? "text-white" : color ? "text-[var(--nav-color)]" : "text-theme-text";
+	const borderClass = variant === "dark" ? "border-white" : color ? "border-[var(--nav-color)]" : "border-theme-text";
+	const menuBg = variant === "dark" && color ? "bg-[var(--nav-color)]" : variant === "dark" ? "bg-theme-text" : "bg-white";
 
 	return (
-		<nav className="relative py-[1.5rem] px-[2rem] md:px-[4rem]">
+		<nav
+			className="relative py-[1.5rem] px-[2rem] md:px-[4rem]"
+			{...(color ? { style: { "--nav-color": color } as React.CSSProperties } : {})}
+		>
 			<div className="flex items-center justify-between">
 				<NavLink
 					to="/"
