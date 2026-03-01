@@ -1,26 +1,35 @@
-[
-	{
-		"title": "Portfolio Site",
-		"description": "Personal portfolio built with React Router 7 and Tailwind CSS.",
-		"tags": ["React", "TypeScript", "Tailwind"],
-		"color": "#32384c",
-		"iconPath": "/images/projects/portfolio.png",
-		"content": "# Overview\n\nA modern portfolio site.\n\n## Tech Stack\n\nReact Router 7, Vite, Tailwind CSS v4."
-	},
-	{
-		"title": "Task Manager",
-		"description": "A full-stack task management application.",
-		"tags": ["Node.js", "PostgreSQL", "React"],
-		"color": "#adbca5",
-		"iconPath": "/images/projects/task-manager.png",
-		"content": "# Overview\n\nManage tasks efficiently.\n\n## Features\n\nCRUD operations, drag-and-drop, real-time sync."
-	},
-	{
-		"title": "Weather App",
-		"description": "Real-time weather dashboard with location search.",
-		"tags": ["React", "API", "CSS"],
-		"color": "#e8b9ab",
-		"iconPath": "",
-		"content": "# Overview\n\nWeather data at a glance.\n\n## API\n\nOpenWeatherMap integration."
-	}
-]
+{
+	"last_updated": "2026-02-28T05:00:00.000Z",
+	"projects": [
+		{
+			"title": "Portfolio Site",
+			"slug": "portfolio-site",
+			"description": "Personal portfolio built with React Router 7 and Tailwind CSS.",
+			"tags": ["React", "TypeScript", "Tailwind"],
+			"color": "#32384c",
+			"iconPath": "/images/projects/portfolio.png",
+			"content": "# Overview\n\nA modern portfolio site.\n\n## Tech Stack\n\nReact Router 7, Vite, Tailwind CSS v4.",
+			"isFavorite": true
+		},
+		{
+			"title": "Task Manager",
+			"slug": "task-manager",
+			"description": "A full-stack task management application.",
+			"tags": ["Node.js", "PostgreSQL", "React"],
+			"color": "#adbca5",
+			"iconPath": "/images/projects/task-manager.png",
+			"content": "# Overview\n\nManage tasks efficiently.\n\n## Features\n\nCRUD operations, drag-and-drop, real-time sync.",
+			"isFavorite": false
+		},
+		{
+			"title": "Weather App",
+			"slug": "weather-app",
+			"description": "Real-time weather dashboard with location search.",
+			"tags": ["React", "API", "CSS"],
+			"color": "#e8b9ab",
+			"iconPath": "",
+			"content": "# Overview\n\nWeather data at a glance.\n\n## API\n\nOpenWeatherMap integration.",
+			"isFavorite": false
+		}
+	]
+}

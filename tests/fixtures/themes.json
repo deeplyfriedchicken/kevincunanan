@@ -1,0 +1,17 @@
+[
+	{
+		"slug": "floatcms",
+		"title": "FloatCMS",
+		"primaryColor": "#2a7b8a"
+	},
+	{
+		"slug": "toggle",
+		"title": "Toggle",
+		"primaryColor": "#4B0082"
+	},
+	{
+		"slug": "admin-portal",
+		"title": "Admin Portal",
+		"primaryColor": "#1a2a6c"
+	}
+]

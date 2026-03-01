@@ -1,6 +1,6 @@
 import { Github } from "lucide-react";
-import { githubUrl } from "~/components/nav-links";
 import { NavItem } from "~/components/NavItem";
+import { githubUrl } from "~/components/nav-links";
 
 export function Navbar({
 	navItems = [],

@@ -1,11 +1,21 @@
 import ReactMarkdown from "react-markdown";
-import { useParams } from "react-router";
+import { data } from "react-router";
 import { Footer } from "~/components/Footer";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { getPortfolioItem } from "~/data/portfolio";
+import { assetUrl } from "~/services/assetUrl";
+import type { Route } from "./+types/project";
 
-export function meta({ params }: { params: Record<string, string> }) {
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 	const project = getPortfolioItem(params.slug ?? "");
+	if (!project) {
+		throw data(null, { status: 404 });
+	}
+	return { project };
+}
+
+export function meta({ loaderData }: Route.MetaArgs) {
+	const project = loaderData?.project;
 	return [
 		{
 			title: project
@@ -37,22 +47,8 @@ function extractTOC(markdown: string): TOCItem[] {
 	}, []);
 }
 
-export default function Project() {
-	const { slug } = useParams();
-	const project = getPortfolioItem(slug ?? "");
-
-	if (!project) {
-		return (
-			<div className="min-h-screen flex flex-col">
-				<InnerNavbar />
-				<main className="flex-1 px-[2rem] md:px-[4rem] py-[3rem]">
-					<p className="text-theme-text font-light">Project not found.</p>
-				</main>
-				<Footer />
-			</div>
-		);
-	}
-
+export default function Project({ loaderData }: Route.ComponentProps) {
+	const { project } = loaderData;
 	const markdown = project.content;
 	const toc = extractTOC(markdown);
 
@@ -80,7 +76,7 @@ export default function Project() {
 						<div className="relative z-10 -mt-[6rem] mb-[2rem] w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center">
 							{project.iconPath && (
 								<img
-									src={project.iconPath}
+									src={assetUrl(project.iconPath)}
 									alt={project.title}
 									className="w-full h-full object-contain p-[1rem]"
 								/>
@@ -183,7 +179,7 @@ export default function Project() {
 								},
 								code({ children }) {
 									return (
-										<code className="bg-gray-100 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
+										<code className="bg-theme-primary/10 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
 											{children}
 										</code>
 									);

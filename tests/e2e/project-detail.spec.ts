@@ -13,7 +13,8 @@ test.describe("Project detail page", () => {
 
 	test("invalid slug shows not found message", async ({ page }) => {
 		await page.goto("/projects/nonexistent-project-slug");
-		await expect(page.getByText("Project not found.")).toBeVisible();
+		await expect(page.getByText("404")).toBeVisible();
+		await expect(page.getByText("not found")).toBeVisible();
 	});
 
 	test("navbar is present on detail page", async ({ page }) => {

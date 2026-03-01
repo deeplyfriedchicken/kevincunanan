@@ -1,23 +1,37 @@
-import { Github } from "lucide-react";
 import Lottie from "lottie-react";
-import { useCallback, useState } from "react";
+import { Github } from "lucide-react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
+import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 import { Navbar } from "~/components/Navbar";
 import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
-import catBlue from "~/data/cat.json";
-import catGreen from "~/data/cat-green.json";
-import catPink from "~/data/cat-pink.json";
-import catYellow from "~/data/cat-yellow.json";
+import generatedThemesData from "~/data/themes.json";
 
-const catAnimations = {
-	blue: catBlue,
-	pink: catPink,
-	green: catGreen,
-	yellow: catYellow,
-} as const;
+const catModules = import.meta.glob<{ default: object }>("../data/cat-*.json", {
+	eager: true,
+});
+const catAnimations: Record<string, object> = {};
+for (const [path, mod] of Object.entries(catModules)) {
+	const slug = path.match(/cat-(.+)\.json$/)?.[1];
+	if (slug) catAnimations[slug] = mod.default;
+}
+
+type ThemeEntry = { slug: string; title: string; primaryColor: string };
+const generatedThemes = generatedThemesData as ThemeEntry[];
+
+// Build a slug → CTA mapping. Blue is the hardcoded default.
+const ctaByTheme: Record<string, { text: string; href: string }> = {
+	blue: { text: "check out my work", href: "/projects" },
+};
+for (const { slug, title } of generatedThemes) {
+	ctaByTheme[slug] = {
+		text: `check out ${title.toLowerCase()}`,
+		href: `/projects/${slug}`,
+	};
+}
 
 const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
@@ -27,6 +41,20 @@ export function Welcome() {
 	const [desktopSway, setDesktopSway] = useState(false);
 	// Track whether ball has ever been opened so closing gets the up animation (not bounce)
 	const [ballHasOpened, setBallHasOpened] = useState(false);
+
+	const cta = ctaByTheme[theme] ?? ctaByTheme.blue;
+	const [ctaAnimating, setCtaAnimating] = useState(false);
+	const prevThemeRef = useRef(theme);
+
+	useEffect(() => {
+		if (prevThemeRef.current === theme) return;
+		prevThemeRef.current = theme;
+		setCtaAnimating(false);
+		requestAnimationFrame(() => setCtaAnimating(true));
+		// Reset after animation so the class can be cleanly reapplied on the next change
+		const t = setTimeout(() => setCtaAnimating(false), 400);
+		return () => clearTimeout(t);
+	}, [theme]);
 
 	const handleDesktopBallClick = useCallback(() => {
 		setDesktopSway(false);
@@ -60,10 +88,10 @@ export function Welcome() {
 					</ul>
 
 					<Link
-						to="/projects"
-						className="inline-block mt-[4rem] bg-theme-button text-white px-[1.75rem] py-[0.75rem] rounded-full font-bold text-[0.875rem]"
+						to={cta.href}
+						className={`inline-block mt-[4rem] bg-theme-button text-white px-[1.75rem] py-[0.75rem] rounded-full font-bold text-[0.875rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
 					>
-						check out my work
+						{cta.text}
 					</Link>
 				</div>
 
@@ -214,22 +242,23 @@ export function Welcome() {
 						</p>
 					</div>
 
-					<div className="row-start-3 flex">
-						<p className="text-theme-credit opacity-25 font-semibold mt-auto text-[0.875rem]">
+					<div className="row-start-3 flex flex-col justify-end gap-[0.5rem]">
+						<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
 							designed by cory
 						</p>
+						<LastUpdatedClock variant="light" />
 					</div>
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
-						<p className="font-merriweather-sans text-theme-muted uppercase basis-1/3 tracking-widest text-[0.875rem]">
+						<p className="font-merriweather-sans text-theme-text uppercase basis-1/3 tracking-widest text-[0.875rem]">
 							Los Angeles
 						</p>
 						<div className="basis-2/3">
 							<Link
-								to="/projects"
-								className="bg-theme-button hover:bg-theme-button-hover px-[3rem] py-[1rem] text-white rounded-full transition-colors text-[1rem] whitespace-nowrap"
+								to={cta.href}
+								className={`inline-block bg-theme-button hover:bg-theme-button-hover px-[3rem] py-[1rem] text-white rounded-full transition-colors text-[1rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
 							>
-								check out my work
+								{cta.text}
 							</Link>
 						</div>
 					</div>

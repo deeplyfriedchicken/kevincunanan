@@ -5,5 +5,4 @@ export const navLinks = [
 	{ to: "/resume", label: "resume" },
 ];
 
-export const githubUrl =
-	"https://github.com/deeplyfriedchicken/kevincunanan";
+export const githubUrl = "https://github.com/deeplyfriedchicken/kevincunanan";

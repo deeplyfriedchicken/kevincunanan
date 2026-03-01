@@ -11,7 +11,7 @@ export function InnerNavbar({
 	const [isOpen, setIsOpen] = useState(false);
 	const textClass = variant === "dark" ? "text-white" : "text-theme-text";
 	const borderClass = variant === "dark" ? "border-white" : "border-theme-text";
-	const menuBg = variant === "dark" ? "bg-[#32384c]" : "bg-white";
+	const menuBg = variant === "dark" ? "bg-theme-text" : "bg-white";
 
 	return (
 		<nav className="relative py-[1.5rem] px-[2rem] md:px-[4rem]">

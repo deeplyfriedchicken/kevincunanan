@@ -20,10 +20,7 @@ describe("ProjectCard", () => {
 		renderWithTheme(<ProjectCard {...sampleProject} />);
 
 		const link = screen.getByText("READ MORE +");
-		expect(link).toHaveAttribute(
-			"href",
-			`/projects/${encodeURI("Portfolio Site")}`,
-		);
+		expect(link).toHaveAttribute("href", "/projects/portfolio-site");
 	});
 
 	it("renders image when iconPath is present", () => {

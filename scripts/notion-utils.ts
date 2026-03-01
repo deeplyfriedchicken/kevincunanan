@@ -2,8 +2,11 @@ import type { PageObjectResponse } from "@notionhq/client";
 
 export function getNotionProperty(
 	property: PageObjectResponse["properties"][string],
-): string | string[] | undefined {
+): string | string[] | boolean | undefined {
 	const value = property[property.type as keyof typeof property];
+
+	if (typeof value === "boolean") return value;
+
 	if (!Array.isArray(value) || value.length === 0) return;
 
 	const notionValue = value[0];
