@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import themes from "../../app/data/themes.json";
+import themes from "../fixtures/themes.json" with { type: "json" };
 
 type ThemeEntry = { slug: string; primaryColor: string };
 const generatedThemes = themes as ThemeEntry[];
@@ -38,9 +38,7 @@ test.describe("Generated theme switcher", () => {
 		await page.goto("/");
 
 		for (const { slug } of generatedThemes) {
-			await expect(
-				page.getByLabel(`Switch to ${slug} theme`),
-			).toBeVisible();
+			await expect(page.getByLabel(`Switch to ${slug} theme`)).toBeVisible();
 		}
 	});
 
