@@ -121,6 +121,17 @@ export function Welcome() {
 					<Lottie key={theme} animationData={catAnimations[theme]} loop />
 				</div>
 
+				{/* Bottom-left: credits */}
+				<div className="col-start-1 col-span-1 row-start-2 self-end justify-self-start px-[2.25rem] py-[2.25rem]">
+					<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+						designed by cory
+					</p>
+					<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+						<span className="pr-[0.25rem]">engineered by kevin</span>
+						<LastUpdatedClock variant="light" />
+					</p>
+				</div>
+
 				{/* Nav overlay */}
 				{navOpen && (
 					<>
@@ -246,7 +257,10 @@ export function Welcome() {
 						<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
 							designed by cory
 						</p>
-						<LastUpdatedClock variant="light" />
+						<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+							<span className="pr-[0.25rem]">engineered by kevin</span>
+							<LastUpdatedClock variant="light" />
+						</p>
 					</div>
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
