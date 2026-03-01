@@ -5,6 +5,6 @@ import svgr from "vite-plugin-svgr";
 import tsconfigPaths from "vite-tsconfig-paths";
 
 export default defineConfig(({ command }) => ({
-	base: command === 'build' ? '/kevincunanan/' : '/',
+	base: command === "build" ? "/kevincunanan/" : "/",
 	plugins: [tailwindcss(), reactRouter(), tsconfigPaths(), svgr()],
 }));

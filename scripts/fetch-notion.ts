@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
 import { Client } from "@notionhq/client";
 import { getNotionProperty } from "@scripts/notion-utils";
-import type { TProject } from "@shared/notion";
+import type { TNotionData, TProject } from "@shared/notion";
 import { NotionToMarkdown } from "notion-to-md";
 import slugify from "react-slugify";
 
@@ -69,6 +69,7 @@ for (const page of results) {
 
 	pages.push({
 		title,
+		slug: titleSlug,
 		description: (getNotionProperty(props.Description) as string) || "",
 		tags,
 		color: (getNotionProperty(props.Color) as string) || "",
@@ -78,5 +79,10 @@ for (const page of results) {
 	console.log(`Fetched: ${title}`);
 }
 
-writeFileSync(OUTPUT_PATH, JSON.stringify(pages, null, 2));
+const output: TNotionData = {
+	last_updated: new Date().toISOString(),
+	projects: pages,
+};
+
+writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
 console.log(`Saved ${pages.length} pages to notion-pages.json`);

@@ -1,8 +1,10 @@
 import { Link } from "react-router";
 import { TechTag } from "~/components/TechTag";
+import { assetUrl } from "~/services/assetUrl";
 
 type TProjectCard = {
 	title: string;
+	slug: string;
 	description: string;
 	tags: string[];
 	color: string;
@@ -11,6 +13,7 @@ type TProjectCard = {
 
 export function ProjectCard({
 	title,
+	slug,
 	description,
 	tags,
 	iconPath,
@@ -20,7 +23,7 @@ export function ProjectCard({
 			<div className="w-full md:w-[20rem] h-[15rem] md:h-[20rem] flex items-center justify-center shrink-0 overflow-hidden">
 				{iconPath && (
 					<img
-						src={iconPath}
+						src={assetUrl(iconPath)}
 						alt={title}
 						className="w-full h-full object-contain p-[2.5rem]"
 					/>
@@ -39,7 +42,7 @@ export function ProjectCard({
 					))}
 				</div>
 				<Link
-					to={`/projects/${encodeURI(title)}`}
+					to={`/projects/${slug}`}
 					className="text-theme-text font-merriweather-sans text-[0.875rem] hover:opacity-70 transition-opacity mt-[0.5rem]"
 				>
 					READ MORE +

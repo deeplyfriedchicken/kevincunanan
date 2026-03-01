@@ -1,14 +1,18 @@
 import rawData from "@data/notion-pages.json";
-import type { TProject } from "./types";
+import type { TNotionData, TProject } from "./types";
 
-const data = rawData as TProject[];
+const data = rawData as TNotionData;
 
-export function getPortfolioItems() {
-	return data;
+export function getPortfolioItems(): TProject[] {
+	return data.projects;
 }
 
-export function getPortfolioItem(encodedName: string): TProject | undefined {
-	return data.find((item) => item.title === decodeURI(encodedName));
+export function getPortfolioItem(slug: string): TProject | undefined {
+	return data.projects.find((item) => item.slug === slug);
+}
+
+export function getLastUpdated(): string {
+	return data.last_updated;
 }
 
 export function getAllTags(): string[] {

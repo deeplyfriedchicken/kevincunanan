@@ -1,9 +1,10 @@
-import { Github } from "lucide-react";
 import Lottie from "lottie-react";
+import { Github } from "lucide-react";
 import { useCallback, useState } from "react";
 import { Link, NavLink } from "react-router";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
+import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 import { Navbar } from "~/components/Navbar";
 import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
@@ -214,10 +215,11 @@ export function Welcome() {
 						</p>
 					</div>
 
-					<div className="row-start-3 flex">
-						<p className="text-theme-credit opacity-25 font-semibold mt-auto text-[0.875rem]">
+					<div className="row-start-3 flex flex-col justify-end gap-[0.5rem]">
+						<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
 							designed by cory
 						</p>
+						<LastUpdatedClock variant="light" />
 					</div>
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">

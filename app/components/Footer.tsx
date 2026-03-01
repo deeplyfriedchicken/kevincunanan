@@ -1,5 +1,6 @@
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
+import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 
 export function Footer() {
 	return (
@@ -18,6 +19,10 @@ export function Footer() {
 				>
 					send me an email
 				</a>
+			</div>
+
+			<div className="absolute bottom-[2rem] left-[2rem] md:left-[4rem] z-10">
+				<LastUpdatedClock variant="dark" />
 			</div>
 		</footer>
 	);
