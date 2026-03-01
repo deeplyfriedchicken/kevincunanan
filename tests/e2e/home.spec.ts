@@ -56,9 +56,9 @@ test.describe("Generated theme switcher", () => {
 		await page.getByLabel(`Switch to ${slug} theme`).click();
 
 		const theme = await page.locator("html").getAttribute("data-theme");
-		expect(theme).toBe(slug);
+		await expect(theme).toBe(slug);
 		const link = await page.getByRole("link", { name: `check out ${slug}` });
-		expect(link).toBeVisible();
+		await expect(link).toBeVisible();
 	});
 
 	test("active theme button has a visible ring style", async ({ page }) => {
