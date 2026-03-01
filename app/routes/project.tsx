@@ -179,7 +179,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								},
 								code({ children }) {
 									return (
-										<code className="bg-gray-100 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
+										<code className="bg-theme-primary/10 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
 											{children}
 										</code>
 									);

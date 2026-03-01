@@ -18,7 +18,7 @@ export function LastUpdatedClock({ variant = "dark" }: Props) {
 	const tooltipClass =
 		variant === "dark"
 			? "bg-white/10 text-white/80"
-			: "bg-[#2e3445]/90 text-white/90";
+			: "bg-theme-text/90 text-white/90";
 
 	return (
 		<a

@@ -4,7 +4,7 @@ import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 
 export function Footer() {
 	return (
-		<footer className="relative bg-[#2e3445] overflow-hidden py-[6rem] px-[2rem] md:px-[4rem]">
+		<footer className="relative bg-theme-primary overflow-hidden py-[6rem] px-[2rem] md:px-[4rem]">
 			<div className="absolute left-[-175px] bottom-0 text-white opacity-[0.04] pointer-events-none">
 				<LeftBlob className="w-full h-full" style={{ overflow: "visible" }} />
 			</div>
