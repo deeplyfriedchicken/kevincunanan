@@ -13,7 +13,7 @@ export function LastUpdatedClock({ variant = "dark" }: Props) {
 	const anchorClass =
 		variant === "dark"
 			? "text-white/30 hover:text-white/60"
-			: "text-theme-credit/25 hover:text-theme-credit/50";
+			: "text-theme-credit/75 hover:text-theme-credit/50";
 
 	const tooltipClass =
 		variant === "dark"
@@ -25,7 +25,7 @@ export function LastUpdatedClock({ variant = "dark" }: Props) {
 			href={githubUrl}
 			target="_blank"
 			rel="noopener noreferrer"
-			className={`group relative flex items-center transition-colors ${anchorClass}`}
+			className={`group relative inline-block transition-colors ${anchorClass}`}
 		>
 			<Clock size={14} />
 			<span

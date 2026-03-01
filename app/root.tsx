@@ -7,16 +7,17 @@ import {
 	Outlet,
 	Scripts,
 	ScrollRestoration,
+	useLocation,
 } from "react-router";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
 import { ThemeProvider, useTheme } from "~/context/ThemeContext";
+import { Sentry } from "~/sentry";
 import type { Route } from "./+types/root";
 import "./app.css";
 
-const catModules = import.meta.glob<{ default: object }>(
-	"./data/cat-*.json",
-	{ eager: true },
-);
+const catModules = import.meta.glob<{ default: object }>("./data/cat-*.json", {
+	eager: true,
+});
 const catAnimations: Record<string, object> = {};
 for (const [path, mod] of Object.entries(catModules)) {
 	const slug = path.match(/cat-(.+)\.json$/)?.[1];
@@ -24,6 +25,8 @@ for (const [path, mod] of Object.entries(catModules)) {
 }
 
 export const links: Route.LinksFunction = () => [
+	{ rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+	{ rel: "icon", href: "/favicon.ico", sizes: "any" },
 	{ rel: "preconnect", href: "https://fonts.googleapis.com" },
 	{
 		rel: "preconnect",
@@ -87,7 +90,19 @@ function NotFoundPage() {
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
+	const location = useLocation();
+
 	if (isRouteErrorResponse(error) && error.status === 404) {
+		Sentry.captureMessage("404 Not Found", {
+			level: "warning",
+			tags: { status: 404 },
+			contexts: {
+				route: {
+					pathname: location.pathname,
+					search: location.search,
+				},
+			},
+		});
 		return <NotFoundPage />;
 	}
 

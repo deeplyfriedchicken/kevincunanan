@@ -1,4 +1,4 @@
-import { mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
 import { Client } from "@notionhq/client";
 import { getNotionProperty } from "@scripts/notion-utils";
@@ -78,6 +78,15 @@ for (const page of results) {
 		isFavorite: getNotionProperty(props.Favorites) === true,
 	});
 	console.log(`Fetched: ${title}`);
+}
+
+// Check if projects have changed before writing
+if (existsSync(OUTPUT_PATH)) {
+	const existing: TNotionData = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8"));
+	if (JSON.stringify(existing.projects) === JSON.stringify(pages)) {
+		console.log("No changes to projects — skipping write.");
+		process.exit(0);
+	}
 }
 
 const output: TNotionData = {

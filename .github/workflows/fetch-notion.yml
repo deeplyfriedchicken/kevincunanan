@@ -31,7 +31,17 @@ jobs:
           NOTION_DATA_SOURCE_ID: ${{ secrets.NOTION_DATA_SOURCE_ID }}
         run: npx tsx scripts/fetch-notion.ts
 
+      - name: Check if Notion data changed
+        id: notion_diff
+        run: |
+          if git diff --quiet data/notion-pages.json; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Generate themes
+        if: steps.notion_diff.outputs.changed == 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SENTRY_DSN: ${{ secrets.SENTRY_DSN }}

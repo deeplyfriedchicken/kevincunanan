@@ -163,6 +163,34 @@ body {
 	animation: nav-overlay-fade 0.3s ease-out forwards;
 }
 
+/* Mobile: subtle ball rattle to invite interaction */
+@keyframes ball-rattle {
+	0%,
+	70%,
+	100% {
+		transform: translateX(0);
+	}
+	75% {
+		transform: translateX(2px);
+	}
+	80% {
+		transform: translateX(-2px);
+	}
+	85% {
+		transform: translateX(1.5px);
+	}
+	90% {
+		transform: translateX(-1px);
+	}
+	95% {
+		transform: translateX(0.5px);
+	}
+}
+
+.animate-ball-rattle {
+	animation: ball-rattle 2s ease-in-out infinite;
+}
+
 /* CTA button pop when theme changes */
 @keyframes cta-pop {
 	0% {
@@ -181,4 +209,44 @@ body {
 
 .animate-cta-pop {
 	animation: cta-pop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Theme picker collapse/expand */
+.theme-dot {
+	transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+	transition-delay: calc(var(--dot-index, 0) * 30ms);
+}
+
+/* Mobile (horizontal): all dots collapse to center, fan out symmetrically */
+[data-picker-state="collapsed"] .theme-dot {
+	transform: translateX(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 40px)
+	);
+}
+[data-picker-state="peeking"] .theme-dot {
+	transform: translateX(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 34px)
+	);
+}
+
+/* Desktop (vertical): all dots collapse to center, fan out symmetrically */
+@media (min-width: 768px) {
+	[data-picker-state="collapsed"] .theme-dot {
+		transform: translateY(
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.25rem)
+		);
+	}
+	[data-picker-state="peeking"] .theme-dot {
+		transform: translateY(
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.75rem)
+		);
+	}
+}
+
+[data-picker-state="expanded"] .theme-dot {
+	transform: none;
+}
+
+[data-picker-state="expanded"] .theme-dot:hover {
+	transform: scale(1.1);
 }
