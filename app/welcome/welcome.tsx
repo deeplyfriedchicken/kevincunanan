@@ -8,17 +8,16 @@ import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 import { Navbar } from "~/components/Navbar";
 import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
-import catBlue from "~/data/cat.json";
-import catGreen from "~/data/cat-green.json";
-import catPink from "~/data/cat-pink.json";
-import catYellow from "~/data/cat-yellow.json";
 
-const catAnimations = {
-	blue: catBlue,
-	pink: catPink,
-	green: catGreen,
-	yellow: catYellow,
-} as const;
+const catModules = import.meta.glob<{ default: object }>(
+	"../data/cat-*.json",
+	{ eager: true },
+);
+const catAnimations: Record<string, object> = {};
+for (const [path, mod] of Object.entries(catModules)) {
+	const slug = path.match(/cat-(.+)\.json$/)?.[1];
+	if (slug) catAnimations[slug] = mod.default;
+}
 
 const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 

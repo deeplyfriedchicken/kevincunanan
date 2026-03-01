@@ -75,6 +75,7 @@ for (const page of results) {
 		color: (getNotionProperty(props.Color) as string) || "",
 		iconPath,
 		content: n2m.toMarkdownString(mdBlocks).parent,
+		isFavorite: getNotionProperty(props.Favorites) === true,
 	});
 	console.log(`Fetched: ${title}`);
 }

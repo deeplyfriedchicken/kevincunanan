@@ -6,6 +6,7 @@ export type TProject = {
 	tags: string[];
 	color: string;
 	iconPath: string;
+	isFavorite: boolean;
 };
 
 export type TNotionData = {
