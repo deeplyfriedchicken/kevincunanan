@@ -2,6 +2,7 @@ import Lottie from "lottie-react";
 import { Github } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
+import ArrowSvg from "~/assets/arrow.svg?react";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
 import { LastUpdatedClock } from "~/components/LastUpdatedClock";
@@ -81,10 +82,10 @@ export function Welcome() {
 					</h1>
 
 					<ul className="text-theme-text font-light text-[1.0625rem] mt-[4rem] space-y-[1rem]">
-						<li>full stack developer</li>
-						<li>verified cat enthusiast</li>
-						<li>maker of cool things</li>
-						<li>react subject matter expert</li>
+						<li>senior software engineer</li>
+						<li>agentic engineer</li>
+						<li>pipeline tinkerer</li>
+						<li>cat whisperer</li>
 					</ul>
 
 					<Link
@@ -196,6 +197,12 @@ export function Welcome() {
 						className="w-[48px] h-[48px] rounded-full bg-theme-text-light opacity-100 shrink-0 -mt-[10px] cursor-pointer"
 						aria-label="Sway animation"
 					/>
+					<p className="whitespace-nowrap absolute right-[2rem] top-[calc(50%+25px)] w-full text-theme-text-light font-light text-[1.125rem] rotate-270">
+						agentic engineer
+					</p>
+					<p className="whitespace-nowrap absolute left-[calc(50%+2.5rem)] bottom-3 text-theme-text-light font-light text-[1.125rem]">
+						pipeline tinkerer
+					</p>
 				</div>
 
 				<div className="fixed inset-0 pointer-events-none z-0">
@@ -229,28 +236,18 @@ export function Welcome() {
 						</p>
 					</div>
 
-					<div className="flex items-start justify-center">
-						<p className="text-theme-text-light font-light text-[1.125rem] mt-[2rem]">
-							full stack developer
-						</p>
-					</div>
+					<div />
 
 					<Navbar navItems={navItems} />
 
 					<div className="flex items-center justify-start">
-						<p className="text-theme-text-light font-light text-[1.125rem] writing-vertical-lr rotate-180">
-							react subject matter expert
+						<p className="text-theme-text-light font-light mt-[8rem] text-[1.125rem] writing-vertical-lr">
+							cat whisperer
 						</p>
 					</div>
 
 					<div className="col-start-2 col-span-1 flex items-center justify-center">
 						<Lottie key={theme} animationData={catAnimations[theme]} loop />
-					</div>
-
-					<div className="flex items-center justify-end">
-						<p className="text-theme-text-light font-light text-[1.125rem]">
-							verified cat enthusiast
-						</p>
 					</div>
 
 					<div className="row-start-3 flex flex-col justify-end gap-[0.5rem]">
@@ -262,6 +259,13 @@ export function Welcome() {
 							<LastUpdatedClock variant="light" />
 						</p>
 					</div>
+
+					<ArrowSvg
+						aria-hidden="true"
+						preserveAspectRatio="none"
+						className="absolute left-[calc(5%)] top-[calc(50%)] pointer-events-none opacity-50"
+						style={{ width: "35%", height: "25%" }}
+					/>
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
 						<p className="font-merriweather-sans text-theme-text uppercase basis-1/3 tracking-widest text-[0.875rem]">
@@ -275,12 +279,6 @@ export function Welcome() {
 								{cta.text}
 							</Link>
 						</div>
-					</div>
-
-					<div className="row-start-3 flex items-end justify-end">
-						<p className="text-theme-text-light font-light text-[1.125rem]">
-							maker of cool things
-						</p>
 					</div>
 				</div>
 			</main>
