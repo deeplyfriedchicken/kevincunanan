@@ -21,8 +21,7 @@ test.describe("Home page", () => {
 		await page.goto("/");
 		await page.getByLabel("Switch to blue theme").click();
 
-		const theme = await page.locator("html").getAttribute("data-theme");
-		expect(theme).toBe("blue");
+		await expect(page.locator("html")).toHaveAttribute("data-theme", "blue");
 	});
 });
 
@@ -52,12 +51,11 @@ test.describe("Generated theme switcher", () => {
 
 		await page.goto("/");
 
-		const { slug } = generatedThemes[1];
+		const { slug } = generatedThemes[0];
 		await page.getByLabel(`Switch to ${slug} theme`).click();
 
-		const theme = await page.locator("html").getAttribute("data-theme");
-		await expect(theme).toBe(slug);
-		const link = await page.getByRole("link", { name: `check out ${slug}` });
+		await expect(page.locator("html")).toHaveAttribute("data-theme", slug);
+		const link = page.getByRole("link", { name: `check out ${slug}` });
 		await expect(link).toBeVisible();
 	});
 

@@ -1,13 +1,19 @@
-import { screen } from "@testing-library/react";
+import { screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithTheme } from "@tests/helpers/render";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
-import generatedThemesData from "~/data/themes.json";
 
-type ThemeEntry = { slug: string; primaryColor: string };
-const generatedThemes = generatedThemesData as ThemeEntry[];
+vi.mock("~/data/themes.json", () => ({
+	default: [{ slug: "testproject", primaryColor: "#ff0000" }],
+}));
+
+const generatedThemes = [{ slug: "testproject", primaryColor: "#ff0000" }];
 
 describe("ThemeSwitcher", () => {
+	afterEach(() => {
+		document.documentElement.removeAttribute("data-theme");
+	});
+
 	it("always renders the blue theme button", () => {
 		renderWithTheme(<ThemeSwitcher />);
 
@@ -57,8 +63,6 @@ describe("ThemeSwitcher", () => {
 	});
 
 	it("clicking a generated theme button activates it and updates data-theme", async () => {
-		if (generatedThemes.length === 0) return; // nothing to test if themes.json is empty
-
 		const user = userEvent.setup();
 		renderWithTheme(<ThemeSwitcher />);
 
@@ -67,12 +71,12 @@ describe("ThemeSwitcher", () => {
 		await user.click(btn);
 
 		expect(btn.className).toContain("ring-2");
-		expect(document.documentElement.dataset.theme).toBe(slug);
+		await waitFor(() => {
+			expect(document.documentElement.dataset.theme).toBe(slug);
+		});
 	});
 
 	it("only the active theme button has the ring class", async () => {
-		if (generatedThemes.length === 0) return;
-
 		const user = userEvent.setup();
 		renderWithTheme(<ThemeSwitcher />);
 
