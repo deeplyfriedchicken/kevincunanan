@@ -12,7 +12,7 @@ export function NavItem({ to, children, className = "" }: TNavItem) {
 			<NavLink
 				to={to}
 				className={({ isActive }) =>
-					`block py-[0.5rem] mx-[0.75rem] text-theme-text text-[1rem] hover:opacity-70 transition-opacity ${isActive ? "border-b-4 border-theme-text" : ""} ${className}`
+					`block py-[0.5rem] mx-[0.375rem] lg:mx-[0.75rem] text-theme-text text-[1rem] hover:opacity-70 transition-opacity ${isActive ? "border-b-4 border-theme-text" : ""} ${className}`
 				}
 			>
 				{children}
