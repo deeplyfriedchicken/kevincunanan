@@ -28,14 +28,23 @@ export function meta({ loaderData }: Route.MetaArgs) {
 	];
 }
 
+function stripMarkdownLinks(text: string): string {
+	return text.replace(/\[([^\]]+)\]\([^)]+\)/g, "$1");
+}
+
 export function extractTOC(markdown: string): TOCItem[] {
 	return markdown.split("\n").reduce<TOCItem[]>((acc, line) => {
-		if (line.startsWith("# ") && !line.startsWith("## "))
-			acc.push({ level: 1, text: line.slice(2), id: slugify(line.slice(2)) });
-		else if (line.startsWith("## ") && !line.startsWith("### "))
-			acc.push({ level: 2, text: line.slice(3), id: slugify(line.slice(3)) });
-		else if (line.startsWith("### "))
-			acc.push({ level: 3, text: line.slice(4), id: slugify(line.slice(4)) });
+		let raw = "";
+		if (line.startsWith("# ") && !line.startsWith("## ")) {
+			raw = line.slice(2);
+			acc.push({ level: 1, text: stripMarkdownLinks(raw), id: slugify(raw) });
+		} else if (line.startsWith("## ") && !line.startsWith("### ")) {
+			raw = line.slice(3);
+			acc.push({ level: 2, text: stripMarkdownLinks(raw), id: slugify(raw) });
+		} else if (line.startsWith("### ")) {
+			raw = line.slice(4);
+			acc.push({ level: 3, text: stripMarkdownLinks(raw), id: slugify(raw) });
+		}
 		return acc;
 	}, []);
 }
