@@ -1,75 +1,109 @@
 {
-	"last_updated": "2026-03-02T08:36:11.337Z",
-	"projects": [
-		{
-			"title": "FloatCMS",
-			"slug": "floatcms",
-			"description": "Open source headless CMS platform engineered to be an entirely customizable API to drive frontend websites. ",
-			"tags": ["GraphQL", "Django", "React", "AWS", "EC2"],
-			"color": "#006d77",
-			"iconPath": "/images/projects/floatcms.png",
-			"content": "\n# Summary\n\n\nOpen source headless CMS platform engineered to be an entirely customizable API to drive frontend websites. Design and collaboration were heavily accompanied by [Cory](https://www.linkedin.com/in/findingcory/).\n\n\n## Tools Used\n\n\nDjango, GraphQL, React, Material UI\n\n\n# Original Concept\n\n\n## Why\n\n\nI had a lot of experience building out GitHub pages hosted websites for a few years after college. Unfortunately, using CMS options were either too expensive, not super configurable or very platform specific. I wanted something like a Headless CMS without having to pay for a subscription per user account. \n\n\n## How\n\n\n### Wireframes\n\n\n![Landing page for a user](/images/content/floatcms/floatcms-0.png)\n\n\n![Flexible editor for choosing input types for API properties](/images/content/floatcms/floatcms-1.jpg)\n\n",
-			"isFavorite": true
-		},
-		{
-			"title": "Toggle",
-			"slug": "toggle",
-			"description": "Full stack whitelabel insurance product for Farmers Insurance subsidiary to sell auto, renters, and homeowners insurance nationwide.",
-			"tags": ["React", "Django", "AWS", "EC2", "Component Library"],
-			"color": "#4A0861",
-			"iconPath": "/images/projects/toggle.jpeg",
-			"content": "\n# [gettoggle.com](http://gettoggle.com/)\n\n\nToggle Inc. hoped to deliver a seamless insurance experience for users looking to buy renters, auto, and homeowners insurance.\n\n\n## Auto Insurance\n\n\n## Homeowners\n\n\n# Problem: Config for Component Reusability\n\n\nIncreasing DRYness in the codebase by reducing hardcoded IF / ELSE conditions\n\n\n# TDL: Toggle Design Library\n\n",
-			"isFavorite": true
-		},
-		{
-			"title": "JPL",
-			"slug": "jpl",
-			"description": "Contract full stack engineering role focused on implementing support apps for labs scientists to improve their day to day work.",
-			"tags": ["Django", "GraphQL", "React", "AWS", "EC2", "SQS"],
-			"color": "#020002",
-			"iconPath": "/images/projects/jpl.png",
-			"content": "\n# Working at JPL\n\n\nThe division I worked in, OCIO at the time, focused on delivering internal tooling and custom software applications to the rest of the lab and scientists. My team specifically had a specialized stack in Django + React + Postgres applications that solved needs for MARS2020 and other groups.\n\n\n## IADS Dashboard - System Consolidation\n\n\n## WSPR - Waiver Signing\n\n",
-			"isFavorite": false
-		},
-		{
-			"title": "Retrace",
-			"slug": "retrace",
-			"description": "Plugin for merchants to let customers easily toggle the Retrace product on and off.",
-			"tags": ["Preact", "E-Commerce", "Shopify Plugin"],
-			"color": "#22529B",
-			"iconPath": "/images/projects/retrace.svg",
-			"content": "\n# What is Retrace?\n\n\n# How I contributed\n\n\n## Vanilla JavaScript\n\n\n## Preact\n\n",
-			"isFavorite": false
-		},
-		{
-			"title": "Admin Portal",
-			"slug": "admin-portal",
-			"description": "Admin management system for creating a fully customizable insurance product. Worked on the document, email, and webhook experiences primarily.",
-			"tags": ["React", "Material UI"],
-			"color": "#0C2874",
-			"iconPath": "/images/projects/admin-portal.jpg",
-			"content": "\n## Document Builder\n\n\n## Support \n\n",
-			"isFavorite": true
-		},
-		{
-			"title": "Document / Email Engineer",
-			"slug": "document-email-engineer",
-			"description": "A Deno backend service that allowed engineers to build emails using TypeScript React.",
-			"tags": ["Deno", "React"],
-			"color": "#0377CC",
-			"iconPath": "/images/projects/document-email-engineer.png",
-			"content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n",
-			"isFavorite": false
-		},
-		{
-			"title": "Porfolio",
-			"slug": "porfolio",
-			"description": "Fully static site built entirely during GitHub workflows using React Router 7 framework. Leverages Notion for CMS project management and Claude for intelligent palette generation.",
-			"tags": ["React", "Claude", "React Router 7", "GitHub Actions"],
-			"color": "#32384c",
-			"iconPath": "/images/projects/porfolio.png",
-			"content": "\n# It’s just a static website\n\n\nAt its core, yes, this is a static website. _Periodt_. \n\n\nBut, underneath that, it has a lot more work put into it:\n\n- Notion database as a makeshift CMS for managing project content\n    - Automatic PR’s and CI on cron schedules when Notion databases are updated\n- GitHub workflows to handle CI checks, GitHub Page Deployments, and Cron Jobs\n    - E2E, Unit, and Linting to keep code clean and reusable and check for breaking changes in an age of Agentic coding\n    - Sentry Error Logging and Monitoring\n- Intelligent palette creation using Claude prompts in a workflow to generate swappable website color palettes based off project images\n\nFrontend engineering is a lot more than just writing HTML, CSS, and JavaScript; though admittedly I love that part of the field, it’s a constantly evolving space.\n\n\n## 💾 Notion Database\n\n\nLeveraging Notion as a headless CMS requires a paid plan to access the Notion API. After receiving an API key, you can query individual databases and loop through rows and items.\n\n\n![Portfolio Notion Database Setup](/images/content/porfolio/porfolio-0.jpeg)\n\n- `Doc Name` - Corresponds to project title _(subject to change, honestly)_\n- `Tags` - Added as project tags, just for extra knowledge / SEO perhaps, but might be useful for querying and sorting in the future\n- `Favorites` - Boolean checkbox primarily used for generating specific palette themes\n- `Description` - Project description on projects page\n- `Color` - Theme color for the individual project page right up (like this one)\n\n### Automatic PR and CI on Notion Changes\n\n\nI configured a cron job to run nightly which hits the Notion API and checks for changes. \n\n\nIF it detects changes, it’ll overwrite a JSON file and open a PR. GitHub is set for automatic merging as well, so this _should_ all run automatically without me needing to configure anything. \n\n\n## 🔬 GitHub workflows to handle CI/CD\n\n\n_show a graphic showing the PR flow and release_\n\n\n## Testing & Linting\n\n> quote on AI and importance of testing software\n\nLLM’s and agents are quickly becoming an important part of the software engineering space. Anyone who’s not using the tools here is going to fall behind. However, the somewhat unsupervised nature of code means that testing has become more important. \n\n\n### Unit & E2E Tests\n\n\nBasic strategies for unit and e2e happy path testing were implemented. The most important things to test are the Notion scripts and Project components and flows handling data.\n\n\n### Linting\n\n\nLinting checks run after completed agent task runs and on PR’s.\n\n\n### Sentry\n\n\nTo monitor errors and failed jobs, I’ve added Sentry to the Notion data fetching scripts. My future feature is to add monitoring and dashboards for errors and general metrics.\n\n\nWe also added Sentry React to handle 404 errors, but hopefully I’ll catch and handle more errors in the future.\n\n\n## 🎨 AI Generated Color Palettes\n\n\n_Add a graphic on GitHub workflow to Claude_\n\n\nI built a flexible theme picker using Tailwind and a `data-theme` property. These were static color palettes that were decided in Figma. However, I personally felt these lacked character and purpose in general. \n\n\nIntroducing the `Favorites` property;  using AI, if there’s any projects with cover icons with that boolean property enabled, we feed Claude the logo and ask it to produce a color-accessible color palette. \n\n\nIt’s a fun way to use AI and the Notion CMS together without creating a big risk for prompt injection on my site.\n\n",
-			"isFavorite": false
-		}
-	]
+  "last_updated": "2026-03-02T10:19:18.022Z",
+  "projects": [
+    {
+      "title": "FloatCMS",
+      "slug": "floatcms",
+      "description": "Open source headless CMS platform engineered to be an entirely customizable API to drive frontend websites. ",
+      "tags": [
+        "GraphQL",
+        "Django",
+        "React",
+        "AWS",
+        "EC2"
+      ],
+      "color": "#006d77",
+      "iconPath": "/images/projects/floatcms.png",
+      "content": "\n# Summary\n\n\nOpen source headless CMS platform engineered to be an entirely customizable API to drive frontend websites. Design and collaboration were heavily accompanied by [Cory](https://www.linkedin.com/in/findingcory/).\n\n\n## Tools Used\n\n\nDjango, GraphQL, React, Material UI\n\n\n# Original Concept\n\n\n## Why\n\n\nI had a lot of experience building out GitHub pages hosted websites for a few years after college. Unfortunately, using CMS options were either too expensive, not super configurable or very platform specific. I wanted something like a Headless CMS without having to pay for a subscription per user account. \n\n\n## How\n\n\n### Wireframes\n\n\n![Landing page for a user](/images/content/floatcms/floatcms-0.png)\n\n\n![Flexible editor for choosing input types for API properties](/images/content/floatcms/floatcms-1.jpg)\n\n",
+      "isFavorite": true
+    },
+    {
+      "title": "Toggle",
+      "slug": "toggle",
+      "description": "Full stack whitelabel insurance product for Farmers Insurance subsidiary to sell auto, renters, and homeowners insurance nationwide.",
+      "tags": [
+        "React",
+        "Django",
+        "AWS",
+        "EC2",
+        "Component Library"
+      ],
+      "color": "#4A0861",
+      "iconPath": "/images/projects/toggle.jpeg",
+      "content": "\n# [gettoggle.com](http://gettoggle.com/)\n\n\nToggle Inc. hoped to deliver a seamless insurance experience for users looking to buy renters, auto, and homeowners insurance.\n\n\n## Auto Insurance\n\n\n## Homeowners\n\n\n# Problem: Config for Component Reusability\n\n\nIncreasing DRYness in the codebase by reducing hardcoded IF / ELSE conditions\n\n\n# TDL: Toggle Design Library\n\n",
+      "isFavorite": true
+    },
+    {
+      "title": "JPL",
+      "slug": "jpl",
+      "description": "Contract full stack engineering role focused on implementing support apps for labs scientists to improve their day to day work.",
+      "tags": [
+        "Django",
+        "GraphQL",
+        "React",
+        "AWS",
+        "EC2",
+        "SQS"
+      ],
+      "color": "#020002",
+      "iconPath": "/images/projects/jpl.png",
+      "content": "\n# Working at JPL\n\n\nThe division I worked in, OCIO at the time, focused on delivering internal tooling and custom software applications to the rest of the lab and scientists. My team specifically had a specialized stack in Django + React + Postgres applications that solved needs for MARS2020 and other groups.\n\n\nExtra words here\n\n\n## IADS Dashboard - System Consolidation\n\n\n## WSPR - Waiver Signing\n\n",
+      "isFavorite": false
+    },
+    {
+      "title": "Retrace",
+      "slug": "retrace",
+      "description": "Plugin for merchants to let customers easily toggle the Retrace product on and off.",
+      "tags": [
+        "Preact",
+        "E-Commerce",
+        "Shopify Plugin"
+      ],
+      "color": "#22529B",
+      "iconPath": "/images/projects/retrace.svg",
+      "content": "\n# What is Retrace?\n\n\n# How I contributed\n\n\n## Vanilla JavaScript\n\n\n## Preact\n\n",
+      "isFavorite": false
+    },
+    {
+      "title": "Admin Portal",
+      "slug": "admin-portal",
+      "description": "Admin management system for creating a fully customizable insurance product. Worked on the document, email, and webhook experiences primarily.",
+      "tags": [
+        "React",
+        "Material UI"
+      ],
+      "color": "#0C2874",
+      "iconPath": "/images/projects/admin-portal.jpg",
+      "content": "\n## Document Builder\n\n\n## Support \n\n",
+      "isFavorite": true
+    },
+    {
+      "title": "Document / Email Engineer",
+      "slug": "document-email-engineer",
+      "description": "A Deno backend service that allowed engineers to build emails using TypeScript React.",
+      "tags": [
+        "Deno",
+        "React"
+      ],
+      "color": "#0377CC",
+      "iconPath": "/images/projects/document-email-engineer.png",
+      "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n",
+      "isFavorite": false
+    },
+    {
+      "title": "Porfolio",
+      "slug": "porfolio",
+      "description": "Fully static site built entirely during GitHub workflows using React Router 7 framework. Leverages Notion for CMS project management and Claude for intelligent palette generation.",
+      "tags": [
+        "React",
+        "Claude",
+        "React Router 7",
+        "GitHub Actions"
+      ],
+      "color": "#32384c",
+      "iconPath": "/images/projects/porfolio.png",
+      "content": "\n# It’s just a static website\n\n\nAt its core, yes, this is a static website. _Periodt_. \n\n\nBut, underneath that, it has a lot more work put into it:\n\n- Notion database as a makeshift CMS for managing project content\n    - Automatic PR’s and CI on cron schedules when Notion databases are updated\n- GitHub workflows to handle CI checks, GitHub Page Deployments, and Cron Jobs\n    - E2E, Unit, and Linting to keep code clean and reusable and check for breaking changes in an age of Agentic coding\n    - Sentry Error Logging and Monitoring\n- Intelligent palette creation using Claude prompts in a workflow to generate swappable website color palettes based off project images\n\nFrontend engineering is a lot more than just writing HTML, CSS, and JavaScript; though admittedly I love that part of the field, it’s a constantly evolving space.\n\n\n## 💾 Notion Database\n\n\nLeveraging Notion as a headless CMS requires a paid plan to access the Notion API. After receiving an API key, you can query individual databases and loop through rows and items.\n\n\n![Portfolio Notion Database Setup](/images/content/porfolio/porfolio-0.jpeg)\n\n- `Doc Name` - Corresponds to project title _(subject to change, honestly)_\n- `Tags` - Added as project tags, just for extra knowledge / SEO perhaps, but might be useful for querying and sorting in the future\n- `Favorites` - Boolean checkbox primarily used for generating specific palette themes\n- `Description` - Project description on projects page\n- `Color` - Theme color for the individual project page right up (like this one)\n\n### Automatic PR and CI on Notion Changes\n\n\nI configured a cron job to run nightly which hits the Notion API and checks for changes. \n\n\nIF it detects changes, it’ll overwrite a JSON file and open a PR. GitHub is set for automatic merging as well, so this _should_ all run automatically without me needing to configure anything. \n\n\n## 🔬 GitHub workflows to handle CI/CD\n\n\n_show a graphic showing the PR flow and release_\n\n\n## Testing & Linting\n\n> quote on AI and importance of testing software\n\nLLM’s and agents are quickly becoming an important part of the software engineering space. Anyone who’s not using the tools here is going to fall behind. However, the somewhat unsupervised nature of code means that testing has become more important. \n\n\n### Unit & E2E Tests\n\n\nBasic strategies for unit and e2e happy path testing were implemented. The most important things to test are the Notion scripts and Project components and flows handling data.\n\n\n### Linting\n\n\nLinting checks run after completed agent task runs and on PR’s.\n\n\n### Sentry\n\n\nTo monitor errors and failed jobs, I’ve added Sentry to the Notion data fetching scripts. My future feature is to add monitoring and dashboards for errors and general metrics.\n\n\nWe also added Sentry React to handle 404 errors, but hopefully I’ll catch and handle more errors in the future.\n\n\n## 🎨 AI Generated Color Palettes\n\n\n_Add a graphic on GitHub workflow to Claude_\n\n\nI built a flexible theme picker using Tailwind and a `data-theme` property. These were static color palettes that were decided in Figma. However, I personally felt these lacked character and purpose in general. \n\n\nIntroducing the `Favorites` property;  using AI, if there’s any projects with cover icons with that boolean property enabled, we feed Claude the logo and ask it to produce a color-accessible color palette. \n\n\nIt’s a fun way to use AI and the Notion CMS together without creating a big risk for prompt injection on my site.\n\n",
+      "isFavorite": false
+    }
+  ]
 }
