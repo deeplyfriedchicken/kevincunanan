@@ -286,6 +286,13 @@ export function Welcome() {
 						style={{ width: "35%", height: "25%" }}
 					/>
 
+					<ArrowSvg
+						aria-hidden="true"
+						preserveAspectRatio="none"
+						className="absolute left-[calc(5%)] top-[calc(50%)] pointer-events-none opacity-50"
+						style={{ width: "35%", height: "25%" }}
+					/>
+
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
 						<p className="font-merriweather-sans text-theme-text uppercase basis-1/3 tracking-widest text-[0.875rem]">
 							Los Angeles
