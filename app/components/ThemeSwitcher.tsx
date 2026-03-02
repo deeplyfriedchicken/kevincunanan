@@ -19,9 +19,7 @@ export function ThemeSwitcher() {
 	const isHomePage = pathname === "/";
 	const containerRef = useRef<HTMLFieldSetElement>(null);
 
-	const [pickerState, setPickerState] = useState<PickerState>(
-		isHomePage ? "expanded" : "collapsed",
-	);
+	const [pickerState, setPickerState] = useState<PickerState>("expanded");
 
 	// Reset state on route changes
 	useEffect(() => {
@@ -48,6 +46,8 @@ export function ThemeSwitcher() {
 			document.removeEventListener("touchstart", handleClickOutside);
 		};
 	}, [isHomePage, pickerState]);
+
+	if (!isHomePage) return null;
 
 	const handleContainerClick = () => {
 		if (!isHomePage && pickerState !== "expanded") {

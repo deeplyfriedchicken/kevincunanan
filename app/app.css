@@ -227,15 +227,15 @@ body {
 	transition-delay: calc(var(--dot-index, 0) * 30ms);
 }
 
-/* Mobile (horizontal): all dots collapse to center, fan out symmetrically */
+/* Mobile (vertical): all dots collapse to center, fan out symmetrically */
 [data-picker-state="collapsed"] .theme-dot {
-	transform: translateX(
-		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 40px)
+	transform: translateY(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.75rem)
 	);
 }
 [data-picker-state="peeking"] .theme-dot {
-	transform: translateX(
-		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 34px)
+	transform: translateY(
+		calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.25rem)
 	);
 }
 
@@ -243,12 +243,12 @@ body {
 @media (min-width: 768px) {
 	[data-picker-state="collapsed"] .theme-dot {
 		transform: translateY(
-			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.25rem)
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.75rem)
 		);
 	}
 	[data-picker-state="peeking"] .theme-dot {
 		transform: translateY(
-			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 2.75rem)
+			calc(((var(--dot-count) - 1) / 2 - var(--dot-index)) * 3.25rem)
 		);
 	}
 }
