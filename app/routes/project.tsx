@@ -18,13 +18,21 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 
 export function meta({ loaderData }: Route.MetaArgs) {
 	const project = loaderData?.project;
+	const title = project
+		? `${project.title} | Kevin Cunanan`
+		: "Project Not Found | Kevin Cunanan";
+	const description = project?.description ?? "";
 	return [
+		{ title },
+		{ name: "description", content: description },
+		{ property: "og:title", content: title },
+		{ property: "og:description", content: description },
 		{
-			title: project
-				? `${project.title} | Kevin Cunanan`
-				: "Project Not Found | Kevin Cunanan",
+			property: "og:image",
+			content: "https://cunanan.dev/images/og-image.png",
 		},
-		{ name: "description", content: project?.description ?? "" },
+		{ property: "og:type", content: "website" },
+		{ name: "twitter:card", content: "summary_large_image" },
 	];
 }
 
