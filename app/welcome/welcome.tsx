@@ -224,10 +224,10 @@ export function Welcome() {
 						aria-label="Sway animation"
 					/>
 					<p className="whitespace-nowrap absolute right-[2.5rem] top-[calc(50%+25px)] w-full text-theme-text-light font-light text-[1rem] rotate-270">
-						agentic engineer
+						pipeline tinkerer
 					</p>
 					<p className="whitespace-nowrap absolute left-[calc(50%+2.5rem)] bottom-3 text-theme-text-light font-light text-[1rem]">
-						pipeline tinkerer
+						agentic engineer
 					</p>
 				</div>
 
