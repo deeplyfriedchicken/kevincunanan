@@ -72,7 +72,6 @@ for (const page of results) {
 
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
 	const tags = (getNotionProperty(props.Tags) as string[]) || [];
-	console.log({ mdBlocks });
 	const rawContent = n2m.toMarkdownString(mdBlocks).parent;
 	const content = await downloadContentImages(
 		rawContent,
