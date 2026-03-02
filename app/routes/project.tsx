@@ -87,40 +87,49 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								h1({ children }) {
 									const text = String(children);
 									const id = slugify(text);
+									const url = `${window.location.origin}${window.location.pathname}#${id}`;
 									return (
-										<h1
-											id={id}
-											className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
-										>
-											{children}
-											<HeadingAnchor id={id} />
-										</h1>
+										<a href={url}>
+											<h1
+												id={id}
+												className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
+											>
+												{children}
+												<HeadingAnchor id={id} />
+											</h1>
+										</a>
 									);
 								},
 								h2({ children }) {
 									const text = String(children);
 									const id = slugify(text);
+									const url = `${window.location.origin}${window.location.pathname}#${id}`;
 									return (
-										<h2
-											id={id}
-											className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
-										>
-											{children}
-											<HeadingAnchor id={id} />
-										</h2>
+										<a href={url}>
+											<h2
+												id={id}
+												className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
+											>
+												{children}
+												<HeadingAnchor id={id} />
+											</h2>
+										</a>
 									);
 								},
 								h3({ children }) {
 									const text = String(children);
 									const id = slugify(text);
+									const url = `${window.location.origin}${window.location.pathname}#${id}`;
 									return (
-										<h3
-											id={id}
-											className="group uppercase tracking-widest text-theme-text text-[1.25rem] font-semibold mt-[2rem] mb-[0.5rem]"
-										>
-											{children}
-											<HeadingAnchor id={id} />
-										</h3>
+										<a href={url}>
+											<h3
+												id={id}
+												className="group uppercase tracking-widest text-theme-text text-[1.25rem] font-semibold mt-[2rem] mb-[0.5rem]"
+											>
+												{children}
+												<HeadingAnchor id={id} />
+											</h3>
+										</a>
 									);
 								},
 								p({ children }) {
