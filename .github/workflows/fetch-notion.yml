@@ -58,6 +58,7 @@ jobs:
             public/images/content/ \
             app/generated-themes.css \
             app/data/themes.json \
+            app/data/.themes-hash \
             "app/data/cat-*.json"
           if ! git diff --staged --quiet; then
             DATE=$(date -u "+%Y-%m-%d")
