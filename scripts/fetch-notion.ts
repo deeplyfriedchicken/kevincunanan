@@ -46,7 +46,7 @@ for (const page of results) {
 	const title = (getNotionProperty(props["Doc name"]) as string) || "";
 	const titleSlug = slugify(title);
 
-	console.log({ page, icon: page.icon });
+	console.log({ titleSlug });
 
 	// Download cover icon
 	let iconPath = "";
@@ -72,6 +72,7 @@ for (const page of results) {
 
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
 	const tags = (getNotionProperty(props.Tags) as string[]) || [];
+	console.log({ mdBlocks });
 	const rawContent = n2m.toMarkdownString(mdBlocks).parent;
 	const content = await downloadContentImages(
 		rawContent,
