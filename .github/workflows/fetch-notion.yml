@@ -78,6 +78,7 @@ jobs:
           **Favorites (themes generated):** ${FAVORITE_COUNT}" \
               --base main \
               --head "${BRANCH}"
+            gh pr merge --auto --squash "${BRANCH}"
           else
             echo "No changes, skipping PR."
           fi
