@@ -56,7 +56,10 @@ function EngineeredByKevin() {
 	return (
 		<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
 			<span className="pr-[0.25rem]">
-				<Link to="/projects/porfolio">engineered</Link> by kevin
+				<Link className="underline" to="/projects/porfolio">
+					engineered
+				</Link>{" "}
+				by kevin
 			</span>
 			<LastUpdatedClock variant="light" />
 		</p>
