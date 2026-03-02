@@ -86,6 +86,16 @@ body {
 	}
 }
 
+/* Desktop string+ball: shorter on small viewports */
+.desktop-ball {
+	bottom: calc(50% + 50px);
+}
+@media (min-height: 700px) {
+	.desktop-ball {
+		bottom: calc(50% + 125px);
+	}
+}
+
 .animate-pendulum {
 	animation: pendulum-sway 2s ease-out forwards;
 	transform-origin: top center;
