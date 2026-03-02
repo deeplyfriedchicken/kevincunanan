@@ -8,7 +8,11 @@ export const ProjectFactory = new Factory<TProject>()
 	.attr("tags", () => ["React", "TypeScript"])
 	.attr("color", () => "#32384c")
 	.attr("iconPath", () => "/images/projects/sample.png")
-	.attr("content", () => "# Overview\n\nSample project content.")
+	.attr(
+		"content",
+		() =>
+			"# Overview\n\nSample project content.\n\n## Tech Stack\n\nReact and TypeScript.\n\n### Why React\n\nComponent model.",
+	)
 	.attr("isFavorite", () => false);
 
 export const sampleProject = ProjectFactory.build({

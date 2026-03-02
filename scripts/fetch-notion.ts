@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { extname, resolve } from "node:path";
 import { Client } from "@notionhq/client";
+import { downloadContentImages } from "@scripts/download-content-images";
 import { getNotionProperty } from "@scripts/notion-utils";
 import type { TNotionData, TProject } from "@shared/notion";
 import { NotionToMarkdown } from "notion-to-md";
@@ -9,6 +10,10 @@ import slugify from "react-slugify";
 const OUTPUT_PATH = resolve(import.meta.dirname, "../data/notion-pages.json");
 
 const ICONS_DIR = resolve(import.meta.dirname, "../public/images/projects");
+const CONTENT_IMAGES_DIR = resolve(
+	import.meta.dirname,
+	"../public/images/content",
+);
 
 const token = process.env.NOTION_API_TOKEN;
 const databaseId = process.env.NOTION_DATABASE_ID;
@@ -22,6 +27,7 @@ if (!token || !databaseId) {
 }
 
 mkdirSync(ICONS_DIR, { recursive: true });
+mkdirSync(CONTENT_IMAGES_DIR, { recursive: true });
 
 const notion = new Client({ auth: token });
 const n2m = new NotionToMarkdown({ notionClient: notion });
@@ -66,6 +72,12 @@ for (const page of results) {
 
 	const mdBlocks = await n2m.pageToMarkdown(page.id);
 	const tags = (getNotionProperty(props.Tags) as string[]) || [];
+	const rawContent = n2m.toMarkdownString(mdBlocks).parent;
+	const content = await downloadContentImages(
+		rawContent,
+		titleSlug,
+		CONTENT_IMAGES_DIR,
+	);
 
 	pages.push({
 		title,
@@ -74,7 +86,7 @@ for (const page of results) {
 		tags,
 		color: (getNotionProperty(props.Color) as string) || "",
 		iconPath,
-		content: n2m.toMarkdownString(mdBlocks).parent,
+		content,
 		isFavorite: getNotionProperty(props.Favorites) === true,
 	});
 	console.log(`Fetched: ${title}`);

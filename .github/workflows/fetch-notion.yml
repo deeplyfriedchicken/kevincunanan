@@ -54,10 +54,11 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/notion-pages.json \
-                  public/images/projects/ \
-                  app/generated-themes.css \
-                  app/data/themes.json \
-                  "app/data/cat-*.json"
+            public/images/projects/ \
+            public/images/content/ \
+            app/generated-themes.css \
+            app/data/themes.json \
+            "app/data/cat-*.json"
           if ! git diff --staged --quiet; then
             DATE=$(date -u "+%Y-%m-%d")
             TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
@@ -71,9 +72,9 @@ jobs:
               --title "chore: Notion data + themes update (${DATE})" \
               --body "## Notion Data Pull
 
-**Pulled at:** ${TIMESTAMP}
-**Total items:** ${ITEM_COUNT}
-**Favorites (themes generated):** ${FAVORITE_COUNT}" \
+          **Pulled at:** ${TIMESTAMP}
+          **Total items:** ${ITEM_COUNT}
+          **Favorites (themes generated):** ${FAVORITE_COUNT}" \
               --base main \
               --head "${BRANCH}"
           else

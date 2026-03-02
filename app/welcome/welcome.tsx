@@ -36,6 +36,33 @@ for (const { slug, title } of generatedThemes) {
 
 const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
+function DesignedByCory() {
+	return (
+		<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+			designed by{" "}
+			<a
+				className="underline"
+				href="https://www.linkedin.com/in/findingcory/"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				cory
+			</a>
+		</p>
+	);
+}
+
+function EngineeredByKevin() {
+	return (
+		<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+			<span className="pr-[0.25rem]">
+				<Link to="/projects/porfolio">engineered</Link> by kevin
+			</span>
+			<LastUpdatedClock variant="light" />
+		</p>
+	);
+}
+
 export function Welcome() {
 	const { theme } = useTheme();
 	const [navOpen, setNavOpen] = useState(false);
@@ -126,13 +153,8 @@ export function Welcome() {
 
 				{/* Bottom-left: credits */}
 				<div className="col-start-1 col-span-1 row-start-2 self-end justify-self-start px-[2.25rem] py-[2.25rem]">
-					<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
-						designed by cory
-					</p>
-					<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
-						<span className="pr-[0.25rem]">engineered by kevin</span>
-						<LastUpdatedClock variant="light" />
-					</p>
+					<DesignedByCory />
+					<EngineeredByKevin />
 				</div>
 
 				{/* Nav overlay */}
@@ -253,14 +275,16 @@ export function Welcome() {
 					</div>
 
 					<div className="row-start-3 flex flex-col justify-end gap-[0.5rem]">
-						<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
-							designed by cory
-						</p>
-						<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
-							<span className="pr-[0.25rem]">engineered by kevin</span>
-							<LastUpdatedClock variant="light" />
-						</p>
+						<DesignedByCory />
+						<EngineeredByKevin />
 					</div>
+
+					<ArrowSvg
+						aria-hidden="true"
+						preserveAspectRatio="none"
+						className="absolute left-[calc(5%)] top-[calc(50%)] pointer-events-none opacity-50"
+						style={{ width: "35%", height: "25%" }}
+					/>
 
 					<ArrowSvg
 						aria-hidden="true"
