@@ -71,7 +71,9 @@ test.describe("Project detail page", () => {
 		await anchorButton.click();
 
 		// Verify the checkmark icon appears (confirms the click registered)
-		await expect(heading.locator("text=Copy success")).toBeVisible();
+		await expect(
+			heading.locator("[data-testid='copy-success-icon']"),
+		).toBeVisible();
 
 		// Read clipboard and verify it contains an anchor link
 		const clipboardText = await page.evaluate(() =>

@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import themes from "../fixtures/themes.json" with { type: "json" };
+import themes from "../../app/data/themes.json" with { type: "json" };
 
 type ThemeEntry = { slug: string; primaryColor: string };
 const generatedThemes = themes as ThemeEntry[];

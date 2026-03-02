@@ -19,6 +19,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 		>
 			{copied ? (
 				<svg
+					data-testid="copy-success-icon"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
@@ -33,6 +34,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 				</svg>
 			) : (
 				<svg
+					data-testid="copy-icon"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
