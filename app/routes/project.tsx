@@ -1,5 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import { data } from "react-router";
+import slugify from "react-slugify";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { TableOfContents, type TOCItem } from "~/components/TableOfContents";
 import { getPortfolioItem } from "~/data/portfolio";
@@ -24,13 +25,6 @@ export function meta({ loaderData }: Route.MetaArgs) {
 		},
 		{ name: "description", content: project?.description ?? "" },
 	];
-}
-
-export function slugify(text: string) {
-	return text
-		.toLowerCase()
-		.replace(/\s+/g, "-")
-		.replace(/[^\w-]/g, "");
 }
 
 export function extractTOC(markdown: string): TOCItem[] {
@@ -154,15 +148,15 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 									);
 								},
 								img({ src, alt }) {
-								return (
-									<img
-										src={src ? assetUrl(src) : src}
-										alt={alt ?? ""}
-										className="w-full rounded my-[1rem]"
-									/>
-								);
-							},
-							code({ children }) {
+									return (
+										<img
+											src={src ? assetUrl(src) : src}
+											alt={alt ?? ""}
+											className="w-full rounded my-[1rem]"
+										/>
+									);
+								},
+								code({ children }) {
 									return (
 										<code className="bg-theme-primary/10 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
 											{children}
