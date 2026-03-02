@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { data } from "react-router";
 import slugify from "react-slugify";
+import { HeadingAnchor } from "~/components/HeadingAnchor";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { TableOfContents, type TOCItem } from "~/components/TableOfContents";
 import { getPortfolioItem } from "~/data/portfolio";
@@ -80,39 +81,45 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 					</div>
 
 					{/* RIGHT COLUMN: article */}
-					<article className="space-y-[1rem]">
+					<article className="space-y-[1rem] max-w-[40rem]">
 						<ReactMarkdown
 							components={{
 								h1({ children }) {
 									const text = String(children);
+									const id = slugify(text);
 									return (
 										<h1
-											id={slugify(text)}
-											className="text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
+											id={id}
+											className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
 										>
 											{children}
+											<HeadingAnchor id={id} />
 										</h1>
 									);
 								},
 								h2({ children }) {
 									const text = String(children);
+									const id = slugify(text);
 									return (
 										<h2
-											id={slugify(text)}
-											className="text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
+											id={id}
+											className="group text-theme-text text-[1.75rem] font-light mt-[2rem] mb-[0.75rem] first:mt-0"
 										>
 											{children}
+											<HeadingAnchor id={id} />
 										</h2>
 									);
 								},
 								h3({ children }) {
 									const text = String(children);
+									const id = slugify(text);
 									return (
 										<h3
-											id={slugify(text)}
-											className="uppercase tracking-widest text-theme-text text-[0.75rem] font-semibold mt-[2rem] mb-[0.5rem]"
+											id={id}
+											className="group uppercase tracking-widest text-theme-text text-[1.25rem] font-semibold mt-[2rem] mb-[0.5rem]"
 										>
 											{children}
+											<HeadingAnchor id={id} />
 										</h3>
 									);
 								},
@@ -149,11 +156,18 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								},
 								img({ src, alt }) {
 									return (
-										<img
-											src={src ? assetUrl(src) : src}
-											alt={alt ?? ""}
-											className="w-full rounded my-[1rem]"
-										/>
+										<div className="w-full flex flex-col items-center justify-center">
+											<div className="max-w-[30rem]">
+												<img
+													src={src ? assetUrl(src) : src}
+													alt={alt ?? ""}
+													className="w-full rounded my-[1rem]"
+												/>
+												<p className="text-theme-text opacity-75 font-light text-[0.875rem] text-center">
+													{alt}
+												</p>
+											</div>
+										</div>
 									);
 								},
 								code({ children }) {
