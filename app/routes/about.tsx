@@ -4,6 +4,17 @@ export function meta() {
 	return [
 		{ title: "About | Kevin Cunanan" },
 		{ name: "description", content: "About Kevin Cunanan" },
+		{
+			property: "og:title",
+			content: "Kevin Cunanan | Senior Software Engineer",
+		},
+		{ property: "og:description", content: "About Kevin Cunanan" },
+		{
+			property: "og:image",
+			content: "https://cunanan.dev/images/og-image.png",
+		},
+		{ property: "og:type", content: "website" },
+		{ name: "twitter:card", content: "summary_large_image" },
 	];
 }
 

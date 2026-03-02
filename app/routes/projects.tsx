@@ -7,6 +7,17 @@ export function meta() {
 	return [
 		{ title: "Projects | Kevin Cunanan" },
 		{ name: "description", content: "Kevin Cunanan's projects" },
+		{ property: "og:title", content: "Projects | Kevin Cunanan" },
+		{
+			property: "og:description",
+			content: "Kevin Cunanan's projects",
+		},
+		{
+			property: "og:image",
+			content: "https://cunanan.dev/images/og-image.png",
+		},
+		{ property: "og:type", content: "website" },
+		{ name: "twitter:card", content: "summary_large_image" },
 	];
 }
 
