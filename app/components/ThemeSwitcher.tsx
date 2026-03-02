@@ -75,7 +75,7 @@ export function ThemeSwitcher() {
 			onMouseLeave={handleMouseLeave}
 			onClick={handleContainerClick}
 			onKeyDown={handleContainerClick}
-			className="fixed bottom-10 left-0 right-0 justify-center flex-row gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50 border-none p-0 m-0"
+			className="fixed bottom-[80px] left-[31.5px] justify-center flex-col gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50 border-none p-0 m-0"
 			style={{ "--dot-count": themes.length } as React.CSSProperties}
 		>
 			{themes.map(({ slug, primaryColor }, index) => (
