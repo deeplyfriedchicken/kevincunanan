@@ -46,7 +46,7 @@ for (const page of results) {
 	const title = (getNotionProperty(props["Doc name"]) as string) || "";
 	const titleSlug = slugify(title);
 
-	console.log({ page, icon: page.icon });
+	console.log({ titleSlug });
 
 	// Download cover icon
 	let iconPath = "";

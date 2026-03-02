@@ -49,7 +49,7 @@ jobs:
 
       - name: Open PR if changed
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GH_PAT }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -58,6 +58,7 @@ jobs:
             public/images/content/ \
             app/generated-themes.css \
             app/data/themes.json \
+            app/data/.themes-hash \
             "app/data/cat-*.json"
           if ! git diff --staged --quiet; then
             DATE=$(date -u "+%Y-%m-%d")

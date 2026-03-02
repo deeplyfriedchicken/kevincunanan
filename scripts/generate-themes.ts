@@ -1,4 +1,5 @@
-import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import Anthropic from "@anthropic-ai/sdk";
 import { getPalettePrompt } from "@scripts/prompts/getPalettePrompt";
@@ -27,6 +28,7 @@ const GENERATED_CSS_PATH = resolve(
 	"../app/generated-themes.css",
 );
 const THEMES_JSON_PATH = resolve(APP_DATA_DIR, "themes.json");
+const THEME_HASH_PATH = resolve(APP_DATA_DIR, ".themes-hash");
 
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
@@ -35,6 +37,33 @@ try {
 		readFileSync(NOTION_DATA_PATH, "utf-8"),
 	);
 	const favorites = notionData.projects.filter((p) => p.isFavorite);
+
+	// Build a fingerprint from favorites metadata + icon file contents
+	const hash = createHash("sha256");
+	for (const fav of favorites) {
+		hash.update(`${fav.slug}|${fav.color}|${fav.iconPath}\n`);
+		if (fav.iconPath) {
+			const iconFile = resolve(PUBLIC_DIR, `.${fav.iconPath}`);
+			try {
+				hash.update(readFileSync(iconFile));
+			} catch {
+				// Icon missing — hash will differ from last run, triggering regeneration
+				hash.update("MISSING");
+			}
+		}
+	}
+	const fingerprint = hash.digest("hex");
+
+	if (existsSync(THEME_HASH_PATH)) {
+		const previousHash = readFileSync(THEME_HASH_PATH, "utf-8").trim();
+		if (previousHash === fingerprint) {
+			console.log(
+				"Favorites and icons unchanged since last run — skipping theme generation.",
+			);
+			await Sentry.flush(2000);
+			process.exit(0);
+		}
+	}
 
 	if (favorites.length === 0) {
 		console.log("No favorite projects found. Writing empty outputs.");
@@ -188,6 +217,10 @@ try {
 	// Write themes.json
 	writeFileSync(THEMES_JSON_PATH, JSON.stringify(themesMetadata, null, 2));
 	console.log(`Wrote app/data/themes.json`);
+
+	// Save fingerprint for next run
+	writeFileSync(THEME_HASH_PATH, fingerprint);
+	console.log(`Wrote themes hash to .themes-hash`);
 } catch (err) {
 	Sentry.captureException(err);
 	await Sentry.flush(2000);
@@ -196,6 +229,4 @@ try {
 }
 
 await Sentry.flush(2000);
-console.log("\nDone.");
-console.log("\nDone.");
 console.log("\nDone.");
