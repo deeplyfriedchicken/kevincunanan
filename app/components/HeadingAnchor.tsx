@@ -14,7 +14,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 		<button
 			type="button"
 			onClick={handleClick}
-			className="cursor-pointer inline-flex items-center ml-[0.5rem] opacity-25 hover:opacity-100 transition-opacity align-middle"
+			className="cursor-pointer inline-flex items-center ml-[0.5rem] h-full opacity-25 hover:opacity-100 transition-opacity align-middle"
 			aria-label={`Copy link to ${id}`}
 		>
 			{copied ? (

@@ -90,13 +90,13 @@ describe("ThemeSwitcher", () => {
 	});
 
 	describe("collapsible behavior on non-home pages", () => {
-		it('renders data-picker-state="collapsed" at /about', () => {
+		it("should not render if not /", () => {
 			const { container } = renderWithTheme(<ThemeSwitcher />, {
 				initialEntries: ["/about"],
 			});
 
 			const picker = container.querySelector("[data-picker-state]");
-			expect(picker).toHaveAttribute("data-picker-state", "collapsed");
+			expect(picker).toBeNull();
 		});
 
 		it('renders data-picker-state="expanded" at /', () => {
@@ -106,48 +106,6 @@ describe("ThemeSwitcher", () => {
 
 			const picker = container.querySelector("[data-picker-state]");
 			expect(picker).toHaveAttribute("data-picker-state", "expanded");
-		});
-
-		it("container click when collapsed transitions to expanded", async () => {
-			const user = userEvent.setup();
-			const { container } = renderWithTheme(<ThemeSwitcher />, {
-				initialEntries: ["/about"],
-			});
-
-			const picker = container.querySelector(
-				"[data-picker-state]",
-			) as HTMLElement;
-			expect(picker).toHaveAttribute("data-picker-state", "collapsed");
-
-			await user.click(picker);
-
-			expect(picker).toHaveAttribute("data-picker-state", "expanded");
-		});
-
-		it("dot click when expanded keeps it expanded and changes theme", async () => {
-			const user = userEvent.setup();
-			const { container } = renderWithTheme(<ThemeSwitcher />, {
-				initialEntries: ["/about"],
-			});
-
-			const picker = container.querySelector(
-				"[data-picker-state]",
-			) as HTMLElement;
-
-			// First expand
-			await user.click(picker);
-			expect(picker).toHaveAttribute("data-picker-state", "expanded");
-
-			// Click a theme dot
-			const { slug } = generatedThemes[0];
-			const btn = screen.getByLabelText(`Switch to ${slug} theme`);
-			await user.click(btn);
-
-			// Should stay expanded
-			expect(picker).toHaveAttribute("data-picker-state", "expanded");
-			await waitFor(() => {
-				expect(document.documentElement.dataset.theme).toBe(slug);
-			});
 		});
 	});
 });

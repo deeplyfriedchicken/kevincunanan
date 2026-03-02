@@ -104,14 +104,14 @@ export function Welcome() {
 	return (
 		<>
 			{/* Mobile layout */}
-			<div className="md:hidden bg-white min-h-screen grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-x-hidden">
+			<div className="md:hidden bg-white h-dvh grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-hidden">
 				{/* Top-left: title, subtitles, CTA */}
-				<div className="col-start-1 row-start-1 px-[2.25rem] pt-[3rem]">
+				<div className="col-start-1 row-start-1 px-[2.25rem] pt-[clamp(1.5rem,4dvh,3rem)]">
 					<h1 className="text-theme-text-light font-light text-[3.5rem] leading-tight">
 						kevin cunanan
 					</h1>
 
-					<ul className="text-theme-text font-light text-[1.0625rem] mt-[4rem] space-y-[1rem]">
+					<ul className="text-theme-text font-light text-[1.0625rem] mt-[clamp(1.5rem,5dvh,4rem)] space-y-[clamp(0.5rem,1.5dvh,1rem)]">
 						<li>senior software engineer</li>
 						<li>agentic engineer</li>
 						<li>pipeline tinkerer</li>
@@ -120,7 +120,7 @@ export function Welcome() {
 
 					<Link
 						to={cta.href}
-						className={`inline-block mt-[4rem] bg-theme-button text-white px-[1.75rem] py-[0.75rem] rounded-full font-bold text-[0.875rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
+						className={`inline-block mt-[clamp(1.5rem,5dvh,4rem)] bg-theme-button text-white px-[1.75rem] py-[0.75rem] rounded-full font-bold text-[0.875rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
 					>
 						{cta.text}
 					</Link>
@@ -150,7 +150,7 @@ export function Welcome() {
 				</div>
 
 				{/* Bottom-right: cat */}
-				<div className="col-start-1 col-span-2 row-start-2 self-end justify-self-end w-[30rem] mr-[-85px] mb-[-60px]">
+				<div className="col-start-1 col-span-2 row-start-2 self-end justify-self-end w-[30rem] mr-[-3rem] mb-[-3rem]">
 					<Lottie key={theme} animationData={catAnimations[theme]} loop />
 				</div>
 
@@ -212,10 +212,9 @@ export function Welcome() {
 			</div>
 
 			{/* Desktop layout */}
-			<main className="relative hidden md:flex items-center justify-center h-screen w-full p-[2rem] md:p-[4rem] -mt-[10px]">
+			<main className="relative hidden md:flex items-center justify-center h-dvh w-full p-[2rem] md:p-[4rem] -mt-[10px] overflow-hidden">
 				<div
-					className={`flex flex-col items-center absolute top-0 left-1/2 -translate-x-1/2 z-20 ${desktopSway ? "animate-pendulum" : ""}`}
-					style={{ bottom: "calc(50% + 125px)" }}
+					className={`flex flex-col items-center absolute top-0 left-1/2 -translate-x-1/2 z-20 desktop-ball ${desktopSway ? "animate-pendulum" : ""}`}
 				>
 					<div className="flex-1 w-[10px] bg-theme-text-light opacity-100 rounded-full" />
 					<button
@@ -224,11 +223,11 @@ export function Welcome() {
 						className="w-[48px] h-[48px] rounded-full bg-theme-text-light opacity-100 shrink-0 -mt-[10px] cursor-pointer"
 						aria-label="Sway animation"
 					/>
-					<p className="whitespace-nowrap absolute right-[2rem] top-[calc(50%+25px)] w-full text-theme-text-light font-light text-[1.125rem] rotate-270">
-						agentic engineer
-					</p>
-					<p className="whitespace-nowrap absolute left-[calc(50%+2.5rem)] bottom-3 text-theme-text-light font-light text-[1.125rem]">
+					<p className="whitespace-nowrap absolute right-[2.5rem] top-[calc(50%+25px)] w-full text-theme-text-light font-light text-[1rem] rotate-270">
 						pipeline tinkerer
+					</p>
+					<p className="whitespace-nowrap absolute left-[calc(50%+2.5rem)] bottom-3 text-theme-text-light font-light text-[1rem]">
+						agentic engineer
 					</p>
 				</div>
 
