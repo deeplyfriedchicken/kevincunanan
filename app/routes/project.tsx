@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { data } from "react-router";
 import { InnerNavbar } from "~/components/InnerNavbar";
+import { TableOfContents, type TOCItem } from "~/components/TableOfContents";
 import { getPortfolioItem } from "~/data/portfolio";
 import { assetUrl } from "~/services/assetUrl";
 import type { Route } from "./+types/project";
@@ -25,20 +26,18 @@ export function meta({ loaderData }: Route.MetaArgs) {
 	];
 }
 
-type TOCItem = { level: 2 | 3; text: string; id: string };
-
-function slugify(text: string) {
+export function slugify(text: string) {
 	return text
 		.toLowerCase()
 		.replace(/\s+/g, "-")
 		.replace(/[^\w-]/g, "");
 }
 
-function extractTOC(markdown: string): TOCItem[] {
+export function extractTOC(markdown: string): TOCItem[] {
 	return markdown.split("\n").reduce<TOCItem[]>((acc, line) => {
-		if (line.startsWith("# "))
-			acc.push({ level: 2, text: line.slice(2), id: slugify(line.slice(2)) });
-		else if (line.startsWith("## "))
+		if (line.startsWith("# ") && !line.startsWith("## "))
+			acc.push({ level: 1, text: line.slice(2), id: slugify(line.slice(2)) });
+		else if (line.startsWith("## ") && !line.startsWith("### "))
 			acc.push({ level: 2, text: line.slice(3), id: slugify(line.slice(3)) });
 		else if (line.startsWith("### "))
 			acc.push({ level: 3, text: line.slice(4), id: slugify(line.slice(4)) });
@@ -83,29 +82,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 						</div>
 
 						{/* TOC */}
-						{toc.length > 0 && (
-							<nav className="space-y-[0.125rem]">
-								{toc.map((item) =>
-									item.level === 2 ? (
-										<a
-											key={item.id}
-											href={`#${item.id}`}
-											className="block py-[0.5rem] text-theme-text font-merriweather-sans text-[0.875rem] hover:opacity-70 transition-opacity"
-										>
-											{item.text}
-										</a>
-									) : (
-										<a
-											key={item.id}
-											href={`#${item.id}`}
-											className="block pl-[1rem] py-[0.375rem] border-l-2 border-theme-text/40 text-theme-text font-merriweather-sans text-[0.875rem] hover:opacity-70 transition-opacity"
-										>
-											{item.text}
-										</a>
-									),
-								)}
-							</nav>
-						)}
+						{toc.length > 0 && <TableOfContents items={toc} />}
 					</div>
 
 					{/* RIGHT COLUMN: article */}
@@ -176,7 +153,16 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 										</a>
 									);
 								},
-								code({ children }) {
+								img({ src, alt }) {
+								return (
+									<img
+										src={src ? assetUrl(src) : src}
+										alt={alt ?? ""}
+										className="w-full rounded my-[1rem]"
+									/>
+								);
+							},
+							code({ children }) {
 									return (
 										<code className="bg-theme-primary/10 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
 											{children}

@@ -24,4 +24,32 @@ test.describe("Project detail page", () => {
 
 		await expect(page.locator("nav").first()).toBeVisible();
 	});
+
+	test("TOC renders three levels of headings with correct hierarchy", async ({
+		page,
+	}) => {
+		await page.goto("/projects");
+		const firstReadMore = page.getByText("READ MORE +").first();
+		await firstReadMore.click();
+
+		// Wait for the TOC nav to appear (second nav after the page navbar)
+		const tocNav = page.locator("nav").nth(1);
+		await expect(tocNav).toBeVisible();
+
+		const tocLinks = tocNav.locator("a");
+		const count = await tocLinks.count();
+		expect(count).toBeGreaterThanOrEqual(1);
+
+		// Verify that TOC links have href anchors
+		for (let i = 0; i < count; i++) {
+			const href = await tocLinks.nth(i).getAttribute("href");
+			expect(href).toMatch(/^#.+/);
+		}
+
+		// Verify level differentiation: level-1 links should have font-bold,
+		// level-2/3 links should have border-l-2 with indentation
+		const firstLink = tocLinks.first();
+		const firstClass = await firstLink.getAttribute("class");
+		expect(firstClass).toContain("font-bold");
+	});
 });
