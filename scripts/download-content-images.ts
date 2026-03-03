@@ -9,7 +9,10 @@ export interface FsDeps {
 	writeFileSync: typeof _writeFileSync;
 }
 
-const defaultFs: FsDeps = { mkdirSync: _mkdirSync, writeFileSync: _writeFileSync };
+const defaultFs: FsDeps = {
+	mkdirSync: _mkdirSync,
+	writeFileSync: _writeFileSync,
+};
 
 export async function downloadContentImages(
 	markdown: string,

@@ -57,9 +57,7 @@ test.describe("Generated theme switcher", () => {
 		await expect(page.locator("html")).toHaveAttribute("data-theme", slug);
 	});
 
-	test("clicking a generated theme updates the CTA link", async ({
-		page,
-	}) => {
+	test("clicking a generated theme updates the CTA link", async ({ page }) => {
 		test.skip(
 			generatedThemes.length === 0,
 			"No generated themes in themes.json",

@@ -4,7 +4,7 @@ export type TOCItem = { level: 1 | 2 | 3; text: string; id: string };
 
 export function TableOfContents({ items }: { items: TOCItem[] }) {
 	return (
-		<nav className={clsx("space-y-[0.125rem]")}>
+		<nav className="space-y-[0.125rem]">
 			{items.map((item) => (
 				<a
 					key={item.id}
