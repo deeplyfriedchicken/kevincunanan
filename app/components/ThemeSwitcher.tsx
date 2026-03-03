@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { useTheme } from "~/context/ThemeContext";
@@ -75,7 +76,7 @@ export function ThemeSwitcher() {
 			onMouseLeave={handleMouseLeave}
 			onClick={handleContainerClick}
 			onKeyDown={handleContainerClick}
-			className="fixed bottom-[100px] left-[31.5px] justify-center flex-col gap-[15px] md:bottom-8 md:right-8 md:left-auto md:flex-col md:items-center md:gap-3 flex z-50 border-none p-0 m-0"
+			className="fixed bottom-[100px] left-[31.5px] z-50 m-0 flex flex-col justify-center gap-[15px] border-none p-0 md:right-8 md:bottom-8 md:left-auto md:flex-col md:items-center md:gap-3"
 			style={{ "--dot-count": themes.length } as React.CSSProperties}
 		>
 			{themes.map(({ slug, primaryColor }, index) => (
@@ -90,11 +91,13 @@ export function ThemeSwitcher() {
 						}
 						setTheme(slug);
 					}}
-					className={`theme-dot w-[25px] h-[25px] md:w-10 md:h-10 rounded-full ${
-						theme === slug
-							? "ring-2 ring-offset-2 ring-theme-text scale-110 z-10"
-							: "z-0"
-					}`}
+					className={clsx(
+						"theme-dot z-0 h-[25px] w-[25px] rounded-full md:h-10 md:w-10",
+						{
+							"z-10 scale-110 ring-2 ring-theme-text ring-offset-2":
+								theme === slug,
+						},
+					)}
 					style={
 						{
 							backgroundColor: primaryColor,

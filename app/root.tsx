@@ -69,21 +69,21 @@ export default function App() {
 function NotFoundPage() {
 	const { theme } = useTheme();
 	return (
-		<main className="min-h-screen flex flex-col items-center justify-center gap-[1.5rem]">
+		<main className="flex min-h-screen flex-col items-center justify-center gap-[1.5rem]">
 			<div className="w-[16rem]">
 				<Lottie key={theme} animationData={catAnimations[theme]} loop />
 			</div>
 			<div className="text-center">
-				<p className="text-theme-text-light font-light text-[5rem] leading-none">
+				<p className="font-light text-[5rem] text-theme-text-light leading-none">
 					404
 				</p>
-				<p className="text-theme-text font-light text-[1.125rem] mt-[0.5rem]">
+				<p className="mt-[0.5rem] font-light text-[1.125rem] text-theme-text">
 					not found
 				</p>
 			</div>
 			<Link
 				to="/"
-				className="font-merriweather-sans text-[0.875rem] text-theme-text hover:opacity-70 transition-opacity mt-[0.5rem]"
+				className="mt-[0.5rem] font-merriweather-sans text-[0.875rem] text-theme-text transition-opacity hover:opacity-70"
 			>
 				go home
 			</Link>
@@ -118,11 +118,11 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 		import.meta.env.DEV && error instanceof Error ? error.stack : undefined;
 
 	return (
-		<main className="pt-16 p-4 container mx-auto">
+		<main className="container mx-auto p-4 pt-16">
 			<h1>Error</h1>
 			<p>{details}</p>
 			{stack && (
-				<pre className="w-full p-4 overflow-x-auto">
+				<pre className="w-full overflow-x-auto p-4">
 					<code>{stack}</code>
 				</pre>
 			)}

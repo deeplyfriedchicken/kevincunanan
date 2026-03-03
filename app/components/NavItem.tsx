@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { NavLink } from "react-router";
 
 type TNavItem = {
@@ -12,7 +13,11 @@ export function NavItem({ to, children, className = "" }: TNavItem) {
 			<NavLink
 				to={to}
 				className={({ isActive }) =>
-					`block py-[0.5rem] mx-[0.375rem] lg:mx-[0.75rem] text-theme-text text-[1rem] hover:opacity-70 transition-opacity ${isActive ? "border-b-4 border-theme-text" : ""} ${className}`
+					clsx(
+						"mx-[0.375rem] block py-[0.5rem] text-[1rem] text-theme-text transition-opacity hover:opacity-70 lg:mx-[0.75rem]",
+						isActive && ["border-theme-text", "border-b-4"],
+						className,
+					)
 				}
 			>
 				{children}

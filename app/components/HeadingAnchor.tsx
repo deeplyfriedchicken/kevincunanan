@@ -14,7 +14,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 		<button
 			type="button"
 			onClick={handleClick}
-			className="cursor-pointer inline-flex items-center ml-[0.5rem] h-full opacity-25 hover:opacity-100 transition-opacity align-middle"
+			className="ml-[0.5rem] inline-flex h-full cursor-pointer items-center align-middle opacity-25 transition-opacity hover:opacity-100"
 			aria-label={`Copy link to ${id}`}
 		>
 			{copied ? (
@@ -23,7 +23,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					className="w-[1em] h-[1em] text-theme-button"
+					className="h-[1em] w-[1em] text-theme-button"
 				>
 					<title>Copy success</title>
 					<path
@@ -38,7 +38,7 @@ export function HeadingAnchor({ id }: { id: string }) {
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 20 20"
 					fill="currentColor"
-					className="w-[1em] h-[1em] text-theme-text"
+					className="h-[1em] w-[1em] text-theme-text"
 				>
 					<title>Click to copy section link to clipboard</title>
 					<path d="M12.232 4.232a2.5 2.5 0 0 1 3.536 3.536l-1.225 1.224a.75.75 0 0 0 1.061 1.06l1.224-1.224a4 4 0 0 0-5.656-5.656l-3 3a4 4 0 0 0 .225 5.865.75.75 0 0 0 .977-1.138 2.5 2.5 0 0 1-.142-3.667l3-3Z" />

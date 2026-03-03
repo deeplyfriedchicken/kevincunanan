@@ -10,7 +10,7 @@ export function Navbar({
 	return (
 		<nav>
 			<div className="w-full md:w-auto" id="navbar-default">
-				<ul className="font-medium flex p-4 md:p-0 mt-4 flex-row flex-wrap items-center justify-end gap-y-[0.25rem]">
+				<ul className="mt-4 flex flex-row flex-wrap items-center justify-end gap-y-[0.25rem] p-4 font-medium md:p-0">
 					{navItems.map(({ to, children }) => (
 						<NavItem key={to} to={to}>
 							{children}
@@ -22,9 +22,9 @@ export function Navbar({
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="GitHub repository"
-							className="block py-[0.5rem] mx-[0.375rem] lg:mx-[0.75rem] text-theme-text hover:opacity-70 transition-opacity"
+							className="mx-[0.375rem] block py-[0.5rem] text-theme-text transition-opacity hover:opacity-70 lg:mx-[0.75rem]"
 						>
-							<Github className="w-[1.25rem] h-[1.25rem]" />
+							<Github className="h-[1.25rem] w-[1.25rem]" />
 						</a>
 					</li>
 				</ul>
