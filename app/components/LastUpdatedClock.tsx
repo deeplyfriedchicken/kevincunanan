@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Clock } from "lucide-react";
 import { githubUrl } from "~/components/nav-links";
 import { getLastUpdated } from "~/data/portfolio";
@@ -29,7 +30,10 @@ export function LastUpdatedClock({ variant = "dark" }: Props) {
 		>
 			<Clock size={14} />
 			<span
-				className={`absolute bottom-full left-0 mb-[0.5rem] px-[0.75rem] py-[0.375rem] ${tooltipClass} font-merriweather-sans text-[0.75rem] rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none`}
+				className={clsx(
+					"pointer-events-none absolute bottom-full left-0 mb-[0.5rem] whitespace-nowrap rounded px-[0.75rem] py-[0.375rem] font-merriweather-sans text-[0.75rem] opacity-0 transition-opacity group-hover:opacity-100",
+					tooltipClass,
+				)}
 			>
 				Last Updated: {lastUpdated}
 			</span>

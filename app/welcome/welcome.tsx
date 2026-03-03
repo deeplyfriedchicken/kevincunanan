@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import Lottie from "lottie-react";
 import { Github } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -38,7 +39,7 @@ const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
 function DesignedByCory() {
 	return (
-		<p className="text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+		<p className="font-semibold text-[0.875rem] text-theme-credit opacity-25">
 			designed by{" "}
 			<a
 				className="underline"
@@ -54,7 +55,7 @@ function DesignedByCory() {
 
 function EngineeredByKevin() {
 	return (
-		<p className="flex items-center text-theme-credit opacity-25 font-semibold text-[0.875rem]">
+		<p className="flex items-center font-semibold text-[0.875rem] text-theme-credit opacity-25">
 			<span className="pr-[0.25rem]">
 				<Link className="underline" to="/projects/porfolio">
 					engineered
@@ -104,14 +105,14 @@ export function Welcome() {
 	return (
 		<>
 			{/* Mobile layout */}
-			<div className="md:hidden bg-white h-dvh grid grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-hidden">
+			<div className="grid h-dvh grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-hidden bg-white md:hidden">
 				{/* Top-left: title, subtitles, CTA */}
 				<div className="col-start-1 row-start-1 px-[2.25rem] pt-[clamp(1.5rem,4dvh,3rem)]">
-					<h1 className="text-theme-text-light font-light text-[3.5rem] leading-tight">
+					<h1 className="font-light text-[3.5rem] text-theme-text-light leading-tight">
 						kevin cunanan
 					</h1>
 
-					<ul className="text-theme-text font-light text-[1.0625rem] mt-[clamp(1.5rem,5dvh,4rem)] space-y-[clamp(0.5rem,1.5dvh,1rem)]">
+					<ul className="mt-[clamp(1.5rem,5dvh,4rem)] space-y-[clamp(0.5rem,1.5dvh,1rem)] font-light text-[1.0625rem] text-theme-text">
 						<li>senior software engineer</li>
 						<li>agentic engineer</li>
 						<li>pipeline tinkerer</li>
@@ -120,7 +121,10 @@ export function Welcome() {
 
 					<Link
 						to={cta.href}
-						className={`inline-block mt-[clamp(1.5rem,5dvh,4rem)] bg-theme-button text-white px-[1.75rem] py-[0.75rem] rounded-full font-bold text-[0.875rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
+						className={clsx(
+							"mt-[clamp(1.5rem,5dvh,4rem)] inline-block whitespace-nowrap rounded-full bg-theme-button px-[1.75rem] py-[0.75rem] font-bold text-[0.875rem] text-white",
+							ctaAnimating && "animate-cta-pop",
+						)}
 					>
 						{cta.text}
 					</Link>
@@ -128,34 +132,39 @@ export function Welcome() {
 
 				{/* Top-right: string + ball */}
 				<div
-					className={`col-start-2 row-start-1 flex flex-col items-center pr-[7.72rem] z-10 ${
+					className={clsx(
+						"z-10 col-start-2 row-start-1 flex flex-col items-center pr-[7.72rem]",
 						navOpen
 							? "animate-bounce-drop"
-							: ballHasOpened
-								? "animate-bounce-drop-up"
-								: ""
-					}`}
+							: ballHasOpened && "animate-bounce-drop-up",
+					)}
 				>
 					{/* String */}
 					<div
-						className={`w-[0.625rem] h-[32rem] -mt-[12rem] bg-theme-text-light rounded-b-full ${navOpen ? "" : "animate-ball-rattle"}`}
+						className={clsx(
+							"-mt-[12rem] h-[32rem] w-[0.625rem] rounded-b-full bg-theme-text-light",
+							!navOpen && "animate-ball-rattle",
+						)}
 					/>
 					{/* Ball (nav trigger) */}
 					<button
 						type="button"
 						onClick={handleMobileBallClick}
-						className={`w-[3.9375rem] h-[3.9375rem] rounded-full bg-theme-text-light shrink-0 -mt-[0.5rem] cursor-pointer ${navOpen ? "" : "animate-ball-rattle"}`}
+						className={clsx(
+							"-mt-[0.5rem] h-[3.9375rem] w-[3.9375rem] shrink-0 cursor-pointer rounded-full bg-theme-text-light",
+							!navOpen && "animate-ball-rattle",
+						)}
 						aria-label="Toggle navigation"
 					/>
 				</div>
 
 				{/* Bottom-right: cat */}
-				<div className="col-start-1 col-span-2 row-start-2 self-end justify-self-end w-[30rem] mr-[-3rem] mb-[-3rem]">
+				<div className="col-span-2 col-start-1 row-start-2 mr-[-3rem] mb-[-3rem] w-[30rem] self-end justify-self-end">
 					<Lottie key={theme} animationData={catAnimations[theme]} loop />
 				</div>
 
 				{/* Bottom-left: credits */}
-				<div className="col-start-1 col-span-1 row-start-2 self-end justify-self-start px-[2.25rem] py-[2.25rem]">
+				<div className="col-span-1 col-start-1 row-start-2 self-end justify-self-start px-[2.25rem] py-[2.25rem]">
 					<DesignedByCory />
 					<EngineeredByKevin />
 				</div>
@@ -166,14 +175,14 @@ export function Welcome() {
 						{/* Dark overlay */}
 						<button
 							type="button"
-							className="fixed inset-0 bg-theme-primary/85 z-20 animate-nav-overlay appearance-none border-none p-0 cursor-default"
+							className="fixed inset-0 z-20 animate-nav-overlay cursor-default appearance-none border-none bg-theme-primary/85 p-0"
 							onClick={() => setNavOpen(false)}
 							aria-label="Close navigation"
 						/>
 						{/* White nav header */}
-						<div className="fixed top-0 left-0 right-0 h-[12.4375rem] bg-white/95 backdrop-blur-[10px] z-30 flex items-end px-[2.25rem] pb-[1.5rem] animate-nav-slide">
+						<div className="fixed top-0 right-0 left-0 z-30 flex h-[12.4375rem] animate-nav-slide items-end bg-white/95 px-[2.25rem] pb-[1.5rem] backdrop-blur-[10px]">
 							{/* Logo */}
-							<p className="text-theme-text font-light italic text-[1.5rem]">
+							<p className="font-light text-[1.5rem] text-theme-text italic">
 								kevin cunanan
 							</p>
 							{/* Nav links */}
@@ -185,7 +194,10 @@ export function Welcome() {
 												to={to}
 												onClick={() => setNavOpen(false)}
 												className={({ isActive }) =>
-													`font-merriweather-sans font-bold text-[0.875rem] text-theme-text ${isActive ? "opacity-100" : "opacity-50"}`
+													clsx(
+														"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
+														isActive && "opacity-100",
+													)
 												}
 											>
 												{children}
@@ -198,9 +210,9 @@ export function Welcome() {
 											target="_blank"
 											rel="noopener noreferrer"
 											onClick={() => setNavOpen(false)}
-											className="font-merriweather-sans font-bold text-[0.875rem] text-theme-text opacity-50 flex items-center gap-[0.375rem] hover:opacity-100 transition-opacity"
+											className="flex items-center gap-[0.375rem] font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
 										>
-											<Github className="w-[0.875rem] h-[0.875rem]" />
+											<Github className="h-[0.875rem] w-[0.875rem]" />
 											github
 										</a>
 									</li>
@@ -212,52 +224,49 @@ export function Welcome() {
 			</div>
 
 			{/* Desktop layout */}
-			<main className="relative hidden md:flex items-center justify-center h-dvh w-full p-[2rem] md:p-[4rem] -mt-[10px] overflow-hidden">
+			<main className="relative -mt-[10px] hidden h-dvh w-full items-center justify-center overflow-hidden p-[2rem] md:flex md:p-[4rem]">
 				<div
-					className={`flex flex-col items-center absolute top-0 left-1/2 -translate-x-1/2 z-20 desktop-ball ${desktopSway ? "animate-pendulum" : ""}`}
+					className={clsx(
+						"desktop-ball absolute top-0 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center",
+						desktopSway && "animate-pendulum",
+					)}
 				>
-					<div className="flex-1 w-[10px] bg-theme-text-light opacity-100 rounded-full" />
+					<div className="w-[10px] flex-1 rounded-full bg-theme-text-light opacity-100" />
 					<button
 						type="button"
 						onClick={handleDesktopBallClick}
-						className="w-[48px] h-[48px] rounded-full bg-theme-text-light opacity-100 shrink-0 -mt-[10px] cursor-pointer"
+						className="-mt-[10px] h-[48px] w-[48px] shrink-0 cursor-pointer rounded-full bg-theme-text-light opacity-100"
 						aria-label="Sway animation"
 					/>
-					<p className="whitespace-nowrap absolute right-[2.5rem] top-[calc(50%+25px)] w-full text-theme-text-light font-light text-[1rem] rotate-270">
+					<p className="absolute top-[calc(50%+25px)] right-[2.5rem] w-full rotate-270 whitespace-nowrap font-light text-[1rem] text-theme-text-light">
 						pipeline tinkerer
 					</p>
-					<p className="whitespace-nowrap absolute left-[calc(50%+2.5rem)] bottom-3 text-theme-text-light font-light text-[1rem]">
+					<p className="absolute bottom-3 left-[calc(50%+2.5rem)] whitespace-nowrap font-light text-[1rem] text-theme-text-light">
 						agentic engineer
 					</p>
 				</div>
 
-				<div className="fixed inset-0 pointer-events-none z-0">
+				<div className="pointer-events-none fixed inset-0 z-0">
 					<div
-						className="absolute left-[-175px] bottom-0 text-theme-primary"
+						className="absolute bottom-0 left-[-175px] text-theme-primary"
 						style={{ opacity: "var(--theme-blob-opacity)" }}
 					>
-						<LeftBlob
-							className="w-full h-full"
-							style={{ overflow: "visible" }}
-						/>
+						<LeftBlob className="h-full w-full overflow-visible" />
 					</div>
 					<div
 						className="absolute right-[-500px] bottom-0 text-theme-primary"
 						style={{ opacity: "var(--theme-blob-opacity)" }}
 					>
-						<RightBlob
-							className="w-full h-full"
-							style={{ overflow: "visible" }}
-						/>
+						<RightBlob className="h-full w-full overflow-visible" />
 					</div>
 				</div>
 
-				<div className="relative z-10 grid grid-cols-3 grid-rows-3 gap-[1rem] grow h-full">
-					<div className="flex flex-col items-left justify-center col-span-1">
-						<h1 className="text-theme-text-light font-light mb-[1rem] text-[3.75rem] lg:text-[4.5rem] leading-tight">
+				<div className="relative z-10 grid h-full grow grid-cols-3 grid-rows-3 gap-[1rem]">
+					<div className="items-left col-span-1 flex flex-col justify-center">
+						<h1 className="mb-[1rem] font-light text-[3.75rem] text-theme-text-light leading-tight lg:text-[4.5rem]">
 							kevin cunanan
 						</h1>
-						<p className="text-theme-text font-extralight text-[1rem]">
+						<p className="font-extralight text-[1rem] text-theme-text">
 							senior software engineer
 						</p>
 					</div>
@@ -267,12 +276,12 @@ export function Welcome() {
 					<Navbar navItems={navItems} />
 
 					<div className="flex items-center justify-start">
-						<p className="text-theme-text-light font-light mt-[8rem] text-[1.125rem] writing-vertical-lr">
+						<p className="writing-vertical-lr mt-[8rem] font-light text-[1.125rem] text-theme-text-light">
 							cat whisperer
 						</p>
 					</div>
 
-					<div className="col-start-2 col-span-1 flex items-center justify-center">
+					<div className="col-span-1 col-start-2 flex items-center justify-center">
 						<Lottie key={theme} animationData={catAnimations[theme]} loop />
 					</div>
 
@@ -284,25 +293,20 @@ export function Welcome() {
 					<ArrowSvg
 						aria-hidden="true"
 						preserveAspectRatio="none"
-						className="absolute left-[calc(5%)] top-[calc(50%)] pointer-events-none opacity-50"
-						style={{ width: "35%", height: "25%" }}
-					/>
-
-					<ArrowSvg
-						aria-hidden="true"
-						preserveAspectRatio="none"
-						className="absolute left-[calc(5%)] top-[calc(50%)] pointer-events-none opacity-50"
-						style={{ width: "35%", height: "25%" }}
+						className="pointer-events-none absolute top-[calc(50%)] left-[calc(5%)] h-[calc(25%)] w-[calc(35%)] opacity-50"
 					/>
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
-						<p className="font-merriweather-sans text-theme-text uppercase basis-1/3 tracking-widest text-[0.875rem]">
+						<p className="basis-1/3 font-merriweather-sans text-[0.875rem] text-theme-text uppercase tracking-widest">
 							Los Angeles
 						</p>
 						<div className="basis-2/3">
 							<Link
 								to={cta.href}
-								className={`inline-block bg-theme-button hover:bg-theme-button-hover px-[3rem] py-[1rem] text-white rounded-full transition-colors text-[1rem] whitespace-nowrap ${ctaAnimating ? "animate-cta-pop" : ""}`}
+								className={clsx(
+									"inline-block whitespace-nowrap rounded-full bg-theme-button px-[3rem] py-[1rem] text-[1rem] text-white transition-colors hover:bg-theme-button-hover",
+									ctaAnimating && "animate-cta-pop",
+								)}
 							>
 								{cta.text}
 							</Link>

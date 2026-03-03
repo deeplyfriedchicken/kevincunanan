@@ -1,3 +1,5 @@
+import clsx from "clsx";
+
 export type TOCItem = { level: 1 | 2 | 3; text: string; id: string };
 
 export function TableOfContents({ items }: { items: TOCItem[] }) {
@@ -7,7 +9,10 @@ export function TableOfContents({ items }: { items: TOCItem[] }) {
 				<a
 					key={item.id}
 					href={`#${item.id}`}
-					className={`block font-merriweather-sans text-theme-text hover:opacity-70 transition-opacity ${levelStyles[item.level]}`}
+					className={clsx(
+						"block font-merriweather-sans text-theme-text transition-opacity hover:opacity-70",
+						levelStyles[item.level],
+					)}
 				>
 					{item.text}
 				</a>

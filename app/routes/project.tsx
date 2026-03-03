@@ -63,32 +63,32 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 	const toc = extractTOC(markdown);
 
 	return (
-		<div className="min-h-screen flex flex-col">
+		<div className="flex min-h-screen flex-col">
 			{/* HERO */}
 			<section style={{ backgroundColor: project.color }} className="relative">
 				<InnerNavbar variant="dark" color={project.color} />
-				<div className="px-[2rem] md:px-[4rem] pb-[5rem]">
-					<h1 className="text-white text-[3rem] md:text-[4rem] font-light mb-[1rem]">
+				<div className="px-[2rem] pb-[5rem] md:px-[4rem]">
+					<h1 className="mb-[1rem] font-light text-[3rem] text-white md:text-[4rem]">
 						{project.title}
 					</h1>
-					<p className="text-white/80 text-[1.125rem] font-light max-w-[40rem]">
+					<p className="max-w-[40rem] font-light text-[1.125rem] text-white/80">
 						{project.description}
 					</p>
 				</div>
 			</section>
 
 			{/* CONTENT AREA */}
-			<div className="flex-1 bg-white px-[2rem] md:px-[4rem] py-[3rem]">
-				<div className="grid grid-cols-1 md:grid-cols-[16rem_1fr] gap-[2rem] md:gap-[4rem]">
+			<div className="flex-1 bg-white px-[2rem] py-[3rem] md:px-[4rem]">
+				<div className="grid grid-cols-1 gap-[2rem] md:grid-cols-[16rem_1fr] md:gap-[4rem]">
 					{/* LEFT COLUMN: app icon + TOC */}
 					<div>
 						{/* App icon — negative margin pulls it up over the hero boundary */}
-						<div className="relative z-10 -mt-[6rem] mb-[2rem] w-[8rem] h-[8rem] overflow-hidden flex items-center justify-center">
+						<div className="relative z-10 -mt-[6rem] mb-[2rem] flex h-[8rem] w-[8rem] items-center justify-center overflow-hidden">
 							{project.iconPath && (
 								<img
 									src={assetUrl(project.iconPath)}
 									alt={project.title}
-									className="w-full h-full object-contain p-[1rem]"
+									className="h-full w-full object-contain p-[1rem]"
 								/>
 							)}
 						</div>
@@ -98,7 +98,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 					</div>
 
 					{/* RIGHT COLUMN: article */}
-					<article className="space-y-[1rem] max-w-[40rem]">
+					<article className="max-w-[40rem] space-y-[1rem]">
 						<ReactMarkdown
 							components={{
 								h1({ children }) {
@@ -108,7 +108,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 									return (
 										<h1
 											id={id}
-											className="text-theme-text text-[1.75rem] font-light mb-[0.75rem] mt-[2rem] first:mt-0"
+											className="mt-[2rem] mb-[0.75rem] font-light text-[1.75rem] text-theme-text first:mt-0"
 										>
 											<a href={url}>{children}</a>
 											<HeadingAnchor id={id} />
@@ -122,7 +122,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 									return (
 										<h2
 											id={id}
-											className="text-theme-text text-[1.75rem] font-light mb-[0.75rem] mt-[2rem] first:mt-0"
+											className="mt-[2rem] mb-[0.75rem] font-light text-[1.75rem] text-theme-text first:mt-0"
 										>
 											<a href={url}>{children}</a>
 											<HeadingAnchor id={id} />
@@ -136,7 +136,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 									return (
 										<h3
 											id={id}
-											className="uppercase tracking-widest text-theme-text text-[1.25rem] font-semibold"
+											className="font-semibold text-[1.25rem] text-theme-text uppercase tracking-widest"
 										>
 											<a href={url}>{children}</a>
 											<HeadingAnchor id={id} />
@@ -145,28 +145,28 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								},
 								p({ children }) {
 									return (
-										<p className="text-theme-text font-light leading-relaxed">
+										<p className="font-light text-theme-text leading-relaxed">
 											{children}
 										</p>
 									);
 								},
 								ul({ children }) {
 									return (
-										<ul className="list-disc list-inside space-y-[0.375rem]">
+										<ul className="list-inside list-disc space-y-[0.375rem]">
 											{children}
 										</ul>
 									);
 								},
 								li({ children }) {
 									return (
-										<li className="text-theme-text font-light">{children}</li>
+										<li className="font-light text-theme-text">{children}</li>
 									);
 								},
 								a({ href, children }) {
 									return (
 										<a
 											href={href}
-											className="text-theme-button underline hover:opacity-70 transition-opacity"
+											className="text-theme-button underline transition-opacity hover:opacity-70"
 											target="_blank"
 											rel="noopener noreferrer"
 										>
@@ -176,14 +176,14 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								},
 								img({ src, alt }) {
 									return (
-										<div className="w-full flex flex-col items-center justify-center">
+										<div className="flex w-full flex-col items-center justify-center">
 											<div className="max-w-[30rem]">
 												<img
 													src={src ? assetUrl(src) : src}
 													alt={alt ?? ""}
-													className="w-full rounded my-[1rem]"
+													className="my-[1rem] w-full rounded"
 												/>
-												<p className="text-theme-text opacity-75 font-light text-[0.875rem] text-center">
+												<p className="text-center font-light text-[0.875rem] text-theme-text opacity-75">
 													{alt}
 												</p>
 											</div>
@@ -192,7 +192,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 								},
 								code({ children }) {
 									return (
-										<code className="bg-theme-primary/10 text-theme-text text-[0.875em] px-[0.25rem] py-[0.125rem] rounded">
+										<code className="rounded bg-theme-primary/10 px-[0.25rem] py-[0.125rem] text-[0.875em] text-theme-text">
 											{children}
 										</code>
 									);
