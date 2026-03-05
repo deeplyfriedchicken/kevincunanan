@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-05T05:53:03.823Z",
+  "last_updated": "2026-03-05T20:14:53.160Z",
   "projects": [
     {
       "title": "FloatCMS",
@@ -74,7 +74,7 @@
       "color": "#0377CC",
       "iconPath": "/images/projects/document-email-engineer.png",
       "content": "\n# Background\n\n\nContext, objectives, and scope of the document\n\n\n# Analysis\n\n\nResearch findings, data insights, and key considerations\n\n\n# Recommendations\n\n\nProposed solutions, strategies, and next steps\n\n\n# Implementation\n\n\nAction items, timeline, and resource requirements\n\n",
-      "isFavorite": false
+      "isFavorite": true
     },
     {
       "title": "Porfolio",
