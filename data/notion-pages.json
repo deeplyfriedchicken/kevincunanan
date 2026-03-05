@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-04T05:49:01.668Z",
+  "last_updated": "2026-03-05T05:53:03.823Z",
   "projects": [
     {
       "title": "FloatCMS",
@@ -48,20 +48,6 @@
       "color": "#020002",
       "iconPath": "/images/projects/jpl.png",
       "content": "\n# Working at JPL\n\n\nThe division I worked in, OCIO at the time, focused on delivering internal tooling and custom software applications to the rest of the lab and scientists. My team specifically had a specialized stack in Django + React + Postgres applications that solved needs for MARS2020 and other groups.\n\n\nExtra words here\n\n\n## IADS Dashboard - System Consolidation\n\n\n## WSPR - Waiver Signing\n\n",
-      "isFavorite": false
-    },
-    {
-      "title": "Retrace",
-      "slug": "retrace",
-      "description": "Plugin for merchants to let customers easily toggle the Retrace product on and off.",
-      "tags": [
-        "Preact",
-        "E-Commerce",
-        "Shopify Plugin"
-      ],
-      "color": "#22529B",
-      "iconPath": "/images/projects/retrace.svg",
-      "content": "\n# What is Retrace?\n\n\n# How I contributed\n\n\n## Vanilla JavaScript\n\n\n## Preact\n\n",
       "isFavorite": false
     },
     {
