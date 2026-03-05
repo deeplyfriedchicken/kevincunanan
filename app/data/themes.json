@@ -2,7 +2,7 @@
   {
     "slug": "floatcms",
     "title": "FloatCMS",
-    "primaryColor": "#2a7d8c"
+    "primaryColor": "#2a7d8a"
   },
   {
     "slug": "toggle",
@@ -13,10 +13,5 @@
     "slug": "admin-portal",
     "title": "Admin Portal",
     "primaryColor": "#1a2a6c"
-  },
-  {
-    "slug": "document-email-engineer",
-    "title": "Document / Email Engineer",
-    "primaryColor": "#D4A017"
   }
 ]
