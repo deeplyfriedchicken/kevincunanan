@@ -1,3 +1,4 @@
+import generatedThemesData from "@palettes/themes.json";
 import clsx from "clsx";
 import Lottie from "lottie-react";
 import { Github } from "lucide-react";
@@ -10,16 +11,20 @@ import { LastUpdatedClock } from "~/components/LastUpdatedClock";
 import { Navbar } from "~/components/Navbar";
 import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
-import generatedThemesData from "~/data/themes.json";
+import blueCatJson from "~/data/cat-blue.json";
 
-const catModules = import.meta.glob<{ default: object }>("../data/cat-*.json", {
-	eager: true,
-});
+const catModules = import.meta.glob<{ default: object }>(
+	"../../generatedPalettes/cat-*.json",
+	{
+		eager: true,
+	},
+);
 const catAnimations: Record<string, object> = {};
 for (const [path, mod] of Object.entries(catModules)) {
 	const slug = path.match(/cat-(.+)\.json$/)?.[1];
 	if (slug) catAnimations[slug] = mod.default;
 }
+catAnimations.blue = blueCatJson;
 
 type ThemeEntry = { slug: string; title: string; primaryColor: string };
 const generatedThemes = generatedThemesData as ThemeEntry[];
