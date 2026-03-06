@@ -16,6 +16,7 @@
 		"baseUrl": ".",
 		"paths": {
 			"~/*": ["./app/*"],
+			"@palettes/*": ["./generatedPalettes/*"],
 			"@data/*": ["./data/*"],
 			"@shared/*": ["./types/*"],
 			"@scripts/*": ["./scripts/*"],

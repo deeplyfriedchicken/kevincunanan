@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "./generated-themes.css";
+@import "../generatedPalettes/generated-themes.css";
 
 [data-theme="blue"] {
 	--theme-primary: #32384c;

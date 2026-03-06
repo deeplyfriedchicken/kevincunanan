@@ -25,7 +25,7 @@ export default function Projects() {
 	const projects = getPortfolioItems();
 
 	return (
-		<main className="relative px-[2rem] py-[3rem] md:px-[4rem] md:py-[5rem]">
+		<main className="relative flex flex-row items-center px-[2rem] py-[3rem] md:px-[4rem] md:py-[5rem]">
 			<div className="pointer-events-none fixed inset-0 z-0">
 				<div
 					className="absolute bottom-0 left-[-175px] text-theme-primary"
@@ -41,7 +41,7 @@ export default function Projects() {
 				</div>
 			</div>
 
-			<div className="relative z-10 mx-auto max-w-[64rem]">
+			<div className="relative z-10 mx-auto max-w-[48rem]">
 				<h1 className="mb-[1.5rem] text-center font-light text-[3rem] text-theme-text-light md:text-[5rem]">
 					Projects
 				</h1>
