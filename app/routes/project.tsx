@@ -1,6 +1,7 @@
 import ReactMarkdown from "react-markdown";
 import { data } from "react-router";
 import slugify from "react-slugify";
+import rehypeRaw from "rehype-raw";
 import { HeadingAnchor } from "~/components/HeadingAnchor";
 import { InnerNavbar } from "~/components/InnerNavbar";
 import { TableOfContents, type TOCItem } from "~/components/TableOfContents";
@@ -100,6 +101,7 @@ export default function Project({ loaderData }: Route.ComponentProps) {
 					{/* RIGHT COLUMN: article */}
 					<article className="max-w-[40rem] space-y-[1rem]">
 						<ReactMarkdown
+							rehypePlugins={[rehypeRaw]}
 							components={{
 								h1({ children }) {
 									const text = String(children);
