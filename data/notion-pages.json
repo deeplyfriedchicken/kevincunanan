@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-05T23:09:53.117Z",
+  "last_updated": "2026-03-06T00:56:56.716Z",
   "projects": [
     {
       "title": "FloatCMS",
@@ -10,7 +10,8 @@
         "Django",
         "React",
         "AWS",
-        "EC2"
+        "EC2",
+        "Headless CMS"
       ],
       "color": "#006d77",
       "iconPath": "/images/projects/floatcms.png",
@@ -25,12 +26,12 @@
         "React",
         "Django",
         "AWS",
-        "EC2",
-        "Component Library"
+        "Component Library",
+        "Whitelabel Product"
       ],
       "color": "#4A0861",
       "iconPath": "/images/projects/toggle.jpeg",
-      "content": "\n# [gettoggle.com](http://gettoggle.com/)\n\n\nToggle Inc. hoped to deliver a seamless insurance experience for users looking to buy (and manage) renters, auto, and homeowners insurance. Every time you’ve had to call an agent to buy insurance or (especially) make an insurance change, that’s a time you could’ve used Toggle. \n\n\n![Sample Toggle Renters Flow](/images/content/toggle/toggle-0.gif)\n\n\n_Disclaimer: we built the end-user application for Toggle but were not responsible for managing customers, handling policies, etc._ \n\n\n_Disclaimer 2: None of the screenshots are internal photos, these are real marketing slides and app screenshots from customers / reviewers all found online._\n\n\nA big challenge for Toggle included **building a scalable solution for all 50 states;** this was <u>compounded by insurance regulations and laws</u> in every state which effectively meant we were building a different variation of the application for every state.\n\n\n![Auto insurance expansion graphic](/images/content/toggle/toggle-1.jpg)\n\n\n**I worked** _**heavily**_ **on the auto team**, but throughout around 4 years of working I contributed a lot of work to the <u>homeowners</u>, <u>renters</u>, <u>shared internal developer packages</u>, and <u>a re-themeable Toggle Component library</u>.\n\n\n# Auto Insurance\n\n\nThe auto product focused on delivering a full user experience and customer focused self-service experience for Toggle Inc. I joined when we started building into other states and helped this effort.\n\n\n![auto-primary-driver.webp](/images/content/toggle/toggle-2.webp)\n\n\nWork included tweaking signup flows, allowing users to tweak coverages, and adding features on a state by state basis.\n\n\n![Optional coverages example in auto](/images/content/toggle/toggle-3.webp)\n\n\n## Test Everything\n\n\nOne really positive company culture from Sure was the **strong focus on testing across all fronts**. This included unit testing, integration testing, manual QA testing, automated QA testing pipelines, and even a manual UAT.\n\n\nWe strongly prided ourselves on releasing features after thorough testing, and it’s something that has really stuck with me as a core tenet of my engineering philosophy.\n\n\n## PAIN POINT\n\n\nThe biggest pain point I noticed was we had used a ton of `IF/ELSE` and `CASE` logic to handle different scenarios. This made readability and cognitive understanding really difficult.\n\n\n## Introducing Configurations\n\n\nDue to the hard-coded nature of the application, I proposed a system that leveraged configs (JSON) to handle any differences between states including copy, coverage differences, UI elements, etc.\n\n\n### Hooking into Configs\n\n\nFor frontend UI components, we eliminated a lot of prop-pass through via configs and React Context. This proved a super solid initial solution.\n\n\n```javascript\n// basic example\nimport useComponentConfig from 'some-config';\n\nconst SomeComponent() {\n  const { configData } = useComponentConfig('STATE');\n}\n```\n\n\n_In order to intelligently choose a state, we had to preserve the state the user had chosen for insurance on the initial signup form._\n\n\nThis approach increased DRY-ness in repositories, allowed better unit testing of components, and also provided the ability to make configurations type safe.\n\n\nThe problem now became one of a proliferation of configuration files. The Toggle app needed to be flexible and configurable per state, and per whitelabel. So if we had 2 white-labels and 50 states, we’d have over 100 configuration files. Truth be told, we never really hit an issue because states generally remained unchanged after release aside from minor copy changes and UI updates.\n\n\n# Homeowners and Component Libraries\n\n\n![Example Homeowners Component](/images/content/toggle/toggle-4.png)\n\n\nFor a much shorter time period, I worked on the Homeowners product for Toggle. The work included the same smattering of challenges including releasing to multiple states, accounting for (very) different coverages from auto, handling white-labeling, and using a component library created by great minds like Quinn Elwood.\n\n\n## Component Library\n\n\nQuinn spent a lot of time consolidating reusable styles, components, and “smarter” components across the three products we had. Eventually she was able to build a cohesive component library from these.\n\n\nWhen Quinn left the company, I and a few others became responsible for maintaining the repository in conjunction with new features across each white-label and product.\n\n",
+      "content": "\n# [gettoggle.com](http://gettoggle.com/)\n\n\nToggle Inc. hoped to deliver a seamless insurance experience for users looking to buy (and manage) renters, auto, and homeowners insurance.\n\n\nEvery time you’ve had to call an agent to buy insurance or (especially) make an insurance change, that’s a time you could’ve used Toggle.\n\n\n![Sample Toggle Renters Flow](/images/content/toggle/toggle-0.gif)\n\n\n_Disclaimer: we built the end-user application for Toggle but were not responsible for managing customers, handling policies, etc._ \n\n\n_Disclaimer 2: None of the screenshots are internal photos, these are real marketing slides and app screenshots from customers / reviewers all found online._\n\n\nA big challenge for Toggle included **building a scalable solution for all 50 states;** this was <u>compounded by insurance regulations and laws</u> in every state which effectively meant we were building a different variation of the application for every state.\n\n\n![Auto insurance expansion graphic](/images/content/toggle/toggle-1.jpg)\n\n\n**I worked** _**heavily**_ **on the auto team**, but throughout around 4 years of working I contributed a lot of work to the <u>homeowners</u>, <u>renters</u>, <u>shared internal developer packages</u>, and <u>a re-themeable Toggle Component library</u>.\n\n\n# Auto Insurance\n\n\nThe auto product focused on delivering a full user experience and customer focused self-service experience for Toggle Inc. I joined when we started building into other states and helped this effort.\n\n\n![auto-primary-driver.webp](/images/content/toggle/toggle-2.webp)\n\n\nWork included tweaking signup flows, allowing users to tweak coverages, and adding features on a state by state basis.\n\n\n![Optional coverages example in auto](/images/content/toggle/toggle-3.webp)\n\n\n## Test Everything\n\n\nOne really positive company culture from Sure was the **strong focus on testing across all fronts**. This included unit testing, integration testing, manual QA testing, automated QA testing pipelines, and even a manual UAT.\n\n\nWe strongly prided ourselves on releasing features after thorough testing, and it’s something that has really stuck with me as a core tenet of my engineering philosophy.\n\n\n## PAIN POINT\n\n\nThe biggest pain point I noticed was we had used a ton of `IF/ELSE` and `CASE` logic to handle different scenarios. This made readability and cognitive understanding really difficult.\n\n\n## Introducing Configurations\n\n\nDue to the hard-coded nature of the application, I proposed a system that leveraged configs (JSON) to handle any differences between states including copy, coverage differences, UI elements, etc.\n\n\n### Hooking into Configs\n\n\nFor frontend UI components, we eliminated a lot of prop-pass through via configs and React Context. This proved a super solid initial solution.\n\n\n```javascript\n// basic example\nimport useComponentConfig from 'some-config';\n\nconst SomeComponent() {\n  const { configData } = useComponentConfig('STATE');\n}\n```\n\n\n_In order to intelligently choose a state, we had to preserve the state the user had chosen for insurance on the initial signup form._\n\n\nThis approach increased DRY-ness in repositories, allowed better unit testing of components, and also provided the ability to make configurations type safe.\n\n\nThe problem now became one of a proliferation of configuration files. The Toggle app needed to be flexible and configurable per state, and per whitelabel. So if we had 2 white-labels and 50 states, we’d have over 100 configuration files. Truth be told, we never really hit an issue because states generally remained unchanged after release aside from minor copy changes and UI updates.\n\n\n# Homeowners and Component Libraries\n\n\n![Example Homeowners Component](/images/content/toggle/toggle-4.png)\n\n\nFor a much shorter time period, I worked on the Homeowners product for Toggle. The work included the same smattering of challenges including releasing to multiple states, accounting for (very) different coverages from auto, handling white-labeling, and using a component library created by great minds like Quinn Elwood.\n\n\n## Component Library\n\n\nQuinn spent a lot of time consolidating reusable styles, components, and “smarter” components across the three products we had. Eventually she was able to build a cohesive component library from these.\n\n\nWhen Quinn left the company, I and a few others became responsible for maintaining the repository in conjunction with new features across each white-label and product.\n\n",
       "isFavorite": true
     },
     {
@@ -43,11 +44,12 @@
         "React",
         "AWS",
         "EC2",
-        "SQS"
+        "SQS",
+        "Software Architecture"
       ],
       "color": "#020002",
       "iconPath": "/images/projects/jpl.png",
-      "content": "\n# Working at JPL\n\n\nThe division I worked in, OCIO at the time, focused on delivering internal tooling and custom software applications to the rest of the lab and scientists. My team specifically had a specialized stack in Django + React + Postgres applications that solved needs for MARS2020 and other groups.\n\n\n## IADS Dashboard - System Consolidation\n\n\nThis dashboard focused on consolidating application data from about 4 separate (and older) applications into a single, visually pleasing dashboard. \n\n\nThe intent was to provide a centralized application where team users could track multiple tickets simultaneously without having to sign-in and remember the flows for all the individual apps.\n\n\n_TODO: Diagram adding architecture + AWS flow including SQS for queue-ing and error handling_\n\n\n## WSPR - Waiver Signing\n\n\nA lot of projects on JPL laboratory would go through very specific document flows that were internal. The waivers initially were paper-only. TBT.\n\n\nTo speed up the lab we built a a React / Django application that provided these documents and signing capabilities to JPL teams at large.\n\n",
+      "content": "\n# Working at JPL\n\n\nThe division I worked in, OCIO at the time, focused on delivering internal tooling and custom software applications to the rest of the lab and scientists. My team specifically had a specialized stack in Django + React + Postgres applications that solved needs for MARS2020 and other groups.\n\n\n## IADS Dashboard - System Consolidation\n\n\nThis dashboard focused on consolidating application data from about 4 separate (and older) applications into a single, visually pleasing dashboard. \n\n\nThe intent was to provide a centralized application where team users could track multiple tickets simultaneously without having to sign-in and remember the flows for all the individual apps.\n\n\n![Untitled_Artwork.jpg](/images/content/jpl/jpl-0.jpg)\n\n\n## WSPR - Waiver Signing\n\n\nA lot of projects on JPL laboratory would go through very specific document flows that were internal. The waivers initially were paper-only. TBT.\n\n\nTo speed up the lab we built a a React / Django application that provided these documents and signing capabilities to JPL teams at large.\n\n",
       "isFavorite": false
     },
     {
@@ -56,7 +58,8 @@
       "description": "Admin management system for creating a fully customizable insurance product. Worked on the document, email, and webhook experiences primarily.",
       "tags": [
         "React",
-        "Material UI"
+        "Material UI",
+        "Test Driven Development"
       ],
       "color": "#0C2874",
       "iconPath": "/images/projects/admin-portal.jpg",
@@ -84,7 +87,9 @@
         "React",
         "Claude",
         "React Router 7",
-        "GitHub Actions"
+        "GitHub Actions",
+        "Notion",
+        "Tailwind"
       ],
       "color": "#32384c",
       "iconPath": "/images/projects/porfolio.png",

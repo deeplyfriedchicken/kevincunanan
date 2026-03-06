@@ -22,10 +22,10 @@ const NOTION_DATA_PATH = resolve(
 );
 const CAT_BASE_PATH = resolve(import.meta.dirname, "../app/data/cat-blue.json");
 const PUBLIC_DIR = resolve(import.meta.dirname, "../public");
-const APP_DATA_DIR = resolve(import.meta.dirname, "../app/data");
+const APP_DATA_DIR = resolve(import.meta.dirname, "../generatedPalettes");
 const GENERATED_CSS_PATH = resolve(
 	import.meta.dirname,
-	"../app/generated-themes.css",
+	"../generatedPalettes/generated-themes.css",
 );
 const THEMES_JSON_PATH = resolve(APP_DATA_DIR, "themes.json");
 const THEME_HASH_PATH = resolve(APP_DATA_DIR, ".themes-hash");
