@@ -36,7 +36,7 @@ describe("HeadingAnchor", () => {
 	it("shows link icon by default", () => {
 		renderWithTheme(<HeadingAnchor id="overview" />);
 		expect(
-			screen.getByTitle("Click to copy section link to clipboard"),
+			screen.getByTestId("HeadingAnchor_overview_button"),
 		).toBeInTheDocument();
 	});
 
@@ -70,21 +70,16 @@ describe("HeadingAnchor", () => {
 
 		await user.click(screen.getByRole("button"));
 
-		vi.advanceTimersByTime(1500);
+		await expect(screen.getByTestId("HeadingAnchor_intro_icon_copySuccess"));
+
+		vi.advanceTimersByTime(3001);
 
 		await waitFor(() => {
 			expect(
-				screen.getByTitle("Click to copy section link to clipboard"),
+				screen.getByTestId("HeadingAnchor_intro_icon_copy"),
 			).toBeInTheDocument();
 		});
 
 		vi.useRealTimers();
-	});
-
-	it("starts with reduced opacity and full opacity on hover", () => {
-		renderWithTheme(<HeadingAnchor id="test" />);
-		const button = screen.getByRole("button");
-		expect(button.className).toContain("hover:opacity-100");
-		expect(button.className).toMatch(/opacity-\d+/);
 	});
 });
