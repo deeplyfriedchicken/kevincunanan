@@ -1,8 +1,9 @@
 import clsx from "clsx";
-import { Github, Menu, X } from "lucide-react";
+import { Github, Menu } from "lucide-react";
 import { useState } from "react";
 import { NavLink } from "react-router";
 import { githubUrl, navLinks } from "~/components/nav-links";
+import { useTestId } from "~/hooks/useTestId";
 
 export function InnerNavbar({
 	variant = "light",
@@ -11,6 +12,7 @@ export function InnerNavbar({
 	variant?: "light" | "dark";
 	color?: string;
 }) {
+	const { buildTestId } = useTestId("InnerNavbar");
 	const [isOpen, setIsOpen] = useState(false);
 	const textClass =
 		variant === "dark"
@@ -24,12 +26,6 @@ export function InnerNavbar({
 			: color
 				? "border-[var(--nav-color)]"
 				: "border-theme-text";
-	const menuBg =
-		variant === "dark" && color
-			? "bg-[var(--nav-color)]"
-			: variant === "dark"
-				? "bg-theme-text"
-				: "bg-white";
 
 	return (
 		<nav
@@ -46,15 +42,12 @@ export function InnerNavbar({
 
 				<button
 					type="button"
-					onClick={() => setIsOpen(!isOpen)}
+					onClick={() => setIsOpen(true)}
 					className={clsx("md:hidden", textClass)}
-					aria-label="Toggle menu"
+					aria-label="Open menu"
+					data-testid={buildTestId("burger")}
 				>
-					{isOpen ? (
-						<X className="h-[1.5rem] w-[1.5rem]" />
-					) : (
-						<Menu className="h-[1.5rem] w-[1.5rem]" />
-					)}
+					<Menu className="h-[1.5rem] w-[1.5rem]" />
 				</button>
 
 				<ul className="hidden items-center gap-[0.25rem] md:flex">
@@ -88,38 +81,58 @@ export function InnerNavbar({
 				</ul>
 			</div>
 
+			{/* Mobile nav overlay */}
 			{isOpen && (
-				<div
-					className={`absolute top-full right-0 left-0 ${menuBg} z-50 shadow-lg md:hidden`}
-				>
-					<ul className="flex flex-col px-[2rem] py-[1rem]">
-						{navLinks.map(({ to, label }) => (
-							<li key={to}>
-								<NavLink
-									to={to}
-									onClick={() => setIsOpen(false)}
-									className={({ isActive }) =>
-										`block py-[0.75rem] text-[1rem] ${textClass} transition-opacity hover:opacity-70 ${isActive ? `border-l-4 pl-[0.75rem] ${borderClass}` : ""}`
-									}
-								>
-									{label}
-								</NavLink>
-							</li>
-						))}
-						<li>
-							<a
-								href={githubUrl}
-								target="_blank"
-								rel="noopener noreferrer"
-								onClick={() => setIsOpen(false)}
-								className={`flex items-center gap-[0.5rem] py-[0.75rem] text-[1rem] ${textClass} transition-opacity hover:opacity-70`}
-							>
-								<Github className="h-[1.25rem] w-[1.25rem]" />
-								github
-							</a>
-						</li>
-					</ul>
-				</div>
+				<>
+					{/* Dark overlay */}
+					<button
+						type="button"
+						className="fixed inset-0 z-20 animate-nav-overlay cursor-default appearance-none border-none bg-theme-primary/85 p-0"
+						onClick={() => setIsOpen(false)}
+						aria-label="Close navigation"
+						data-testid={buildTestId("overlay")}
+					/>
+					{/* White nav header */}
+					<div className="fixed top-0 right-0 left-0 z-30 flex h-[12.4375rem] animate-nav-slide items-end bg-white/95 px-[2.25rem] pb-[1.5rem] backdrop-blur-[10px] md:hidden">
+						{/* Logo */}
+						<p className="font-light text-[1.5rem] text-theme-text italic">
+							kevin cunanan
+						</p>
+						{/* Nav links */}
+						<div className="ml-auto">
+							<ul className="flex flex-col items-end gap-[0.625rem]">
+								{navLinks.map(({ to, label }) => (
+									<li key={to}>
+										<NavLink
+											to={to}
+											onClick={() => setIsOpen(false)}
+											className={({ isActive }) =>
+												clsx(
+													"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
+													isActive && "opacity-100",
+												)
+											}
+										>
+											{label}
+										</NavLink>
+									</li>
+								))}
+								<li>
+									<a
+										href={githubUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										onClick={() => setIsOpen(false)}
+										className="flex items-center gap-[0.375rem] font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
+									>
+										<Github className="h-[0.875rem] w-[0.875rem]" />
+										github
+									</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</>
 			)}
 		</nav>
 	);

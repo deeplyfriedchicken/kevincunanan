@@ -1,23 +1,29 @@
-import rawData from "@data/notion-pages.json";
-import type { TNotionData, TProject } from "./types";
+import type { TProject } from "./types";
 
-const data = rawData as TNotionData;
+const modules = import.meta.glob<{ default: TProject }>(
+	"../../data/projects/*.json",
+	{ eager: true },
+);
+const allProjects = Object.values(modules).map((m) => m.default);
 
 export function getPortfolioItems(): TProject[] {
-	return data.projects;
+	return allProjects;
 }
 
 export function getPortfolioItem(slug: string): TProject | undefined {
-	return data.projects.find((item) => item.slug === slug);
+	return allProjects.find((item) => item.slug === slug);
 }
 
 export function getLastUpdated(): string {
-	return data.last_updated;
+	return allProjects.reduce(
+		(latest, p) => (p.last_updated > latest ? p.last_updated : latest),
+		"",
+	);
 }
 
 export function getAllTags(): string[] {
 	const tags = new Set<string>();
-	for (const item of getPortfolioItems()) {
+	for (const item of allProjects) {
 		for (const tag of item.tags) tags.add(tag);
 	}
 	return [...tags].sort();

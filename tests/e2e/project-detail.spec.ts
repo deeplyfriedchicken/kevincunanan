@@ -53,7 +53,7 @@ test.describe("Project detail page", () => {
 		expect(firstClass).toContain("font-bold");
 	});
 
-	test("heading anchor button copies link to clipboard", async ({
+	test("heading anchor button copies link to clipboard with toast message", async ({
 		page,
 		context,
 	}) => {
@@ -62,24 +62,26 @@ test.describe("Project detail page", () => {
 		const firstReadMore = page.getByText("READ MORE +").first();
 		await firstReadMore.click();
 
-		// Wait for article content to load
 		const heading = page.locator("article h1, article h2").first();
 		await expect(heading).toBeVisible();
 
-		// Click the anchor button inside the heading
 		const anchorButton = heading.locator("button").first();
+		const buttonDataTestId =
+			(await anchorButton.getAttribute("data-testid")) || "";
 		await anchorButton.click();
 
-		// Verify the checkmark icon appears (confirms the click registered)
 		await expect(
-			heading.locator("[data-testid='copy-success-icon']"),
+			heading.getByTestId(
+				buttonDataTestId.replace("button", "icon_copySuccess"),
+			),
 		).toBeVisible();
 
-		// Read clipboard and verify it contains an anchor link
 		const clipboardText = await page.evaluate(() =>
 			navigator.clipboard.readText(),
 		);
 		expect(clipboardText).toMatch(/#.+/);
 		expect(clipboardText).toContain(page.url().split("#")[0]);
+
+		await expect(page.getByText("Copied to clipboard")).toBeVisible();
 	});
 });

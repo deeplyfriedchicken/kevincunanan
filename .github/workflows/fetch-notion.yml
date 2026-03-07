@@ -34,7 +34,7 @@ jobs:
       - name: Check if Notion data changed
         id: notion_diff
         run: |
-          if git diff --quiet data/notion-pages.json; then
+          if git diff --quiet data/projects/; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
           else
             echo "changed=true" >> "$GITHUB_OUTPUT"
@@ -53,19 +53,19 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/notion-pages.json \
+          git add data/projects/ \
             public/images/projects/ \
             public/images/content/ \
-            app/generated-themes.css \
-            app/data/themes.json \
-            app/data/.themes-hash \
-            "app/data/cat-*.json"
+            generatedPalettes/generated-themes.css \
+            generatedPalettes/data/themes.json \
+            generatedPalettes/data/.themes-hash \
+            "generatedPalettes/data/cat-*.json"
           if ! git diff --staged --quiet; then
             DATE=$(date -u "+%Y-%m-%d")
             TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
             BRANCH="notion-data/${DATE}-$(date -u '+%H%M')"
-            ITEM_COUNT=$(jq '.projects | length' data/notion-pages.json)
-            FAVORITE_COUNT=$(jq '[.projects[] | select(.isFavorite)] | length' data/notion-pages.json)
+            ITEM_COUNT=$(ls data/projects/*.json 2>/dev/null | wc -l | tr -d ' ')
+            FAVORITE_COUNT=$(jq -s '[.[] | select(.isFavorite)] | length' data/projects/*.json)
             git checkout -b "${BRANCH}"
             git commit -m "chore: update Notion data + themes (${DATE})"
             git push origin "${BRANCH}"
