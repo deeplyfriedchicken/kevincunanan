@@ -1,0 +1,15 @@
+{
+  "title": "Admin Portal",
+  "slug": "admin-portal",
+  "description": "Admin management system for creating a fully customizable insurance product. Worked on the document, email, and webhook experiences primarily.",
+  "tags": [
+    "React",
+    "Material UI",
+    "Test Driven Development"
+  ],
+  "color": "#0C2874",
+  "iconPath": "/images/projects/admin-portal.jpg",
+  "content": "\n_Need to generally be ambiguous about the work. Hard to talk numbers_\n\n\n# General Context\n\n\nSure Inc., focuses on building a platform that allows companies to own the entire insurance flow from choosing products to sell, generating documents, configuring pricing, triggering emails, etc. It’s a entirely configurable system.\n\n\n## My Pod\n\n\nThe team I worked for built and maintained core features including documents, emails, webhooks, and pricing calculations (ROC). 🐬 \n\n\n_maybe a graphic handling a lot of general structure_\n\n\nA lot of engineers on my team really prided themselves on strong integration / unit testing and deep code reviews which really suited my engineering philosophies.\n\n\nHowever, my team had to interface with several other teams including a group responsible for a solid component library.\n\n\n## My Contributions\n\n\nUnfortunately, due to restructuring I only worked on this team / division for about 6 months. But I made significant contributions to every domain except ROC. Additional work focused on refactoring existing code and adding QA automation tests.\n\n\n## Documents\n\n\nThe UI underwent a fairly large refactor / improvement. Originally, the document hub was a rudimentary system with a simple UI. We added a lot of new functionality including\n\n- Document contextual state management to handle save states across multiple components\n- Document reordering built using React DnD’\n- Document test mode that programmatically pulled variables and input options\n- Improved error handling for a ton of backend validation edge cases\n- Better trigger system that could handle file, section, or document generation conditions\n\n## Emails / Webhooks\n\n\nSimple work adding additional options for triggering emails and webhooks, but focused on refactoring a lot of hardcoded code for reusability.\n\n",
+  "isFavorite": true,
+  "last_updated": "2026-03-06T00:15:00.000Z"
+}

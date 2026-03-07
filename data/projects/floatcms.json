@@ -1,0 +1,18 @@
+{
+  "title": "FloatCMS",
+  "slug": "floatcms",
+  "description": "Open source headless CMS platform engineered to be an entirely customizable API to drive frontend websites. ",
+  "tags": [
+    "GraphQL",
+    "Django",
+    "React",
+    "AWS",
+    "EC2",
+    "Headless CMS"
+  ],
+  "color": "#006d77",
+  "iconPath": "/images/projects/floatcms.png",
+  "content": "\n# Summary\n\n\n[Open source headless CMS platform](https://github.com/ukiyodigital/float) engineered to be an entirely customizable API to drive frontend websites. Design and collaboration were heavily accompanied by [Cory](https://www.linkedin.com/in/findingcory/).\n\n\n## Tools Used\n\n\nDjango Rest Framework, GraphQL, React, Material UI, Apollo\n\n\n# Why\n\n\nI had a lot of experience building out GitHub pages hosted websites for a few years after college. Unfortunately, using CMS options were either too expensive, not super configurable or very platform specific. I wanted something like a Headless CMS without having to pay for a subscription per user account. \n\n\n# THE Architecture\n\n\n# UI / UX Design\n\n\n![Landing page for a user](/images/content/floatcms/floatcms-0.png)\n\n\n![Flexible editor for choosing input types for API properties](/images/content/floatcms/floatcms-1.jpg)\n\n",
+  "isFavorite": true,
+  "last_updated": "2026-03-06T00:14:00.000Z"
+}

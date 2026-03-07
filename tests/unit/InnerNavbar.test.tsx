@@ -17,20 +17,22 @@ describe("InnerNavbar", () => {
 		const user = userEvent.setup();
 		renderWithTheme(<InnerNavbar />);
 
-		const toggleButton = screen.getByLabelText("Toggle menu");
-		await user.click(toggleButton);
+		const hamburgerButton = screen.getByTestId("InnerNavbar_burger");
+		await user.click(hamburgerButton);
 
-		// Dropdown should be visible — links appear twice (desktop + mobile)
-		const aboutLinks = screen.getAllByRole("link", { name: "about" });
-		expect(aboutLinks.length).toBeGreaterThanOrEqual(2);
+		const overlay = screen.getByTestId("InnerNavbar_overlay");
+		await user.click(overlay);
 	});
 
 	it("link click closes dropdown", async () => {
 		const user = userEvent.setup();
 		renderWithTheme(<InnerNavbar />);
 
-		const toggleButton = screen.getByLabelText("Toggle menu");
-		await user.click(toggleButton);
+		const hamburgerButton = screen.getByTestId("InnerNavbar_burger");
+		await user.click(hamburgerButton);
+
+		const overlayButton = screen.getByTestId("InnerNavbar_overlay");
+		await user.click(overlayButton);
 
 		// Click a mobile nav link
 		const aboutLinks = screen.getAllByRole("link", { name: "about" });

@@ -7,9 +7,5 @@ export type TProject = {
 	color: string;
 	iconPath: string;
 	isFavorite: boolean;
-};
-
-export type TNotionData = {
 	last_updated: string;
-	projects: TProject[];
 };

@@ -1,5 +1,5 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import Anthropic from "@anthropic-ai/sdk";
 import { getPalettePrompt } from "@scripts/prompts/getPalettePrompt";
@@ -12,14 +12,11 @@ import {
 	validateLottie,
 } from "@scripts/theme-utils";
 import * as Sentry from "@sentry/node";
-import type { TNotionData } from "@shared/notion";
+import type { TProject } from "@shared/notion";
 
 Sentry.init({ dsn: process.env.SENTRY_DSN });
 
-const NOTION_DATA_PATH = resolve(
-	import.meta.dirname,
-	"../data/notion-pages.json",
-);
+const PROJECTS_DIR = resolve(import.meta.dirname, "../data/projects");
 const CAT_BASE_PATH = resolve(import.meta.dirname, "../app/data/cat-blue.json");
 const PUBLIC_DIR = resolve(import.meta.dirname, "../public");
 const APP_DATA_DIR = resolve(import.meta.dirname, "../generatedPalettes");
@@ -33,10 +30,13 @@ const THEME_HASH_PATH = resolve(APP_DATA_DIR, ".themes-hash");
 // ─── Main ─────────────────────────────────────────────────────────────────────
 
 try {
-	const notionData: TNotionData = JSON.parse(
-		readFileSync(NOTION_DATA_PATH, "utf-8"),
+	const projectFiles = readdirSync(PROJECTS_DIR).filter((f) =>
+		f.endsWith(".json"),
 	);
-	const favorites = notionData.projects.filter((p) => p.isFavorite);
+	const projects: TProject[] = projectFiles.map((f) =>
+		JSON.parse(readFileSync(resolve(PROJECTS_DIR, f), "utf-8")),
+	);
+	const favorites = projects.filter((p) => p.isFavorite);
 
 	// Build a fingerprint from favorites metadata + icon file contents
 	const hash = createHash("sha256");

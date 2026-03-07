@@ -12,6 +12,7 @@ import { Navbar } from "~/components/Navbar";
 import { githubUrl, navLinks } from "~/components/nav-links";
 import { useTheme } from "~/context/ThemeContext";
 import blueCatJson from "~/data/cat-blue.json";
+import { useTestId } from "~/hooks/useTestId";
 
 const catModules = import.meta.glob<{ default: object }>(
 	"../../generatedPalettes/cat-*.json",
@@ -43,10 +44,15 @@ for (const { slug, title } of generatedThemes) {
 const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
 
 function DesignedByCory() {
+	const { buildTestId } = useTestId("DesignedByCory");
 	return (
-		<p className="font-semibold text-[0.875rem] text-theme-credit opacity-25">
+		<p
+			data-testid={buildTestId("container")}
+			className="font-semibold text-[0.875rem] text-theme-credit opacity-25"
+		>
 			designed by{" "}
 			<a
+				data-testid={buildTestId("link")}
 				className="underline"
 				href="https://www.linkedin.com/in/findingcory/"
 				target="_blank"
@@ -59,15 +65,26 @@ function DesignedByCory() {
 }
 
 function EngineeredByKevin() {
+	const { buildTestId } = useTestId("EngineeredByKevin");
 	return (
-		<p className="flex items-center font-semibold text-[0.875rem] text-theme-credit opacity-25">
-			<span className="pr-[0.25rem]">
-				<Link className="underline" to="/projects/porfolio">
+		<p
+			data-testid={buildTestId("container")}
+			className="flex items-center font-semibold text-[0.875rem] text-theme-credit opacity-25"
+		>
+			<span className="pr-[0.25rem]" data-testid={buildTestId("links")}>
+				<Link
+					className="underline"
+					to="/projects/porfolio"
+					data-testid={buildTestId("github")}
+				>
 					engineered
 				</Link>{" "}
 				by kevin
 			</span>
-			<LastUpdatedClock variant="light" />
+			<LastUpdatedClock
+				variant="light"
+				data-testid={buildTestId("lastUpdated")}
+			/>
 		</p>
 	);
 }
@@ -76,7 +93,7 @@ export function Welcome() {
 	const { theme } = useTheme();
 	const [navOpen, setNavOpen] = useState(false);
 	const [desktopSway, setDesktopSway] = useState(false);
-	// Track whether ball has ever been opened so closing gets the up animation (not bounce)
+
 	const [ballHasOpened, setBallHasOpened] = useState(false);
 
 	const cta = ctaByTheme[theme] ?? ctaByTheme.blue;
@@ -94,11 +111,11 @@ export function Welcome() {
 	}, [theme]);
 
 	const handleDesktopBallClick = useCallback(() => {
-		setDesktopSway(false);
-		// Force reflow to restart animation
-		requestAnimationFrame(() => setDesktopSway(true));
-		setTimeout(() => setDesktopSway(false), 2000);
-	}, []);
+		if (!desktopSway) {
+			requestAnimationFrame(() => setDesktopSway(true));
+			setTimeout(() => setDesktopSway(false), 2000);
+		}
+	}, [desktopSway]);
 
 	const handleMobileBallClick = useCallback(() => {
 		if (!navOpen) {
@@ -135,7 +152,6 @@ export function Welcome() {
 					</Link>
 				</div>
 
-				{/* Top-right: string + ball */}
 				<div
 					className={clsx(
 						"z-10 col-start-2 row-start-1 flex flex-col items-center pr-[7.72rem]",
@@ -144,14 +160,12 @@ export function Welcome() {
 							: ballHasOpened && "animate-bounce-drop-up",
 					)}
 				>
-					{/* String */}
 					<div
 						className={clsx(
 							"-mt-[12rem] h-[32rem] w-[0.625rem] rounded-b-full bg-theme-text-light",
 							!navOpen && "animate-ball-rattle",
 						)}
 					/>
-					{/* Ball (nav trigger) */}
 					<button
 						type="button"
 						onClick={handleMobileBallClick}
@@ -303,7 +317,7 @@ export function Welcome() {
 
 					<div className="row-start-3 flex flex-col items-center justify-center pt-[2rem]">
 						<p className="basis-1/3 font-merriweather-sans text-[0.875rem] text-theme-text uppercase tracking-widest">
-							Los Angeles
+							Bay Area
 						</p>
 						<div className="basis-2/3">
 							<Link

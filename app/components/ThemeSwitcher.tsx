@@ -1,8 +1,9 @@
+import generatedThemesData from "@palettes/themes.json";
 import clsx from "clsx";
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router";
 import { useTheme } from "~/context/ThemeContext";
-import generatedThemesData from "~/data/themes.json";
+import { useToast } from "~/context/ToastContext";
 
 type ThemeEntry = { slug: string; primaryColor: string };
 
@@ -16,6 +17,7 @@ type PickerState = "collapsed" | "peeking" | "expanded";
 
 export function ThemeSwitcher() {
 	const { theme, setTheme } = useTheme();
+	const { addToast } = useToast();
 	const { pathname } = useLocation();
 	const isHomePage = pathname === "/";
 	const containerRef = useRef<HTMLFieldSetElement>(null);
@@ -90,6 +92,14 @@ export function ThemeSwitcher() {
 							return;
 						}
 						setTheme(slug);
+						addToast(`Theme changed to ${slug}`, {
+							icon: (
+								<span
+									className="inline-block h-[0.75rem] w-[0.75rem] rounded-full"
+									style={{ backgroundColor: primaryColor }}
+								/>
+							),
+						});
 					}}
 					className={clsx(
 						"theme-dot z-0 h-[25px] w-[25px] rounded-full md:h-10 md:w-10",

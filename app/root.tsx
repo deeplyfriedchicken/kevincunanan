@@ -10,7 +10,9 @@ import {
 	useLocation,
 } from "react-router";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
+import { Toast } from "~/components/Toast";
 import { ThemeProvider, useTheme } from "~/context/ThemeContext";
+import { ToastProvider } from "~/context/ToastContext";
 import { Sentry } from "~/sentry";
 import type { Route } from "./+types/root";
 import "./app.css";
@@ -52,8 +54,11 @@ export function Layout({ children }: { children: React.ReactNode }) {
 			</head>
 			<body className="min-h-screen w-full">
 				<ThemeProvider>
-					{children}
-					<ThemeSwitcher />
+					<ToastProvider>
+						{children}
+						<ThemeSwitcher />
+						<Toast />
+					</ToastProvider>
 				</ThemeProvider>
 				<ScrollRestoration />
 				<Scripts />

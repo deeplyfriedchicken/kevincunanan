@@ -2,6 +2,7 @@ import { type RenderOptions, render } from "@testing-library/react";
 import type { ReactElement } from "react";
 import { MemoryRouter } from "react-router";
 import { ThemeProvider } from "~/context/ThemeContext";
+import { ToastProvider } from "~/context/ToastContext";
 
 interface ThemeRenderOptions extends Omit<RenderOptions, "wrapper"> {
 	initialEntries?: string[];
@@ -14,7 +15,9 @@ export function renderWithTheme(
 	return render(ui, {
 		wrapper: ({ children }) => (
 			<MemoryRouter initialEntries={initialEntries}>
-				<ThemeProvider>{children}</ThemeProvider>
+				<ThemeProvider>
+					<ToastProvider>{children}</ToastProvider>
+				</ThemeProvider>
 			</MemoryRouter>
 		),
 		...options,

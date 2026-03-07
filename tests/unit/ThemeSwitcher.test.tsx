@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { renderWithTheme } from "@tests/helpers/render";
 import { ThemeSwitcher } from "~/components/ThemeSwitcher";
 
-vi.mock("~/data/themes.json", () => ({
+vi.mock("@palettes/themes.json", () => ({
 	default: [{ slug: "testproject", primaryColor: "#ff0000" }],
 }));
 

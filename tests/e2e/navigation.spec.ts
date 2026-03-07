@@ -23,7 +23,7 @@ test.describe("Navigation", () => {
 		await page.setViewportSize({ width: 375, height: 812 });
 		await page.goto("/about");
 
-		const hamburger = page.getByLabel("Toggle menu");
+		const hamburger = page.getByTestId("InnerNavbar_burger");
 		await hamburger.click();
 
 		const projectsLink = page.getByRole("link", { name: "projects" }).last();

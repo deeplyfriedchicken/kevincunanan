@@ -3,11 +3,11 @@ import { extname, resolve } from "node:path";
 import { Client } from "@notionhq/client";
 import { downloadContentImages } from "@scripts/download-content-images";
 import { getNotionProperty } from "@scripts/notion-utils";
-import type { TNotionData, TProject } from "@shared/notion";
+import type { TProject } from "@shared/notion";
 import { NotionToMarkdown } from "notion-to-md";
 import slugify from "react-slugify";
 
-const OUTPUT_PATH = resolve(import.meta.dirname, "../data/notion-pages.json");
+const PROJECTS_DIR = resolve(import.meta.dirname, "../data/projects");
 
 const ICONS_DIR = resolve(import.meta.dirname, "../public/images/projects");
 const CONTENT_IMAGES_DIR = resolve(
@@ -26,6 +26,7 @@ if (!token || !databaseId) {
 	process.exit(1);
 }
 
+mkdirSync(PROJECTS_DIR, { recursive: true });
 mkdirSync(ICONS_DIR, { recursive: true });
 mkdirSync(CONTENT_IMAGES_DIR, { recursive: true });
 
@@ -36,14 +37,14 @@ const { results } = await notion.dataSources.query({
 	data_source_id: dataSourceId,
 });
 
-const pages: TProject[] = [];
+let savedCount = 0;
 
 for (const page of results) {
 	if (page.object !== "page" || !("properties" in page)) continue;
 
 	const props = page.properties;
 
-	const title = (getNotionProperty(props["Doc name"]) as string) || "";
+	const title = (getNotionProperty(props["Project Name"]) as string) || "";
 	const titleSlug = slugify(title);
 
 	console.log({ titleSlug });
@@ -79,7 +80,12 @@ for (const page of results) {
 		CONTENT_IMAGES_DIR,
 	);
 
-	pages.push({
+	const lastUpdated =
+		"last_edited_time" in page && typeof page.last_edited_time === "string"
+			? page.last_edited_time
+			: new Date().toISOString();
+
+	const project: TProject = {
 		title,
 		slug: titleSlug,
 		description: (getNotionProperty(props.Description) as string) || "",
@@ -88,23 +94,22 @@ for (const page of results) {
 		iconPath,
 		content,
 		isFavorite: getNotionProperty(props.Favorites) === true,
-	});
-	console.log(`Fetched: ${title}`);
-}
+		last_updated: lastUpdated,
+	};
 
-// Check if projects have changed before writing
-if (existsSync(OUTPUT_PATH)) {
-	const existing: TNotionData = JSON.parse(readFileSync(OUTPUT_PATH, "utf-8"));
-	if (JSON.stringify(existing.projects) === JSON.stringify(pages)) {
-		console.log("No changes to projects — skipping write.");
-		process.exit(0);
+	const outputPath = resolve(PROJECTS_DIR, `${titleSlug}.json`);
+	const serialized = JSON.stringify(project, null, 2);
+
+	if (
+		existsSync(outputPath) &&
+		readFileSync(outputPath, "utf-8") === serialized
+	) {
+		console.log(`No changes: ${title}`);
+	} else {
+		writeFileSync(outputPath, serialized);
+		savedCount++;
+		console.log(`Saved: ${titleSlug}.json`);
 	}
 }
 
-const output: TNotionData = {
-	last_updated: new Date().toISOString(),
-	projects: pages,
-};
-
-writeFileSync(OUTPUT_PATH, JSON.stringify(output, null, 2));
-console.log(`Saved ${pages.length} pages to notion-pages.json`);
+console.log(`Done. ${savedCount} file(s) written to data/projects/`);
