@@ -57,9 +57,9 @@ jobs:
             public/images/projects/ \
             public/images/content/ \
             generatedPalettes/generated-themes.css \
-            generatedPalettes/data/themes.json \
-            generatedPalettes/data/.themes-hash \
-            "generatedPalettes/data/cat-*.json"
+            generatedPalettes/themes.json \
+            generatedPalettes/.themes-hash \
+            "generatedPalettes/cat-*.json"
           if ! git diff --staged --quiet; then
             DATE=$(date -u "+%Y-%m-%d")
             TIMESTAMP=$(date -u "+%Y-%m-%d %H:%M UTC")
