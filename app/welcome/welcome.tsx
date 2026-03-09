@@ -41,7 +41,7 @@ for (const { slug, title } of generatedThemes) {
 	};
 }
 
-const navItems = navLinks.map(({ to, label }) => ({ to, children: label }));
+const navItems = navLinks.map(({ to, label, external }) => ({ to, children: label, external }));
 
 function DesignedByCory() {
 	const { buildTestId } = useTestId("DesignedByCory");
@@ -207,20 +207,32 @@ export function Welcome() {
 							{/* Nav links */}
 							<nav className="ml-auto">
 								<ul className="flex flex-col items-end gap-[0.625rem]">
-									{navItems.map(({ to, children }) => (
+									{navItems.map(({ to, children, external }) => (
 										<li key={to}>
-											<NavLink
-												to={to}
-												onClick={() => setNavOpen(false)}
-												className={({ isActive }) =>
-													clsx(
-														"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
-														isActive && "opacity-100",
-													)
-												}
-											>
-												{children}
-											</NavLink>
+											{external ? (
+												<a
+													href={to}
+													target="_blank"
+													rel="noopener noreferrer"
+													onClick={() => setNavOpen(false)}
+													className="font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
+												>
+													{children}
+												</a>
+											) : (
+												<NavLink
+													to={to}
+													onClick={() => setNavOpen(false)}
+													className={({ isActive }) =>
+														clsx(
+															"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
+															isActive && "opacity-100",
+														)
+													}
+												>
+													{children}
+												</NavLink>
+											)}
 										</li>
 									))}
 									<li>

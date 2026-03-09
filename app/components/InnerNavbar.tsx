@@ -51,20 +51,34 @@ export function InnerNavbar({
 				</button>
 
 				<ul className="hidden items-center gap-[0.25rem] md:flex">
-					{navLinks.map(({ to, label }) => (
+					{navLinks.map(({ to, label, external }) => (
 						<li key={to}>
-							<NavLink
-								to={to}
-								className={({ isActive }) =>
-									clsx(
+							{external ? (
+								<a
+									href={to}
+									target="_blank"
+									rel="noopener noreferrer"
+									className={clsx(
 										"mx-[0.75rem] block py-[0.5rem] text-[1rem] transition-opacity hover:opacity-70",
 										textClass,
-										isActive && ["border-b-4", borderClass],
-									)
-								}
-							>
-								{label}
-							</NavLink>
+									)}
+								>
+									{label}
+								</a>
+							) : (
+								<NavLink
+									to={to}
+									className={({ isActive }) =>
+										clsx(
+											"mx-[0.75rem] block py-[0.5rem] text-[1rem] transition-opacity hover:opacity-70",
+											textClass,
+											isActive && ["border-b-4", borderClass],
+										)
+									}
+								>
+									{label}
+								</NavLink>
+							)}
 						</li>
 					))}
 					<li>
@@ -101,20 +115,32 @@ export function InnerNavbar({
 						{/* Nav links */}
 						<div className="ml-auto">
 							<ul className="flex flex-col items-end gap-[0.625rem]">
-								{navLinks.map(({ to, label }) => (
+								{navLinks.map(({ to, label, external }) => (
 									<li key={to}>
-										<NavLink
-											to={to}
-											onClick={() => setIsOpen(false)}
-											className={({ isActive }) =>
-												clsx(
-													"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
-													isActive && "opacity-100",
-												)
-											}
-										>
-											{label}
-										</NavLink>
+										{external ? (
+											<a
+												href={to}
+												target="_blank"
+												rel="noopener noreferrer"
+												onClick={() => setIsOpen(false)}
+												className="font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
+											>
+												{label}
+											</a>
+										) : (
+											<NavLink
+												to={to}
+												onClick={() => setIsOpen(false)}
+												className={({ isActive }) =>
+													clsx(
+														"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
+														isActive && "opacity-100",
+													)
+												}
+											>
+												{label}
+											</NavLink>
+										)}
 									</li>
 								))}
 								<li>
