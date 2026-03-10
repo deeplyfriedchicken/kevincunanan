@@ -1,15 +1,14 @@
 import generatedThemesData from "@palettes/themes.json";
 import clsx from "clsx";
 import Lottie from "lottie-react";
-import { Github } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Link, NavLink } from "react-router";
+import { Link } from "react-router";
 import ArrowSvg from "~/assets/arrow.svg?react";
 import LeftBlob from "~/assets/leftBlob.svg?react";
 import RightBlob from "~/assets/rightBlob.svg?react";
 import { LastUpdatedClock } from "~/components/LastUpdatedClock";
-import { Navbar } from "~/components/Navbar";
-import { githubUrl, navLinks } from "~/components/nav-links";
+import { MobileNavbar } from "~/components/MobileNavbar";
+import { NavItems } from "~/components/NavItems";
 import { useTheme } from "~/context/ThemeContext";
 import blueCatJson from "~/data/cat-blue.json";
 import { useTestId } from "~/hooks/useTestId";
@@ -30,7 +29,6 @@ catAnimations.blue = blueCatJson;
 type ThemeEntry = { slug: string; title: string; primaryColor: string };
 const generatedThemes = generatedThemesData as ThemeEntry[];
 
-// Build a slug → CTA mapping. Blue is the hardcoded default.
 const ctaByTheme: Record<string, { text: string; href: string }> = {
 	blue: { text: "check out my work", href: "/projects" },
 };
@@ -40,8 +38,6 @@ for (const { slug, title } of generatedThemes) {
 		href: `/projects/${slug}`,
 	};
 }
-
-const navItems = navLinks.map(({ to, label, external }) => ({ to, children: label, external }));
 
 function DesignedByCory() {
 	const { buildTestId } = useTestId("DesignedByCory");
@@ -91,6 +87,7 @@ function EngineeredByKevin() {
 
 export function Welcome() {
 	const { theme } = useTheme();
+	const { buildTestId } = useTestId("Welcome");
 	const [navOpen, setNavOpen] = useState(false);
 	const [desktopSway, setDesktopSway] = useState(false);
 
@@ -126,9 +123,7 @@ export function Welcome() {
 
 	return (
 		<>
-			{/* Mobile layout */}
 			<div className="grid h-dvh grid-cols-[1fr_auto] grid-rows-[auto_1fr] overflow-hidden bg-white md:hidden">
-				{/* Top-left: title, subtitles, CTA */}
 				<div className="col-start-1 row-start-1 px-[2.25rem] pt-[clamp(1.5rem,4dvh,3rem)]">
 					<h1 className="font-light text-[3.5rem] text-theme-text-light leading-tight">
 						kevin cunanan
@@ -177,85 +172,22 @@ export function Welcome() {
 					/>
 				</div>
 
-				{/* Bottom-right: cat */}
 				<div className="col-span-2 col-start-1 row-start-2 mr-[-3rem] mb-[-3rem] w-[30rem] self-end justify-self-end">
 					<Lottie key={theme} animationData={catAnimations[theme]} loop />
 				</div>
 
-				{/* Bottom-left: credits */}
 				<div className="col-span-1 col-start-1 row-start-2 self-end justify-self-start px-[2.25rem] py-[2.25rem]">
 					<DesignedByCory />
 					<EngineeredByKevin />
 				</div>
 
-				{/* Nav overlay */}
-				{navOpen && (
-					<>
-						{/* Dark overlay */}
-						<button
-							type="button"
-							className="fixed inset-0 z-20 animate-nav-overlay cursor-default appearance-none border-none bg-theme-primary/85 p-0"
-							onClick={() => setNavOpen(false)}
-							aria-label="Close navigation"
-						/>
-						{/* White nav header */}
-						<div className="fixed top-0 right-0 left-0 z-30 flex h-[12.4375rem] animate-nav-slide items-end bg-white/95 px-[2.25rem] pb-[1.5rem] backdrop-blur-[10px]">
-							{/* Logo */}
-							<p className="font-light text-[1.5rem] text-theme-text italic">
-								kevin cunanan
-							</p>
-							{/* Nav links */}
-							<nav className="ml-auto">
-								<ul className="flex flex-col items-end gap-[0.625rem]">
-									{navItems.map(({ to, children, external }) => (
-										<li key={to}>
-											{external ? (
-												<a
-													href={to}
-													target="_blank"
-													rel="noopener noreferrer"
-													onClick={() => setNavOpen(false)}
-													className="font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
-												>
-													{children}
-												</a>
-											) : (
-												<NavLink
-													to={to}
-													onClick={() => setNavOpen(false)}
-													className={({ isActive }) =>
-														clsx(
-															"font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50",
-															isActive && "opacity-100",
-														)
-													}
-												>
-													{children}
-												</NavLink>
-											)}
-										</li>
-									))}
-									<li>
-										<a
-											href={githubUrl}
-											target="_blank"
-											rel="noopener noreferrer"
-											onClick={() => setNavOpen(false)}
-											className="flex items-center gap-[0.375rem] font-bold font-merriweather-sans text-[0.875rem] text-theme-text opacity-50 transition-opacity hover:opacity-100"
-										>
-											<Github className="h-[0.875rem] w-[0.875rem]" />
-											github
-										</a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-					</>
-				)}
+				{navOpen && <MobileNavbar closeNavbar={() => setNavOpen(false)} />}
 			</div>
 
-			{/* Desktop layout */}
-			<main className="relative -mt-[10px] hidden h-dvh w-full items-center justify-center overflow-hidden p-[2rem] md:flex md:p-[4rem]">
+			<main
+				data-testid={buildTestId("desktop_container")}
+				className="relative -mt-[10px] hidden h-dvh w-full items-center justify-center overflow-hidden p-[2rem] md:flex md:p-[4rem]"
+			>
 				<div
 					className={clsx(
 						"desktop-ball absolute top-0 left-1/2 z-20 flex -translate-x-1/2 flex-col items-center",
@@ -304,7 +236,16 @@ export function Welcome() {
 
 					<div />
 
-					<Navbar navItems={navItems} />
+					<nav>
+						<div className="w-full md:w-auto" id="navbar-default">
+							<NavItems
+								classNames={{
+									ul: "mt-4 flex flex-row flex-wrap items-center justify-end gap-y-[0.25rem] p-4 font-medium md:p-0",
+									link: "mx-[0.375rem] block py-[0.5rem] text-[1rem] text-theme-text transition-opacity hover:opacity-70 lg:mx-[0.75rem]",
+								}}
+							/>
+						</div>
+					</nav>
 
 					<div className="flex items-center justify-start">
 						<p className="writing-vertical-lr mt-[8rem] font-light text-[1.125rem] text-theme-text-light">
