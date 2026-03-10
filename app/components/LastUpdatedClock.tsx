@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { Clock } from "lucide-react";
-import { githubUrl } from "~/components/nav-links";
+import { githubUrl } from "~/data/nav-links";
 import { getLastUpdated } from "~/data/portfolio";
 import { formatISOString } from "~/services/formatISOString";
 

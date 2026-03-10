@@ -1,4 +1,10 @@
-export const navLinks = [
+export type TNavLink = {
+	to: string;
+	label: React.ReactNode;
+	external?: boolean;
+};
+
+export const navLinks: TNavLink[] = [
 	{ to: "/", label: "home" },
 	{ to: "/about", label: "about" },
 	{ to: "/projects", label: "projects" },
